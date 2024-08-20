@@ -1,5 +1,23 @@
 export const colors = {
-  primary: "#FA7C54",
-  secondary: "#EB5231",
-  dark: "#4D4D4D",
+  brand: {
+    90: "#eb5231",
+    80: "#f4683c",
+    70: "#f76b56",
+  },
+
+  dark: {
+    100: "#000000",
+    90: "#4d4d4d",
+    80: "#8a8a8a",
+    70: "#a7a7a7",
+    60: "#a9a9a9",
+  },
+
+  green: {
+    100: "#42bb4e",
+  },
+
+  borderDefault: "#dcd9d9",
+  viewIcon: "#8ea2b9",
+  backgroundTitle: "#f7f7fa",
 };

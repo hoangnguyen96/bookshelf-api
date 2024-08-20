@@ -1,0 +1,1 @@
+export { PASSWORD } from "./input";
