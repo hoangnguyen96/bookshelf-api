@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@chakra-ui/icons': ^2.1.1
   '@chakra-ui/next-js': ^2.2.0
   '@chakra-ui/react': ^2.8.2
   '@chromatic-com/storybook': 1.6.1
@@ -37,6 +38,7 @@ specifiers:
   typescript: ^5
 
 dependencies:
+  '@chakra-ui/icons': 2.1.1_react@18.3.1
   '@chakra-ui/next-js': 2.2.0_tbdlrltyrowf65dl5bqc3hwoaq
   '@chakra-ui/react': 2.8.2_jpmej7fdbs6l3o6mbpn3tg3uba
   '@emotion/react': 11.13.0_3vdbhqr2ncalcx7opnshezpx3q
@@ -1764,6 +1766,26 @@ packages:
     dependencies:
       '@chakra-ui/shared-utils': 2.0.5
       '@chakra-ui/system': 2.6.2_nbz5y2bwjvyedhi5kofbrpis2q
+      react: 18.3.1
+    dev: false
+
+  /@chakra-ui/icon/3.2.0_react@18.3.1:
+    resolution: {integrity: sha512-xxjGLvlX2Ys4H0iHrI16t74rG9EBcpFvJ3Y3B7KMQTrnW34Kf7Da/UC8J67Gtx85mTHW020ml85SVPKORWNNKQ==}
+    peerDependencies:
+      '@chakra-ui/system': '>=2.0.0'
+      react: '>=18'
+    dependencies:
+      '@chakra-ui/shared-utils': 2.0.5
+      react: 18.3.1
+    dev: false
+
+  /@chakra-ui/icons/2.1.1_react@18.3.1:
+    resolution: {integrity: sha512-3p30hdo4LlRZTT5CwoAJq3G9fHI0wDc0pBaMHj4SUn0yomO+RcDRlzhdXqdr5cVnzax44sqXJVnf3oQG0eI+4g==}
+    peerDependencies:
+      '@chakra-ui/system': '>=2.0.0'
+      react: '>=18'
+    dependencies:
+      '@chakra-ui/icon': 3.2.0_react@18.3.1
       react: 18.3.1
     dev: false
 
