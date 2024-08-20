@@ -41,19 +41,19 @@ export const Button = defineStyleConfig({
   variants: {
     normal: {
       minW: "200px",
-      boxShadow: "0 0 2px 2px #efdfde",
+      boxShadow: "0 0 5px 1px #efdfde",
       _hover: { bgColor: "brand.70" },
     },
     outline: {
       bgColor: "white",
       color: "brand.70",
       borderColor: "brand.70",
-      boxShadow: "0 0 2px 2px #efdfde",
+      boxShadow: "0 0 5px 1px #efdfde",
     },
     full: {
       width: "100%",
       fontWeight: 600,
-      boxShadow: "0 0 2px 2px #efdfde",
+      boxShadow: "0 0 5px 1px #efdfde",
       _hover: { bgColor: "brand.70" },
     },
   },
