@@ -1,4 +1,10 @@
 export { default as Avatar } from "./Avatar";
 export { default as Button } from "./Button";
+export { default as Checkbox } from "./Checkbox";
 export { default as Input } from "./Input";
+export { default as Logo } from "./Logo";
+export { default as HeartIcon } from "./HeartIcon";
 export { default as SearchBar } from "./SearchBar";
+export { default as MenuProfile } from "./MenuProfile";
+export { default as ContributeComplete } from "./ContributeComplete";
+export { default as ModalSuccessProgress } from "./Modal/ModalSuccessProgress";

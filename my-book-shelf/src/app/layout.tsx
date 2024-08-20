@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/logo.webp" />
+        <link rel="icon" href="/favicon.webp" />
       </head>
 
       <body className={`${inter.className} app`}>

@@ -20,4 +20,5 @@ export const colors = {
   borderDefault: "#dcd9d9",
   viewIcon: "#8ea2b9",
   backgroundTitle: "#f7f7fa",
+  bgCheckbox: "#df7d3a",
 };
