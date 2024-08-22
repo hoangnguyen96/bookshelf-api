@@ -1,10 +1,10 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { ChakraProvider } from "@chakra-ui/react";
-import HeartIcon from ".";
+import { Box, ChakraProvider } from "@chakra-ui/react";
 import theme from "@app/themes";
+import Navbar from ".";
 
-const meta: Meta<typeof HeartIcon> = {
-  component: HeartIcon,
+const meta: Meta<typeof Navbar> = {
+  component: Navbar,
   decorators: [
     (Story: StoryFn) => (
       <ChakraProvider theme={theme}>
@@ -16,7 +16,11 @@ const meta: Meta<typeof HeartIcon> = {
 
 export default meta;
 
-const Template: StoryFn<typeof HeartIcon> = (args) => <HeartIcon />;
+const Template: StoryFn<typeof Navbar> = () => (
+  <Box w={400}>
+    <Navbar />
+  </Box>
+);
 
 export const Default = Template.bind({});
 Default.args = {};

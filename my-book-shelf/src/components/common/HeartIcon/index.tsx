@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback, useMemo, useState } from "react";
-import { IconButton } from "@chakra-ui/react";
+import { IconButton, StyleProps } from "@chakra-ui/react";
 import { HeartIconFull, HeartIconOutline } from "@app/assets/icons";
 
-const IconHeart = () => {
+const IconHeart = ({ ...rest }: StyleProps) => {
   const [isSelected, setIsSelected] = useState(false);
 
   const handleClick = () => {
@@ -29,6 +29,7 @@ const IconHeart = () => {
       variant="unstyled"
       fontSize="xl"
       color={colorHeart}
+      {...rest}
     />
   );
 };

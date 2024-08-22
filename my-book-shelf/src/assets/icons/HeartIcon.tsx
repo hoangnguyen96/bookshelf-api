@@ -1,7 +1,9 @@
+"use client";
+
 import { createIcon } from "@chakra-ui/react";
 
 export const HeartIconOutline = createIcon({
-  displayName: "HeartIcon",
+  displayName: "HeartIconOutline",
   viewBox: "0 0 24 24",
   path: (
     <path
@@ -14,7 +16,7 @@ export const HeartIconOutline = createIcon({
 });
 
 export const HeartIconFull = createIcon({
-  displayName: "HeartIcon",
+  displayName: "HeartIconFull",
   viewBox: "0 0 24 24",
   path: (
     <path

@@ -1,30 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Input Should render correctly snapshot 1`] = `
+exports[`FooterForm Should render correctly snapshot 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="chakra-input__group css-bx0blc"
-        data-group="true"
+        class="css-15286ub"
       >
-        <input
-          class="chakra-input css-1x36n8t"
-          type="text"
-        />
+        <span
+          class="chakra-text css-0"
+        >
+          Name
+           
+          <a
+            href="/"
+            style="text-decoration: underline;"
+          >
+            Login
+          </a>
+        </span>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="chakra-input__group css-bx0blc"
-      data-group="true"
+      class="css-15286ub"
     >
-      <input
-        class="chakra-input css-1x36n8t"
-        type="text"
-      />
+      <span
+        class="chakra-text css-0"
+      >
+        Name
+         
+        <a
+          href="/"
+          style="text-decoration: underline;"
+        >
+          Login
+        </a>
+      </span>
     </div>
   </div>,
   "debug": [Function],

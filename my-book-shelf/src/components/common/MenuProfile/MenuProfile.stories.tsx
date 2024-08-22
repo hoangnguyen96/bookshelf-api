@@ -18,5 +18,5 @@ export default meta;
 
 const Template: StoryFn<typeof MenuProfile> = (args) => <MenuProfile />;
 
-export const Menu = Template.bind({});
-Menu.args = {};
+export const Default = Template.bind({});
+Default.args = {};
