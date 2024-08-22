@@ -22,7 +22,7 @@ interface InputBaseProps extends InputProps {
 
 const InputBase = ({
   type = "text",
-  width = "400px",
+  width = "100%",
   isTypePassword = false,
   ...rest
 }: InputBaseProps) => {

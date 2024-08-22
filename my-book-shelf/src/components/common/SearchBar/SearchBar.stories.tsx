@@ -18,7 +18,7 @@ export default meta;
 
 const Template: StoryFn<typeof SearchBar> = (args) => <SearchBar {...args} />;
 
-export const Search = Template.bind({});
-Search.args = {
+export const Default = Template.bind({});
+Default.args = {
   placeholder: "Search...",
 };

@@ -6,6 +6,14 @@ export const Text = defineStyleConfig({
   },
 
   sizes: {
+    xs: {
+      fontSize: "xs",
+      lineHeight: 10,
+    },
+    sm: {
+      fontSize: "sm",
+      lineHeight: 12,
+    },
     md: {
       fontSize: "md",
       lineHeight: 16,

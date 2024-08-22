@@ -21,12 +21,14 @@ const Template: StoryFn<typeof InputBase> = (args) => <InputBase {...args} />;
 export const Text = Template.bind({});
 Text.args = {
   type: "text",
+  width: 400,
   placeholder: "Text...",
 };
 
 export const Password = Template.bind({});
 Password.args = {
   type: "text",
+  width: 400,
   placeholder: "Password...",
   isTypePassword: true,
 };
