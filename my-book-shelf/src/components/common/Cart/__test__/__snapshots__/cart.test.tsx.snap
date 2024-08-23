@@ -6,37 +6,31 @@ exports[`Cart Should render correctly snapshot 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="css-gw4hev"
+        class="css-583j2r"
       >
         <img
           alt="Don't make me think"
           data-nimg="1"
           decoding="async"
-          height="130"
-          loading="lazy"
-          src="/_next/image?url=%2Fimg.jpg&w=384&q=75"
-          srcset="/_next/image?url=%2Fimg.jpg&w=256&q=75 1x, /_next/image?url=%2Fimg.jpg&w=384&q=75 2x"
+          height="172"
+          src=""
           style="color: transparent;"
           width="130"
         />
         <p
           class="chakra-text css-0"
-        >
-          Don’t Make Me think
-        </p>
+        />
         <div
           class="css-k008qs"
         >
           <p
             class="chakra-text css-0"
           >
-            Steve Krug,
+            ,
           </p>
           <p
             class="chakra-text css-0"
-          >
-            2000
-          </p>
+          />
         </div>
         <div
           class="css-k008qs"
@@ -44,7 +38,7 @@ exports[`Cart Should render correctly snapshot 1`] = `
           <p
             class="chakra-text css-0"
           >
-            4.5/
+            /
           </p>
           <p
             class="chakra-text css-c5z1pm"
@@ -54,7 +48,7 @@ exports[`Cart Should render correctly snapshot 1`] = `
         </div>
         <button
           aria-label="Heart icon"
-          class="chakra-button css-1b57780"
+          class="chakra-button css-165tdnh"
           type="button"
         >
           <svg
@@ -76,37 +70,31 @@ exports[`Cart Should render correctly snapshot 1`] = `
   </body>,
   "container": <div>
     <div
-      class="css-gw4hev"
+      class="css-583j2r"
     >
       <img
         alt="Don't make me think"
         data-nimg="1"
         decoding="async"
-        height="130"
-        loading="lazy"
-        src="/_next/image?url=%2Fimg.jpg&w=384&q=75"
-        srcset="/_next/image?url=%2Fimg.jpg&w=256&q=75 1x, /_next/image?url=%2Fimg.jpg&w=384&q=75 2x"
+        height="172"
+        src=""
         style="color: transparent;"
         width="130"
       />
       <p
         class="chakra-text css-0"
-      >
-        Don’t Make Me think
-      </p>
+      />
       <div
         class="css-k008qs"
       >
         <p
           class="chakra-text css-0"
         >
-          Steve Krug,
+          ,
         </p>
         <p
           class="chakra-text css-0"
-        >
-          2000
-        </p>
+        />
       </div>
       <div
         class="css-k008qs"
@@ -114,7 +102,7 @@ exports[`Cart Should render correctly snapshot 1`] = `
         <p
           class="chakra-text css-0"
         >
-          4.5/
+          /
         </p>
         <p
           class="chakra-text css-c5z1pm"
@@ -124,7 +112,7 @@ exports[`Cart Should render correctly snapshot 1`] = `
       </div>
       <button
         aria-label="Heart icon"
-        class="chakra-button css-1b57780"
+        class="chakra-button css-165tdnh"
         type="button"
       >
         <svg

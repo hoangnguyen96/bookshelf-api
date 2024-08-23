@@ -16,7 +16,15 @@ const meta: Meta<typeof Cart> = {
 
 export default meta;
 
-const Template: StoryFn<typeof Cart> = () => <Cart />;
+const Template: StoryFn<typeof Cart> = () => (
+  <Cart
+    title="Don't Make Me Think"
+    author="Steve Krug"
+    imageUrl="https://i.ibb.co/QbQgVtG/book1.png"
+    publicationYear={2000}
+    rating={4.5}
+  />
+);
 
 export const Default = Template.bind({});
 Default.args = {};

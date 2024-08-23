@@ -6,10 +6,16 @@ export const Button = defineStyleConfig({
     borderRadius: "5px",
     color: "white",
     bgColor: "brand.80",
+    _hover: {
+      _disabled: {
+        bgColor: "brand.80",
+      },
+    },
   },
 
   sizes: {
     sm: {
+      minW: "85px",
       h: "30px",
       fontSize: "md",
       fontWeight: 400,
@@ -17,6 +23,7 @@ export const Button = defineStyleConfig({
       py: "6px",
     },
     md: {
+      minW: "125px",
       h: "40px",
       fontSize: "md",
       fontWeight: 600,

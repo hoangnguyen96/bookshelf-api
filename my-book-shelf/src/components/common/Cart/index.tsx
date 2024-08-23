@@ -1,9 +1,22 @@
 import { Flex, Text } from "@chakra-ui/react";
 import Image from "next/image";
-import { book1 } from "@app/assets/images";
 import { HeartIcon } from "..";
 
-const Cart = () => {
+interface CartType {
+  title: string;
+  author: string;
+  imageUrl: string;
+  publicationYear: number;
+  rating: number;
+}
+
+const Cart = ({
+  title,
+  author,
+  imageUrl,
+  publicationYear,
+  rating,
+}: CartType) => {
   return (
     <Flex
       w={160}
@@ -15,17 +28,22 @@ const Cart = () => {
       pb="13px"
       bgColor="white"
       borderRadius="10px"
-      boxShadow="0 0 5px 1px #efdfde"
+      boxShadow="0 0 3px 0px #a9a9a9"
       position="relative"
     >
-      <Image src={book1} alt="Don't make me think" width={130} />
-      <Text size="sm">Don’t Make Me think</Text>
+      <Image
+        src={imageUrl}
+        alt="Don't make me think"
+        width={130}
+        height={172}
+      />
+      <Text size="sm">{title}</Text>
       <Flex>
-        <Text size="xs">Steve Krug,</Text>
-        <Text size="xs">2000</Text>
+        <Text size="xs">{author},</Text>
+        <Text size="xs">{publicationYear}</Text>
       </Flex>
       <Flex>
-        <Text size="xs">4.5/</Text>
+        <Text size="xs">{rating}/</Text>
         <Text size="xs" color="dark.70">
           5
         </Text>

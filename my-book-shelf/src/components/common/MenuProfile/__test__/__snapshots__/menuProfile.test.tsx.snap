@@ -9,7 +9,7 @@ exports[`MenuProfile Should render correctly snapshot 1`] = `
         aria-controls="menu-list-:r1:"
         aria-expanded="false"
         aria-haspopup="menu"
-        class="chakra-button chakra-menu__menu-button css-5df1cg"
+        class="chakra-button chakra-menu__menu-button css-r3lmb2"
         id="menu-button-:r1:"
         type="button"
       >
@@ -59,7 +59,7 @@ exports[`MenuProfile Should render correctly snapshot 1`] = `
       >
         <div
           aria-orientation="vertical"
-          class="chakra-menu__menu-list css-gdva8u"
+          class="chakra-menu__menu-list css-1r8dsm8"
           id="menu-list-:r1:"
           role="menu"
           style="transform-origin: var(--popper-transform-origin); opacity: 0; visibility: hidden; transform: scale(0.8);"
@@ -104,7 +104,7 @@ exports[`MenuProfile Should render correctly snapshot 1`] = `
       aria-controls="menu-list-:r1:"
       aria-expanded="false"
       aria-haspopup="menu"
-      class="chakra-button chakra-menu__menu-button css-5df1cg"
+      class="chakra-button chakra-menu__menu-button css-r3lmb2"
       id="menu-button-:r1:"
       type="button"
     >
@@ -154,7 +154,7 @@ exports[`MenuProfile Should render correctly snapshot 1`] = `
     >
       <div
         aria-orientation="vertical"
-        class="chakra-menu__menu-list css-gdva8u"
+        class="chakra-menu__menu-list css-1r8dsm8"
         id="menu-list-:r1:"
         role="menu"
         style="transform-origin: var(--popper-transform-origin); opacity: 0; visibility: hidden; transform: scale(0.8);"

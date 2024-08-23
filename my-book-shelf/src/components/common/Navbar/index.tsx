@@ -37,7 +37,7 @@ const listNavbar = {
 
 const Navbar = () => {
   return (
-    <Flex flexDir="column" bgColor="white" gap="34px">
+    <Flex flexDir="column" gap="34px">
       {Object.entries(listNavbar || {}).map(([_, stepDetail]) => {
         const { title, link, icon } = stepDetail;
         return (

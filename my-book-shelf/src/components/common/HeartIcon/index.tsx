@@ -29,6 +29,8 @@ const IconHeart = ({ ...rest }: StyleProps) => {
       variant="unstyled"
       fontSize="xl"
       color={colorHeart}
+      minW={30}
+      minH={30}
       {...rest}
     />
   );
