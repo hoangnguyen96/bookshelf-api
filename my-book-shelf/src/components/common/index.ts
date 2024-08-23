@@ -13,5 +13,7 @@ export { default as FormLogin } from "./FormLogin";
 export { default as FormRegister } from "./FormRegister";
 export { default as HeadingForm } from "./HeadingForm";
 export { default as FooterForm } from "./FooterForm";
+export { default as TableList } from "./TableList";
+export { default as UploadImage } from "./UploadImage";
 export { default as ContributeComplete } from "./ContributeComplete";
 export { default as ModalSuccessProgress } from "./Modal/ModalSuccessProgress";

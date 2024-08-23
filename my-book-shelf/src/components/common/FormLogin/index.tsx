@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import {
   Box,
   FormControl,
@@ -7,15 +8,33 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import { useForm, Controller } from "react-hook-form";
-import { Button, Checkbox, FooterForm, HeadingForm, Input } from "..";
+
+// Constants
+import { ERROR_MESSAGES, REGEX_PATTERN } from "@app/constants";
+
+// Models
+import { User } from "@app/models";
+
+// Utils
+import {
+  clearErrorOnChange,
+  isEnableSubmitButton,
+  validateRegExpFormat,
+} from "@app/utils";
+
+// Components
+import { Button, Checkbox, Input } from "..";
 
 const FormLogin = () => {
+  const REQUIRED_FIELDS = ["email", "password"];
+
   const {
     control,
-    formState: { dirtyFields, errors },
     clearErrors,
-    handleSubmit,
-  } = useForm({
+    handleSubmit: submitLogin,
+    formState: { errors, isValid, dirtyFields },
+    reset,
+  } = useForm<Partial<User>>({
     mode: "onBlur",
     reValidateMode: "onBlur",
     defaultValues: {
@@ -24,63 +43,108 @@ const FormLogin = () => {
     },
   });
 
+  // Checking to disable/enable submit button
+  const dirtyItems = Object.keys(dirtyFields);
+
+  const shouldEnable = useMemo(
+    () => isEnableSubmitButton(REQUIRED_FIELDS, dirtyItems, errors),
+    [dirtyItems, errors]
+  );
+
+  const isDisableSubmit = !(shouldEnable || isValid);
+
   return (
     <Box
-      w={565}
-      pt="63px"
-      px="70px"
-      bgColor="white"
-      borderRadius="10px"
-      boxShadow="0 0 5px 1px #efdfde"
+      as="form"
+      onSubmit={submitLogin(() => {})}
+      style={{ marginTop: "40px" }}
     >
-      <HeadingForm
-        title="Welcome Back !"
-        description="Sign in to continue to yourDigital Library"
+      {/* Email */}
+      <FormControl
+        isInvalid={!!errors.email}
+        mb={errors.email?.message ? "0" : "22px"}
+      >
+        <FormLabel htmlFor="email">Email</FormLabel>
+        <Controller
+          name="email"
+          control={control}
+          defaultValue=""
+          rules={{
+            required: ERROR_MESSAGES.FIELD_REQUIRED,
+            validate: (value) =>
+              validateRegExpFormat(
+                value as string,
+                REGEX_PATTERN.EMAIL,
+                "Email"
+              ),
+          }}
+          render={({
+            field: { value, onChange, ...rest },
+            fieldState: { error },
+          }) => (
+            <Input
+              id="email"
+              value={value}
+              placeholder="Email..."
+              isInvalid={!!error?.message}
+              onChange={(e) => {
+                onChange(e);
+                clearErrorOnChange("email", errors, clearErrors);
+              }}
+              {...rest}
+            />
+          )}
+        />
+        <FormErrorMessage pl="10px">
+          {errors.email?.message && errors.email.message}
+        </FormErrorMessage>
+      </FormControl>
+
+      {/* Password */}
+      <FormControl
+        isInvalid={!!errors.password}
+        mb={errors.password?.message ? "0" : "22px"}
+      >
+        <FormLabel htmlFor="password">Password</FormLabel>
+        <Controller
+          name="password"
+          control={control}
+          defaultValue=""
+          rules={{
+            required: ERROR_MESSAGES.FIELD_REQUIRED,
+          }}
+          render={({
+            field: { value, onChange, ...rest },
+            fieldState: { error },
+          }) => (
+            <Input
+              id="password"
+              value={value}
+              placeholder="Password..."
+              isTypePassword={true}
+              isInvalid={!!error?.message}
+              onChange={(e) => {
+                onChange(e);
+                clearErrorOnChange("password", errors, clearErrors);
+              }}
+              {...rest}
+            />
+          )}
+        />
+        <FormErrorMessage pl="10px">
+          {errors.password?.message && errors.password.message}
+        </FormErrorMessage>
+      </FormControl>
+
+      <Checkbox />
+      <Button
+        variant="full"
+        text="Login"
+        mt="40px"
+        mb="60px"
+        isDisabled={isDisableSubmit}
+        onClick={submitLogin(() => {})}
       />
-      <form style={{ marginTop: "40px" }}>
-        <FormControl isInvalid={true} mb="24px">
-          <FormLabel htmlFor="email" sx={{ fontSize: "16px", fontWeight: 600 }}>
-            Email
-          </FormLabel>
-          <Controller
-            name="email"
-            control={control}
-            rules={{ required: "Email is required" }}
-            render={({ field }) => (
-              <Input {...field} placeholder="Email..." id="email" />
-            )}
-          />
-          {/* <FormErrorMessage mt="1px">error</FormErrorMessage> */}
-        </FormControl>
-
-        <FormControl isInvalid={true} mb="50px">
-          <FormLabel
-            htmlFor="password"
-            sx={{ fontSize: "16px", fontWeight: 600 }}
-          >
-            Password
-          </FormLabel>
-          <Controller
-            name="password"
-            control={control}
-            rules={{ required: "Password is required" }}
-            render={({ field }) => (
-              <Input
-                {...field}
-                isTypePassword={true}
-                placeholder="Password..."
-                id="password"
-              />
-            )}
-          />
-          {/* <FormErrorMessage mt="1px">error</FormErrorMessage> */}
-        </FormControl>
-
-        <Checkbox />
-        <Button variant="full" text="Login" mt="40px" mb="60px" />
-      </form>
-
-      <FooterForm text="New User?" textLink="Register Here" pb="160px" />
     </Box>
   );
 };

@@ -22,7 +22,7 @@ Author: Hoang Nguyen Van <[hoang.nguyenvan@asnet.com.vn](hoang.nguyenvan@asnet.c
 
 1. Make sure you install packages with correct version below:
 
-- [node v20.2.0](https://nodejs.org/en/)
+- [node v20.10.0](https://nodejs.org/en/)
 - [pnpm 7.32.3](https://pnpm.io/)
 
 2. Create a `.env` file and follow the `.env.sample` file.

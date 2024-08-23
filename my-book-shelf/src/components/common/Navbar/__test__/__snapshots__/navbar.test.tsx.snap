@@ -6,7 +6,7 @@ exports[`Navbar Should render correctly snapshot 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="css-ar4bwn"
+        class="css-1i050zc"
       >
         <a
           href="/home"
@@ -182,7 +182,7 @@ exports[`Navbar Should render correctly snapshot 1`] = `
   </body>,
   "container": <div>
     <div
-      class="css-ar4bwn"
+      class="css-1i050zc"
     >
       <a
         href="/home"

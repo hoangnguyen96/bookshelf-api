@@ -9,9 +9,11 @@ export const Input = defineStyleConfig({
       height: "56px",
       borderRadius: "8px",
       border: "1px solid",
-
       _placeholder: {
         color: "dark.60",
+      },
+      _invalid: {
+        borderColor: "red.500",
       },
     },
   },

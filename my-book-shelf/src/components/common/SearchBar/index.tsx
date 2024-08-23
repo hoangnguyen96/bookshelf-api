@@ -23,7 +23,12 @@ const SearchBar = ({ placeholder = "Search..." }: InputProps) => {
   };
 
   return (
-    <Flex boxShadow="0 0 2px 2px #efdfde" borderRadius="40px" w={540}>
+    <Flex
+      boxShadow="0 0 3px 0px #a9a9a9"
+      borderRadius="40px"
+      w="100%"
+      maxW={540}
+    >
       <Select
         placeholder="Select"
         border="none"
@@ -45,14 +50,16 @@ const SearchBar = ({ placeholder = "Search..." }: InputProps) => {
           h="50px"
           border="none"
           borderRightRadius="40px"
+          borderLeftRadius="inherit"
           _placeholder={{ color: "gray.500" }}
         />
         <IconButton
           aria-label="Search"
           h="100%"
+          minW="60px"
           icon={<SearchIcon w="20px" height="20px" />}
           position="absolute"
-          right="12px"
+          right="0"
           top="0"
           bottom="0"
           onClick={handleSearch}
