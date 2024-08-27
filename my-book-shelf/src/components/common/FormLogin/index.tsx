@@ -10,7 +10,7 @@ import {
 import { useForm, Controller } from "react-hook-form";
 
 // Constants
-import { ERROR_MESSAGES, REGEX_PATTERN } from "@app/constants";
+import { ERROR_MESSAGES, REGEX_PATTERN, ROUTES } from "@app/constants";
 
 // Models
 import { User } from "@app/models";
@@ -24,9 +24,15 @@ import {
 
 // Components
 import { Button, Checkbox, Input } from "..";
+import { useRouter } from "next/navigation";
 
-const FormLogin = () => {
+interface LoginForm {
+  onSubmit: (data: Partial<User>) => Promise<void | string>;
+}
+
+const FormLogin = ({ onSubmit }: LoginForm) => {
   const REQUIRED_FIELDS = ["email", "password"];
+  const router = useRouter();
 
   const {
     control,
@@ -53,12 +59,19 @@ const FormLogin = () => {
 
   const isDisableSubmit = !(shouldEnable || isValid);
 
+  const handleLogin = async (formData: Partial<User>) => {
+    console.log("data", formData);
+    try {
+      await onSubmit(formData);
+
+      router.push(ROUTES.SEARCH);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <Box
-      as="form"
-      onSubmit={submitLogin(() => {})}
-      style={{ marginTop: "40px" }}
-    >
+    <Box as="form" style={{ marginTop: "40px" }}>
       {/* Email */}
       <FormControl
         isInvalid={!!errors.email}
@@ -143,7 +156,7 @@ const FormLogin = () => {
         mt="40px"
         mb="60px"
         isDisabled={isDisableSubmit}
-        onClick={submitLogin(() => {})}
+        onClick={submitLogin(handleLogin)}
       />
     </Box>
   );

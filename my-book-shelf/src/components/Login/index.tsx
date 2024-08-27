@@ -1,5 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { FooterForm, FormLogin, HeadingForm } from "../common";
+import { authenticate } from "@app/actions/auth";
+import { ROUTES } from "@app/constants";
 
 const Login = () => {
   return (
@@ -20,8 +22,13 @@ const Login = () => {
         title="Welcome Back !"
         description="Sign in to continue to yourDigital Library"
       />
-      <FormLogin />
-      <FooterForm text="New User?" textLink="Register Here" pb="160px" />
+      <FormLogin onSubmit={authenticate} />
+      <FooterForm
+        text="New User?"
+        textLink="Register Here"
+        pb="160px"
+        link={ROUTES.REGISTER}
+      />
     </Box>
   );
 };

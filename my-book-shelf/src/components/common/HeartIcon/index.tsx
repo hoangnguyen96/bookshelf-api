@@ -4,8 +4,12 @@ import { useCallback, useMemo, useState } from "react";
 import { IconButton, StyleProps } from "@chakra-ui/react";
 import { HeartIconFull, HeartIconOutline } from "@app/assets/icons";
 
-const IconHeart = ({ ...rest }: StyleProps) => {
-  const [isSelected, setIsSelected] = useState(false);
+interface IconHeartProps extends StyleProps {
+  isFavorite?: boolean;
+}
+
+const IconHeart = ({ isFavorite = false, ...rest }: IconHeartProps) => {
+  const [isSelected, setIsSelected] = useState(isFavorite);
 
   const handleClick = () => {
     setIsSelected(!isSelected);

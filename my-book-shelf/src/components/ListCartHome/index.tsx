@@ -11,7 +11,6 @@ import { Cart } from "../common";
 
 const ListCartHome = async () => {
   const data = await HttpClient.get<BookType[]>("/books");
-  console.log("data-2222", data);
 
   return (
     <Flex p="70px 44px" justifyContent="space-between">

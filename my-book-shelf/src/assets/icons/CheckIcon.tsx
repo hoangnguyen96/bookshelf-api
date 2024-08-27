@@ -1,9 +1,12 @@
 import { IconProps } from "@chakra-ui/react";
 
-export const CheckIcon: React.FC<IconProps> = () => (
+export const CheckIcon: React.FC<IconProps> = ({
+  width = "140px",
+  height = "140px",
+}) => (
   <svg
-    width="140"
-    height="140"
+    width={width as string}
+    height={height as string}
     viewBox="0 0 140 140"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
