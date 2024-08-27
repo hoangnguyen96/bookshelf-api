@@ -1,5 +1,7 @@
+import { ListSearch } from "@app/components";
+
 const SearchPage = () => {
-  return <>SearchPage</>;
+  return <ListSearch />;
 };
 
 export default SearchPage;

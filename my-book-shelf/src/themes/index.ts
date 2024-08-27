@@ -6,6 +6,7 @@ import { Text } from "./text";
 import { Input } from "./input";
 import { Checkbox } from "./checkbox";
 import { fonts, fontSizes, lineHeights, radius } from "./typography";
+import { Tabs } from "./tabs";
 
 export const theme = extendTheme({
   colors,
@@ -19,6 +20,7 @@ export const theme = extendTheme({
     Text,
     Input,
     Checkbox,
+    Tabs,
   },
 });
 

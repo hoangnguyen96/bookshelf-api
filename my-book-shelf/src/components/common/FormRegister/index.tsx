@@ -2,6 +2,7 @@
 
 import { useCallback, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
+import bcrypt from "bcryptjs";
 import {
   Box,
   FormControl,
@@ -74,9 +75,25 @@ const FormRegister = ({ itemUpdate, onSubmit }: FormRegisterProps) => {
   const isDisableSubmit = !(shouldEnable || isValid);
 
   const handleFormSubmit = useCallback(
-    (data: FormRegisterData) => {
-      onSubmit(data);
-      reset();
+    async (data: FormRegisterData) => {
+      if (!data.password) {
+        console.error("Password is required");
+        return;
+      }
+
+      try {
+        const hashedPassword = await bcrypt.hash(data.password, 10);
+
+        const userWithHashedPassword = {
+          ...data,
+          password: hashedPassword,
+        };
+
+        onSubmit(userWithHashedPassword);
+        reset();
+      } catch (error) {
+        console.error("Error hashing password:", error);
+      }
     },
     [onSubmit, reset]
   );

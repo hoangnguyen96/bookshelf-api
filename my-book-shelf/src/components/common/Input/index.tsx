@@ -21,12 +21,15 @@ interface InputBaseProps extends InputProps {
 }
 
 const InputBase = forwardRef<HTMLDivElement, InputBaseProps>(
-  ({
-    type = "text",
-    width = "100%",
-    isTypePassword = false,
-    ...rest
-  }: InputBaseProps) => {
+  (
+    {
+      type = "text",
+      width = "100%",
+      isTypePassword = false,
+      ...rest
+    }: InputBaseProps,
+    ref
+  ) => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const handleToggleShowPassword = () => {
@@ -55,7 +58,7 @@ const InputBase = forwardRef<HTMLDivElement, InputBaseProps>(
 
     return (
       <InputGroup size="md" w={width}>
-        <Input pr="16px" type={typeInput} {...rest} />
+        <Input ref={ref} pr="16px" type={typeInput} {...rest} />
         {isTypePassword && (
           <InputRightElement width="4.5rem">
             <IconButton

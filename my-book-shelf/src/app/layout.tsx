@@ -1,9 +1,10 @@
+import "../styles/globals.css";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "../styles/globals.css";
-import { Providers } from "./providers";
-import { Box, Flex } from "@chakra-ui/react";
-import { Logo, Navbar } from "@app/components/common";
+import { SessionProvider } from "next-auth/react";
+import { ChakraUIProviders } from "./ChakraProvider";
+import { auth } from "@app/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,11 +14,13 @@ export const metadata: Metadata = {
     "My book shelf management is an online book reading application that helps users conveniently borrow books.",
 };
 
-const RootLayout = ({
+const RootLayout = async ({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
+  const session = await auth();
+
   return (
     <html lang="en">
       <head>
@@ -25,11 +28,13 @@ const RootLayout = ({
       </head>
 
       <body className={inter.className}>
-        <Providers>
-          <main className="app" style={{ padding: "48px 35px 38px" }}>
-            {children}
-          </main>
-        </Providers>
+        <ChakraUIProviders>
+          <SessionProvider session={session}>
+            <main className="app" style={{ padding: "48px 35px 38px" }}>
+              {children}
+            </main>
+          </SessionProvider>
+        </ChakraUIProviders>
       </body>
     </html>
   );

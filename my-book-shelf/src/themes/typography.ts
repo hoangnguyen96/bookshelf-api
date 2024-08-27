@@ -17,7 +17,8 @@ export const fontSizes = {
   md: "15px",
   lg: "16px",
   xl: "20px",
-  xxl: "35px",
+  xxl: "25px",
+  xxxl: "35px",
 };
 
 export const lineHeights = {
@@ -28,6 +29,8 @@ export const lineHeights = {
   20: "20px",
   22: "22px",
   24: "24px",
+  26: "26px",
+  36: "36px",
 };
 
 export const radius = {

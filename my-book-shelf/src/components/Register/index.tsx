@@ -6,6 +6,7 @@ import { useCallback } from "react";
 import { User } from "@app/models";
 import { generateSevenDigitUUID } from "@app/utils";
 import { HttpClient } from "@app/services";
+import { ROUTES } from "@app/constants";
 
 // Components
 
@@ -54,7 +55,12 @@ const Register = () => {
         description="For Both Staff & Students"
       />
       <FormRegister onSubmit={handleSubmit} />
-      <FooterForm text="Already a User?" textLink="Login now" pb="80px" />
+      <FooterForm
+        text="Already a User?"
+        textLink="Login now"
+        pb="80px"
+        link={ROUTES.LANDING_PAGE}
+      />
     </Box>
   );
 };

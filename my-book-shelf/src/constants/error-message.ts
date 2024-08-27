@@ -10,6 +10,7 @@ export const ERROR_MESSAGES = {
 
   // Response Api
   NETWORK_ERROR: "Network response was not ok!",
+  EMAIL_PASSWORD_INVALID: 'Email or password invalid.Please help to try again!',
 
   // Validation
   FIELD_REQUIRED: "This field is required.",

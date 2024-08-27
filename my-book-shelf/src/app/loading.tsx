@@ -1,10 +1,17 @@
 "use client";
 
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 
 const Loading = () => (
-  <Box>
-    <Text>Loading...</Text>
+  <Box
+    h="100vh"
+    display="flex"
+    alignItems="center"
+    textAlign="center"
+    justifyContent="center"
+  >
+    <Spinner size="lg" thickness="4px" speed="0.65s" color="brand.500" />
   </Box>
 );
+
 export default Loading;

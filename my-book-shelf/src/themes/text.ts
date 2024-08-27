@@ -27,6 +27,16 @@ export const Text = defineStyleConfig({
       lineHeight: 24,
       fontWeight: 400,
     },
+    xxl: {
+      fontSize: "xxl",
+      lineHeight: 26,
+      fontWeight: 700,
+    },
+    xxxl: {
+      fontSize: "xxxl",
+      lineHeight: 36,
+      fontWeight: 400,
+    },
   },
 
   defaultProps: {

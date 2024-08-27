@@ -11,8 +11,18 @@ import {
   Text,
 } from "@chakra-ui/react";
 import Avatar from "../Avatar";
+import { logout } from "@app/actions/auth";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@app/constants";
 
 const MenuProfile = () => {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await logout();
+    router.push(ROUTES.LOGIN);
+  };
+
   return (
     <Menu>
       <MenuButton
@@ -39,7 +49,7 @@ const MenuProfile = () => {
       <MenuList minW={205} borderRadius="10px" boxShadow="0 0 3px 0px #a9a9a9">
         <MenuItem>Profile</MenuItem>
         <MenuItem>Favorite</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </MenuList>
     </Menu>
   );
