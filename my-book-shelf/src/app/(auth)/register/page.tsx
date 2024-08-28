@@ -1,16 +1,23 @@
 "use client";
-
-import { Box } from "@chakra-ui/react";
-import { FooterForm, FormRegister, HeadingForm } from "../common";
 import { useCallback } from "react";
-import { User } from "@app/models";
-import { generateSevenDigitUUID } from "@app/utils";
-import { HttpClient } from "@app/services";
+import { Box } from "@chakra-ui/react";
+
+// Constants
 import { ROUTES } from "@app/constants";
 
-// Components
+// Models
+import { User } from "@app/models";
 
-const Register = () => {
+// Services
+import { HttpClient } from "@app/services";
+
+// Utils
+import { generateSevenDigitUUID } from "@app/utils";
+
+// Components
+import { FooterForm, FormRegister, HeadingForm } from "@app/components/common";
+
+const RegisterPage = () => {
   const handleSubmit = useCallback(async (values: Partial<User>) => {
     const uuid = generateSevenDigitUUID();
     const { username, email, password } = values;
@@ -65,4 +72,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterPage;

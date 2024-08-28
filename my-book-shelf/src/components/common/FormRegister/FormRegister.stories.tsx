@@ -34,7 +34,12 @@ const Template: StoryFn<typeof FormRegister> = () => (
   >
     <HeadingForm title="Registration" description="For Both Staff & Students" />
     <FormRegister onSubmit={() => {}} />
-    <FooterForm text="Already a User?" textLink="Login now" pb="80px" />
+    <FooterForm
+      text="Already a User?"
+      textLink="Login now"
+      pb="80px"
+      link="/"
+    />
   </Box>
 );
 

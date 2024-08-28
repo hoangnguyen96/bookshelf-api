@@ -7,6 +7,8 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
+import Books from "./books";
+import Favorites from "./favorites";
 
 const MyBookShelfPage = () => {
   return (
@@ -27,12 +29,12 @@ const MyBookShelfPage = () => {
           </Tab>
         </TabList>
 
-        <TabPanels>
-          <TabPanel>
-            <p>All Books!</p>
+        <TabPanels mt="34px">
+          <TabPanel p={0}>
+            <Books />
           </TabPanel>
-          <TabPanel>
-            <p>Favorite!</p>
+          <TabPanel p={0}>
+            <Favorites />
           </TabPanel>
         </TabPanels>
       </Tabs>

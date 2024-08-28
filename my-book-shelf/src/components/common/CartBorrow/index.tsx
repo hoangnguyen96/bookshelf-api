@@ -3,7 +3,23 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import { Button } from "..";
 
-const CartBorrow = () => {
+interface CartBorrowProps {
+  title: string;
+  author: string;
+  publicationYear: number;
+  rating: number;
+  imgUrl: string;
+  createDate: string;
+}
+
+const CartBorrow = ({
+  title,
+  author,
+  publicationYear,
+  rating,
+  imgUrl,
+  createDate,
+}: CartBorrowProps) => {
   return (
     <Flex
       gap="25px"
@@ -14,17 +30,21 @@ const CartBorrow = () => {
       pr="20px"
       bgColor="white"
       borderRadius="10px"
-      boxShadow="0 0 5px 1px #efdfde"
     >
       <Flex flexDirection="column" gap="5px" w={123}>
-        <Image src={book1} alt="Don't make me think" />
-        <Text size="sm">Don’t Make Me think</Text>
+        <Image
+          src={imgUrl}
+          alt="Don't make me think"
+          width={123}
+          height={170}
+        />
+        <Text size="sm">{title}</Text>
         <Flex>
-          <Text size="xs">Steve Krug,</Text>
-          <Text size="xs">2000</Text>
+          <Text size="xs">{author},</Text>
+          <Text size="xs">{publicationYear}</Text>
         </Flex>
         <Flex>
-          <Text size="xs">4.5/</Text>
+          <Text size="xs">{rating}/</Text>
           <Text size="xs" color="dark.70">
             5
           </Text>
@@ -35,7 +55,7 @@ const CartBorrow = () => {
           <Text size="md" mb="10px">
             Borrowed on
           </Text>
-          <Text size="xs">11 Mar 2023 09:00 AM</Text>
+          <Text size="xs">{createDate}</Text>
         </Box>
         <Button
           variant="outline"
