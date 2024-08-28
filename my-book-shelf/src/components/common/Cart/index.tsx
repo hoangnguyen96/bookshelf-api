@@ -6,6 +6,7 @@ interface CartType {
   title: string;
   author: string;
   imageUrl: string;
+  isFavorite: boolean;
   publicationYear: number;
   rating: number;
 }
@@ -14,6 +15,7 @@ const Cart = ({
   title,
   author,
   imageUrl,
+  isFavorite,
   publicationYear,
   rating,
 }: CartType) => {
@@ -48,7 +50,12 @@ const Cart = ({
           5
         </Text>
       </Flex>
-      <HeartIcon position="absolute" right="10px" bottom="5px" />
+      <HeartIcon
+        position="absolute"
+        right="10px"
+        bottom="5px"
+        isFavorite={isFavorite}
+      />
     </Flex>
   );
 };

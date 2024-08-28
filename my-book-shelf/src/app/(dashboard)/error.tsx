@@ -17,9 +17,9 @@ const Error = ({
   }, [error]);
 
   return (
-    <Flex>
+    <Flex flexDir="column" justifyContent="center" alignItems="center" h="80%">
       <Text>Something went wrong!</Text>
-      <Button onClick={() => reset()} text="Try again" />
+      <Button mt="30px" onClick={() => reset()} text="Try again" />
     </Flex>
   );
 };

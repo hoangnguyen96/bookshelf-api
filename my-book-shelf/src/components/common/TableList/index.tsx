@@ -1,9 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { book1 } from "@app/assets/images";
-import { Button, HeartIcon } from "..";
+import { Button, HeartIcon, StatusBook } from "..";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@app/constants";
 
 interface TableListProps {
+  id: string;
   title: string;
   author: string;
   imageUrl: string;
@@ -15,6 +20,7 @@ interface TableListProps {
 }
 
 const TableList = ({
+  id,
   title,
   author,
   imageUrl,
@@ -24,6 +30,12 @@ const TableList = ({
   rating,
   isContribute = false,
 }: TableListProps) => {
+  const router = useRouter();
+
+  const handleRedirectPreview = () => {
+    router.push(`${ROUTES.PREVIEW}/${id}`);
+  };
+
   return (
     <Flex
       bgColor="white"
@@ -64,13 +76,7 @@ const TableList = ({
           <Text size="md">UX Design</Text>
         </Flex>
       </Flex>
-      {!isContribute && (
-        <Box w={85} height={26} bgColor="green.100" borderRadius="5px">
-          <Text size="md" color="white" lineHeight="26px" textAlign="center">
-            In-Shelf
-          </Text>
-        </Box>
-      )}
+      {!isContribute && <StatusBook />}
       <Flex
         gap={isContribute ? "36px" : "64px"}
         alignItems="center"
@@ -78,7 +84,12 @@ const TableList = ({
         w="100%"
       >
         {!isContribute && <HeartIcon isFavorite={idFavorite} />}
-        <Button size="sm" variant="outline" text="Preview" />
+        <Button
+          size="sm"
+          variant="outline"
+          text="Preview"
+          onClick={handleRedirectPreview}
+        />
         {isContribute && <Button size="sm" variant="outline" text="Delete" />}
       </Flex>
     </Flex>

@@ -64,7 +64,7 @@ const FormLogin = ({ onSubmit }: LoginForm) => {
     try {
       await onSubmit(formData);
 
-      router.push(ROUTES.SEARCH);
+      router.push(ROUTES.HOME);
     } catch (error) {
       console.log(error);
     }

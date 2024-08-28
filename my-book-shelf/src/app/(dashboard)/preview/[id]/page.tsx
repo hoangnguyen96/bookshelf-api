@@ -1,35 +1,42 @@
 "use client";
 
-import { ROUTES } from "@app/constants";
 import { Box, Flex, Text } from "@chakra-ui/react";
+import { notFound, useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowBackIcon } from "@chakra-ui/icons";
 import Image from "next/image";
-import { book1, previewAuthor } from "@app/assets/images";
-import { CheckIcon, StarFullIcon } from "@app/assets/icons";
-import { Button } from "../common";
-import { BookType, User } from "@app/models";
-import { useEffect, useState } from "react";
+
+// Models
+import { BookType } from "@app/models";
+
+// Services
 import { HttpClient } from "@app/services";
 
-const PreviewBook = () => {
-  const [book, setBook] = useState<BookType[]>();
+// Images
+import { ArrowBackIcon } from "@chakra-ui/icons";
+import { CheckIcon, StarFullIcon } from "@app/assets/icons";
+import { previewAuthor } from "@app/assets/images";
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await HttpClient.get<BookType[]>(`/books?id=${3}`);
+// Components
+import { Button, StatusBook } from "@app/components/common";
 
-        setBook(data);
-      } catch (error) {
-        console.error("Error fetching data", error);
-      }
-    };
+interface PreviewBookProps {
+  params: {
+    id: string;
+  };
+}
 
-    fetchData();
-  }, []);
+const getBookById = async (id: string) => {
+  let data = await HttpClient.get<BookType[]>(`/books?id=${id}`);
 
-  const [foundBook] = book || [];
+  if (!data) notFound();
+  return data;
+};
+
+const PreviewBook = async ({ params: { id } }: PreviewBookProps) => {
+  const router = useRouter();
+  const data = await getBookById(id);
+
+  const [foundBook, ...rest] = data || [];
   const {
     title,
     author,
@@ -40,11 +47,10 @@ const PreviewBook = () => {
     imageUrl,
     status,
   } = foundBook;
-  console.log("dataBook:", foundBook);
 
   return (
-    <Box p="20px 44px" h="100%" maxHeight={418}>
-      <Link href={ROUTES.SEARCH}>
+    <Box p="20px 44px" h="100%" maxHeight={420}>
+      <Link href="#" onClick={() => router.back()}>
         <ArrowBackIcon w={5} h={5} />
         <Text as="span" ml="9px">
           Back to results
@@ -60,7 +66,7 @@ const PreviewBook = () => {
           borderRadius="10px"
         >
           <Image
-            src={book1}
+            src={imageUrl}
             alt="Preview book"
             width={210}
             height={278}
@@ -68,11 +74,11 @@ const PreviewBook = () => {
           />
         </Box>
         <Flex flexDir="column" w="100%" maxW={503}>
-          <Text size="xxxl">Don’t Make Me Think </Text>
+          <Text size="xxxl">{title}</Text>
           <Text my="10px">
-            By Steve Krug, <Text as="span">2000</Text>
+            By {author}, <Text as="span">{publicationYear}</Text>
           </Text>
-          <Text color="dark.60">Second Edition</Text>
+          <Text color="dark.60">{edition} edition</Text>
 
           <Flex my="30px" alignItems="center" gap="19px">
             <Flex gap="10px" alignItems="center">
@@ -82,7 +88,7 @@ const PreviewBook = () => {
                 ))}
               </Flex>
               <Text size="md" fontSize="14px" fontWeight={500}>
-                <Text as="span">5.0</Text> Ratings
+                <Text as="span">{rating}</Text> Ratings
               </Text>
             </Flex>
             <Text size="md" fontSize="14px" fontWeight={500}>
@@ -115,20 +121,17 @@ const PreviewBook = () => {
               <Text fontSize="14px" fontWeight={700}>
                 Status
               </Text>
-              <Box w={85} height={26} bgColor="green.100" borderRadius="5px">
-                <Text
-                  size="md"
-                  color="white"
-                  lineHeight="26px"
-                  textAlign="center"
-                >
-                  In-Shelf
-                </Text>
-              </Box>
+              <StatusBook status={status} />
             </Flex>
           </Flex>
 
-          <Button size="xl" text="BORROW" maxW={210} mt="43px" />
+          <Button
+            size="xl"
+            text="BORROW"
+            maxW={210}
+            mt="43px"
+            lineHeight="60px"
+          />
         </Flex>
         <Box
           maxW={445}
@@ -146,14 +149,10 @@ const PreviewBook = () => {
             </Text>
           </Text>
           <Text size="xl" mt="22px" mb="43px">
-            Steve Krug
+            {author}
           </Text>
           <Text size="sm" lineHeight="16px">
-            Steve Krug is a usability consultant who has more than 30 years of
-            experience as a user advocate for companies like Apple, Netscape,
-            AOL, Lexus, and others. Based in part on the success of his first
-            book, Don't Make Me Think, he has become a highly sought-after
-            speaker on usability design.
+            {description}
           </Text>
           <Image
             src={previewAuthor}

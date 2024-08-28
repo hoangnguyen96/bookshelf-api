@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Flex } from "@chakra-ui/react";
 import { Logo, Navbar } from "@app/components/common";
 import { TopContent } from "@app/components";

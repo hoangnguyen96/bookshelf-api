@@ -23,6 +23,7 @@ const Template: StoryFn<typeof Cart> = () => (
     imageUrl="https://i.ibb.co/QbQgVtG/book1.png"
     publicationYear={2000}
     rating={4.5}
+    isFavorite={true}
   />
 );
 

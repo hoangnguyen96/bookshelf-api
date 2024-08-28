@@ -32,8 +32,12 @@ const Template: StoryFn<typeof FormLogin> = () => (
       title="Welcome Back !"
       description="Sign in to continue to yourDigital Library"
     />
-    <FormLogin />
-    <FooterForm text="New User?" textLink="Register Here" pb="160px" />
+    <FormLogin
+      onSubmit={async () => {
+        return Promise.resolve();
+      }}
+    />
+    <FooterForm text="New User?" textLink="Register Here" pb="160px" link="/" />
   </Box>
 );
 export const Default = Template.bind({});
