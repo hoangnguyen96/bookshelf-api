@@ -3,12 +3,15 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { Logo, Navbar } from "@app/components/common";
 import { TopContent } from "@app/components";
+import { useSession } from "next-auth/react";
 
 const DashboardLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
+  const { data: session } = useSession();
+
   return (
     <Flex bgColor="white" borderRadius="10px" height="100%">
       <Flex
@@ -18,7 +21,7 @@ const DashboardLayout = ({
         alignItems="center"
       >
         <Logo />
-        <Navbar />
+        <Navbar isAdmin={session?.user?.isAdmin} />
       </Flex>
       <Box
         w="100%"

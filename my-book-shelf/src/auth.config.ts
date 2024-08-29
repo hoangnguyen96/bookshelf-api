@@ -3,6 +3,7 @@ import type {
   Session as NextAuthSession,
   User as NextAuthUser,
 } from "next-auth";
+import { ROUTES } from "./constants";
 
 export interface CustomUser extends NextAuthUser {
   id: string;
@@ -21,17 +22,21 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const isOnHome = nextUrl.pathname.startsWith("/home");
-      const isOnSearch = nextUrl.pathname.startsWith("/search");
-      const isOnBookShelf = nextUrl.pathname.startsWith("/my-book-shelf");
-      const isOnContribute = nextUrl.pathname.startsWith("/contribute");
-      const isOnPreview = nextUrl.pathname.startsWith("/preview");
+      const isOnHome = nextUrl.pathname.startsWith(ROUTES.HOME);
+      const isOnSearch = nextUrl.pathname.startsWith(ROUTES.SEARCH);
+      const isOnBookShelf = nextUrl.pathname.startsWith(ROUTES.MY_BOOK_SHELF);
+      const isOnContribute = nextUrl.pathname.startsWith(ROUTES.CONTRIBUTE);
+      const isOnContributeList = nextUrl.pathname.startsWith(
+        ROUTES.CONTRIBUTE_LIST
+      );
+      const isOnPreview = nextUrl.pathname.startsWith(ROUTES.PREVIEW);
 
       if (
         isOnHome ||
         isOnSearch ||
         isOnBookShelf ||
         isOnContribute ||
+        isOnContributeList ||
         isOnPreview
       ) {
         if (isLoggedIn) return true;

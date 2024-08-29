@@ -12,6 +12,7 @@ interface TableListProps {
   title: string;
   author: string;
   imageUrl: string;
+  category: string;
   edition: string;
   publicationYear: number;
   rating: number;
@@ -25,6 +26,7 @@ const TableList = ({
   author,
   imageUrl,
   edition,
+  category,
   idFavorite,
   publicationYear,
   rating,
@@ -33,7 +35,7 @@ const TableList = ({
   const router = useRouter();
 
   const handleRedirectPreview = () => {
-    router.push(`${ROUTES.PREVIEW}/${id}`);
+    router.push(isContribute ? ROUTES.CONTRIBUTE : `${ROUTES.PREVIEW}/${id}`);
   };
 
   return (
@@ -65,14 +67,14 @@ const TableList = ({
         </Flex>
       </Flex>
       <Flex gap="72px" alignItems="center" maxW={312} w="100%">
-        <Text size="xl">
+        <Text size="xl" w="60px">
           {rating}
           <Text as="span" size="md" color="dark.70">
             /5
           </Text>
         </Text>
         <Flex flexDir="column" gap="11px">
-          <Text size="xl">Computer Science</Text>
+          <Text size="xl">{category}</Text>
           <Text size="md">UX Design</Text>
         </Flex>
       </Flex>

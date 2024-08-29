@@ -11,6 +11,7 @@ export { default as MenuProfile } from "./MenuProfile";
 export { default as Navbar } from "./Navbar";
 export { default as FormLogin } from "./FormLogin";
 export { default as FormRegister } from "./FormRegister";
+export { default as FormContribute } from "./FormContribute";
 export { default as HeadingForm } from "./HeadingForm";
 export { default as FooterForm } from "./FooterForm";
 export { default as TableList } from "./TableList";

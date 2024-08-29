@@ -13,7 +13,7 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 // Constants
 import { PASSWORD } from "@app/constants";
 
-type InputType = "text" | "password" | "number";
+type InputType = "text" | "password" | "number" | "file";
 
 interface InputBaseProps extends InputProps {
   isTypePassword?: boolean;

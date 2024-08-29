@@ -8,4 +8,5 @@ export const ROUTES = {
   PREVIEW: "/preview",
   MY_BOOK_SHELF: "/my-book-shelf",
   CONTRIBUTE: "/contribute",
+  CONTRIBUTE_LIST: "/contribute-list",
 };

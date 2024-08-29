@@ -99,11 +99,7 @@ const FormRegister = ({ itemUpdate, onSubmit }: FormRegisterProps) => {
   );
 
   return (
-    <Box
-      as="form"
-      onSubmit={submitLogin(handleFormSubmit)}
-      style={{ marginTop: "40px" }}
-    >
+    <Box as="form" style={{ marginTop: "40px" }}>
       {/* Name */}
       <FormControl
         isInvalid={!!errors.username}
