@@ -1,3 +1,4 @@
+import { BookType } from "@app/models";
 import {
   FieldErrors,
   FieldValues,
@@ -20,4 +21,38 @@ export const clearErrorOnChange = <T extends FieldValues>(
 export const generateSevenDigitUUID = () => {
   const uuid = uuidv4().replace(/\D/g, "");
   return uuid.slice(0, 7);
+};
+
+export const getThreeTopBook = (data: BookType[]) =>
+  data
+    .sort((a, b) => {
+      return (
+        new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
+      );
+    })
+    .slice(0, 3);
+
+export const formatDate = (date: Date) => {
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const period = hours >= 12 ? "PM" : "AM";
+  const formattedHours = hours % 12 || 12;
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+  return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()} ${formattedHours}:${formattedMinutes} ${period}`;
 };

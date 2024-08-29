@@ -7,3 +7,4 @@ export { BookshelfIcon } from "./BookshelfIcon";
 export { GiftIcon } from "./GiftIcon";
 export { StarOutlineIcon } from "./StarOutlineIcon";
 export { StarFullIcon } from "./StarFullIcon";
+export { UploadIcon } from "./Upload";

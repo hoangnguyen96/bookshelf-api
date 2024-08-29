@@ -9,6 +9,7 @@ interface CartType {
   isFavorite: boolean;
   publicationYear: number;
   rating: number;
+  isContribute?: boolean;
 }
 
 const Cart = ({
@@ -18,6 +19,7 @@ const Cart = ({
   isFavorite,
   publicationYear,
   rating,
+  isContribute = false,
 }: CartType) => {
   return (
     <Flex
@@ -44,18 +46,23 @@ const Cart = ({
         <Text size="xs">{author},</Text>
         <Text size="xs">{publicationYear}</Text>
       </Flex>
-      <Flex>
-        <Text size="xs">{rating}/</Text>
-        <Text size="xs" color="dark.70">
-          5
-        </Text>
-      </Flex>
-      <HeartIcon
-        position="absolute"
-        right="10px"
-        bottom="5px"
-        isFavorite={isFavorite}
-      />
+
+      {!isContribute && (
+        <>
+          <Flex>
+            <Text size="xs">{rating}/</Text>
+            <Text size="xs" color="dark.70">
+              5
+            </Text>
+          </Flex>
+          <HeartIcon
+            position="absolute"
+            right="10px"
+            bottom="5px"
+            isFavorite={isFavorite}
+          />
+        </>
+      )}
     </Flex>
   );
 };

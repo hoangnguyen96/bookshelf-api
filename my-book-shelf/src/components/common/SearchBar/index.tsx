@@ -7,6 +7,7 @@ import {
   Select,
   Flex,
   InputProps,
+  Box,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { useState } from "react";
@@ -38,8 +39,12 @@ const SearchBar = ({ placeholder = "Search..." }: InputProps) => {
         bgColor="backgroundTitle"
         _focusVisible={{ borderColor: "transparent" }}
       >
-        <option value="option1">Title</option>
-        <option value="option2">Author</option>
+        <Box as="option" value="option1">
+          Title
+        </Box>
+        <Box as="option" value="option2">
+          Author
+        </Box>
       </Select>
       <InputGroup size="md">
         <Input

@@ -21,5 +21,6 @@ export const colors = {
   viewIcon: "#8ea2b9",
   backgroundTitle: "#f7f7fa",
   backgroundContent: "#f3f3f7",
+  backgroundUpload: "#adb5bd",
   bgCheckbox: "#df7d3a",
 };

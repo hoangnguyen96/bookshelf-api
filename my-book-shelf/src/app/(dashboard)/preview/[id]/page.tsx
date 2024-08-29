@@ -60,7 +60,7 @@ const PreviewBook = async ({ params: { id } }: PreviewBookProps) => {
         <Box
           maxW={274}
           width="100%"
-          height="100%"
+          height={405}
           bgColor="white"
           p="24px 32px"
           borderRadius="10px"
@@ -136,7 +136,7 @@ const PreviewBook = async ({ params: { id } }: PreviewBookProps) => {
         <Box
           maxW={445}
           width="100%"
-          height="100%"
+          height={418}
           bgColor="white"
           p="30px"
           borderRadius="10px"

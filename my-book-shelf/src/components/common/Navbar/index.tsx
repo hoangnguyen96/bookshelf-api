@@ -12,38 +12,45 @@ import {
   SearchIcon,
 } from "@app/assets/icons";
 
-const listNavbar = {
-  [NAVBAR_STEP.HOME]: {
-    title: NAVBAR_STEP.HOME,
-    link: ROUTES.HOME,
-    icon: () => <HomeIcon />,
-  },
-  [NAVBAR_STEP.SEARCH]: {
-    title: NAVBAR_STEP.SEARCH,
-    link: ROUTES.SEARCH,
-    icon: () => <SearchIcon />,
-  },
-  [NAVBAR_STEP.MY_SHELF]: {
-    title: NAVBAR_STEP.MY_SHELF,
-    link: ROUTES.MY_BOOK_SHELF,
-    icon: () => <BookshelfIcon />,
-  },
-  [NAVBAR_STEP.CONTRIBUTE]: {
-    title: NAVBAR_STEP.CONTRIBUTE,
-    link: ROUTES.CONTRIBUTE,
-    icon: () => <GiftIcon />,
-  },
-};
+interface NavbarProps {
+  isAdmin?: boolean;
+}
 
-const Navbar = () => {
+const Navbar = ({ isAdmin = false }: NavbarProps) => {
+  const listNavbar = [
+    {
+      title: NAVBAR_STEP.HOME,
+      link: ROUTES.HOME,
+      icon: () => <HomeIcon />,
+    },
+    {
+      title: NAVBAR_STEP.SEARCH,
+      link: ROUTES.SEARCH,
+      icon: () => <SearchIcon />,
+    },
+    {
+      title: NAVBAR_STEP.MY_SHELF,
+      link: ROUTES.MY_BOOK_SHELF,
+      icon: () => <BookshelfIcon />,
+    },
+    {
+      ...(isAdmin && {
+        title: NAVBAR_STEP.CONTRIBUTE,
+        link: ROUTES.CONTRIBUTE,
+        icon: () => <GiftIcon />,
+      }),
+    },
+  ];
+
   return (
     <Flex flexDir="column" gap="34px">
-      {Object.entries(listNavbar || {}).map(([_, stepDetail]) => {
-        const { title, link, icon } = stepDetail;
+      {listNavbar.map((item) => {
+        const { title, link = "", icon } = item;
+
         return (
           <Link key={title} href={link}>
             <Flex gap="12px">
-              {icon()}
+              {icon && icon()}
               <Text size="xl">{title}</Text>
             </Flex>
           </Link>
