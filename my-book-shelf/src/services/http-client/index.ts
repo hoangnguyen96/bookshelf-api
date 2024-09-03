@@ -1,4 +1,4 @@
-import { ERROR_MESSAGES } from "@app/constants";
+import { MESSAGES } from "@app/constants";
 
 const API_END_POINT = process.env.NEXT_PUBLIC_API_URL || "";
 
@@ -21,7 +21,7 @@ class HttpService {
     });
 
     if (!response.ok) {
-      throw new Error(ERROR_MESSAGES.NETWORK_ERROR);
+      throw new Error(MESSAGES.NETWORK_ERROR);
     }
 
     return response.json();
@@ -31,7 +31,7 @@ class HttpService {
     try {
       return await this.request<T>("GET", url);
     } catch (error) {
-      throw new Error(ERROR_MESSAGES.GET_ERROR);
+      throw new Error(MESSAGES.GET_ERROR);
     }
   }
 
@@ -39,7 +39,7 @@ class HttpService {
     try {
       return await this.request<T>("POST", url, body);
     } catch (error) {
-      throw new Error(ERROR_MESSAGES.POST_ERROR);
+      throw new Error(MESSAGES.POST_ERROR);
     }
   }
 
@@ -47,7 +47,7 @@ class HttpService {
     try {
       return await this.request<T>("PUT", url, body);
     } catch (error) {
-      throw new Error(ERROR_MESSAGES.UPDATE_ERROR);
+      throw new Error(MESSAGES.UPDATE_ERROR);
     }
   }
 
@@ -55,7 +55,7 @@ class HttpService {
     try {
       return await this.request<T>("DELETE", url);
     } catch (error) {
-      throw new Error(ERROR_MESSAGES.DELETE_ERROR);
+      throw new Error(MESSAGES.DELETE_ERROR);
     }
   }
 }

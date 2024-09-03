@@ -1,8 +1,11 @@
 import { Flex, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import { HeartIcon } from "..";
+import { ROUTES } from "@app/constants";
+import Link from "next/link";
 
 interface CartType {
+  id: string;
   title: string;
   author: string;
   imageUrl: string;
@@ -13,6 +16,7 @@ interface CartType {
 }
 
 const Cart = ({
+  id,
   title,
   author,
   imageUrl,
@@ -35,12 +39,14 @@ const Cart = ({
       boxShadow="0 0 3px 0px #a9a9a9"
       position="relative"
     >
-      <Image
-        src={imageUrl}
-        alt="Don't make me think"
-        width={130}
-        height={172}
-      />
+      <Link key={id} href={`${ROUTES.PREVIEW}/${id}`}>
+        <Image
+          src={imageUrl}
+          alt="Don't make me think"
+          width={130}
+          height={172}
+        />
+      </Link>
       <Text size="sm">{title}</Text>
       <Flex>
         <Text size="xs">{author},</Text>
@@ -59,6 +65,7 @@ const Cart = ({
             position="absolute"
             right="10px"
             bottom="5px"
+            id={id}
             isFavorite={isFavorite}
           />
         </>

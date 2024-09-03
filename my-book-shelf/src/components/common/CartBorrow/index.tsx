@@ -1,25 +1,34 @@
-import { book1 } from "@app/assets/images";
+"use client";
+
 import { Box, Flex, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import { Button } from "..";
 
 interface CartBorrowProps {
+  id: string;
   title: string;
   author: string;
   publicationYear: number;
   rating: number;
   imgUrl: string;
   createDate: string;
+  onReturnBook: (id: string) => void;
 }
 
 const CartBorrow = ({
+  id,
   title,
   author,
   publicationYear,
   rating,
   imgUrl,
   createDate,
+  onReturnBook,
 }: CartBorrowProps) => {
+  const handleReturnBook = () => {
+    onReturnBook(id);
+  };
+
   return (
     <Flex
       gap="25px"
@@ -63,6 +72,7 @@ const CartBorrow = ({
           w={125}
           boxShadow="none"
           text="Return"
+          onClick={handleReturnBook}
         />
       </Flex>
     </Flex>

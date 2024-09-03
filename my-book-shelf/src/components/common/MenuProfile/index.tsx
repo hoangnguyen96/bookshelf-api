@@ -14,9 +14,12 @@ import Avatar from "../Avatar";
 import { logout } from "@app/actions/auth";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@app/constants";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const MenuProfile = () => {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const handleLogout = async () => {
     await logout();
@@ -40,16 +43,36 @@ const MenuProfile = () => {
         boxShadow="0 0 4px -1px #a9a9a9"
       >
         <Flex justifyContent="flex-start" alignItems="center" gap={4}>
-          <Avatar width={45} height={45} border="2px solid white" />
+          <Avatar
+            image={session?.user?.image || ""}
+            width={45}
+            height={45}
+            border="2px solid white"
+          />
           <Text size="xl" flex={1}>
-            Kenson
+            {session?.user?.name}
           </Text>
         </Flex>
       </MenuButton>
       <MenuList minW={205} borderRadius="10px" boxShadow="0 0 3px 0px #a9a9a9">
-        <MenuItem>Profile</MenuItem>
-        <MenuItem>Favorite</MenuItem>
-        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        <MenuItem>
+          <Link href={ROUTES.PROFILE} style={{ width: "100%" }}>
+            Profile
+          </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link
+            href={`${ROUTES.MY_BOOK_SHELF_FAVORITES}`}
+            style={{ width: "100%" }}
+          >
+            Favorite
+          </Link>
+        </MenuItem>
+        <MenuItem onClick={handleLogout}>
+          <Text lineHeight="30px" w="100%">
+            Logout
+          </Text>
+        </MenuItem>
       </MenuList>
     </Menu>
   );

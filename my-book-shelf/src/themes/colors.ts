@@ -23,4 +23,6 @@ export const colors = {
   backgroundContent: "#f3f3f7",
   backgroundUpload: "#adb5bd",
   bgCheckbox: "#df7d3a",
+  buttonUpload: "#909090",
+  backgroundReadOnly: "#fafbfc",
 };

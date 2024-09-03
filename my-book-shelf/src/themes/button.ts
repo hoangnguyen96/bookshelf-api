@@ -14,6 +14,12 @@ export const Button = defineStyleConfig({
   },
 
   sizes: {
+    xs: {
+      minW: "115px",
+      fontsize: "xs",
+      fontWeight: 500,
+      lineHeight: "24px",
+    },
     sm: {
       minW: "85px",
       h: "30px",

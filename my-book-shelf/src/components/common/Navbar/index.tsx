@@ -1,3 +1,6 @@
+"use client";
+
+import { useSession } from "next-auth/react";
 import { Flex, Text } from "@chakra-ui/react";
 import Link from "next/link";
 
@@ -12,11 +15,8 @@ import {
   SearchIcon,
 } from "@app/assets/icons";
 
-interface NavbarProps {
-  isAdmin?: boolean;
-}
-
-const Navbar = ({ isAdmin = false }: NavbarProps) => {
+const Navbar = () => {
+  const { data: session } = useSession();
   const listNavbar = [
     {
       title: NAVBAR_STEP.HOME,
@@ -34,7 +34,7 @@ const Navbar = ({ isAdmin = false }: NavbarProps) => {
       icon: () => <BookshelfIcon />,
     },
     {
-      ...(isAdmin && {
+      ...(session?.user?.isAdmin && {
         title: NAVBAR_STEP.CONTRIBUTE,
         link: ROUTES.CONTRIBUTE,
         icon: () => <GiftIcon />,

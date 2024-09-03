@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Box,
   FormControl,
@@ -10,7 +10,7 @@ import {
 import { useForm, Controller } from "react-hook-form";
 
 // Constants
-import { ERROR_MESSAGES, REGEX_PATTERN, ROUTES } from "@app/constants";
+import { MESSAGES, REGEX_PATTERN } from "@app/constants";
 
 // Models
 import { User } from "@app/models";
@@ -19,12 +19,12 @@ import { User } from "@app/models";
 import {
   clearErrorOnChange,
   isEnableSubmitButton,
+  validatePassword,
   validateRegExpFormat,
 } from "@app/utils";
 
 // Components
 import { Button, Checkbox, Input } from "..";
-import { useRouter } from "next/navigation";
 
 interface LoginForm {
   onSubmit: (data: Partial<User>) => Promise<void | string>;
@@ -32,11 +32,12 @@ interface LoginForm {
 
 const FormLogin = ({ onSubmit }: LoginForm) => {
   const REQUIRED_FIELDS = ["email", "password"];
-  const router = useRouter();
+  const [rememberMe, setRememberMe] = useState<boolean>(false);
 
   const {
     control,
     clearErrors,
+    getValues,
     handleSubmit: submitLogin,
     formState: { errors, isValid, dirtyFields },
     reset,
@@ -59,16 +60,49 @@ const FormLogin = ({ onSubmit }: LoginForm) => {
 
   const isDisableSubmit = !(shouldEnable || isValid);
 
-  const handleLogin = async (formData: Partial<User>) => {
-    console.log("data", formData);
-    try {
-      await onSubmit(formData);
+  const handleRememberMeClick = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    console.log("900099");
+    const isChecked = event.target.checked;
+    setRememberMe(isChecked);
 
-      router.push(ROUTES.HOME);
-    } catch (error) {
-      console.log(error);
+    if (isChecked) {
+      // Save email and password to localStorage
+      const email = getValues("email") || "";
+      const password = getValues("password") || "";
+      localStorage.setItem("email", email);
+      localStorage.setItem("password", password);
+    } else {
+      // Clear email and password from localStorage
+      localStorage.removeItem("email");
+      localStorage.removeItem("password");
     }
   };
+
+  const handleLogin = async (formData: Partial<User>) => {
+    console.log("data", formData);
+    if (rememberMe) {
+      localStorage.setItem("email", formData.email || "");
+      localStorage.setItem("password", formData.password || "");
+    }
+    try {
+      await onSubmit(formData);
+    } catch (error) {
+      throw new Error(MESSAGES.LOGIN_FAILED);
+    }
+  };
+
+  useEffect(() => {
+    // Read from localStorage on component mount
+    const savedEmail = localStorage.getItem("email") || "";
+    const savedPassword = localStorage.getItem("password") || "";
+    setRememberMe(!!savedEmail); // Check if email exists in localStorage
+    reset({
+      email: savedEmail,
+      password: savedPassword,
+    });
+  }, [reset]);
 
   return (
     <Box as="form" style={{ marginTop: "40px" }}>
@@ -83,7 +117,7 @@ const FormLogin = ({ onSubmit }: LoginForm) => {
           control={control}
           defaultValue=""
           rules={{
-            required: ERROR_MESSAGES.FIELD_REQUIRED,
+            required: MESSAGES.FIELD_REQUIRED,
             validate: (value) =>
               validateRegExpFormat(
                 value as string,
@@ -124,7 +158,8 @@ const FormLogin = ({ onSubmit }: LoginForm) => {
           control={control}
           defaultValue=""
           rules={{
-            required: ERROR_MESSAGES.FIELD_REQUIRED,
+            required: MESSAGES.FIELD_REQUIRED,
+            validate: (value) => validatePassword(value || ""),
           }}
           render={({
             field: { value, onChange, ...rest },
@@ -149,7 +184,7 @@ const FormLogin = ({ onSubmit }: LoginForm) => {
         </FormErrorMessage>
       </FormControl>
 
-      <Checkbox />
+      <Checkbox isChecked={rememberMe} onChange={handleRememberMeClick} />
       <Button
         variant="full"
         text="Login"

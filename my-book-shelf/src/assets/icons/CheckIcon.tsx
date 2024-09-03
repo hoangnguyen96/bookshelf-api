@@ -1,3 +1,5 @@
+"use client";
+
 import { IconProps } from "@chakra-ui/react";
 
 export const CheckIcon: React.FC<IconProps> = ({

@@ -5,13 +5,16 @@ import { z } from "zod";
 import { HttpClient } from "./services";
 import bcrypt from "bcryptjs";
 import { User as UserModel } from "./models";
+import { API_ROUTES, MESSAGES } from "./constants";
 
 const getUser = async (email: string): Promise<UserModel[] | []> => {
   try {
-    const user = (await HttpClient.get(`/user?email=${email}`)) as [];
+    const user = (await HttpClient.get(
+      `${API_ROUTES.USER}?email=${email}`
+    )) as UserModel[];
+
     return user;
   } catch (error) {
-    console.error("Failed to fetch user:", error);
     return [];
   }
 };
@@ -42,8 +45,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           const [foundUser, ...rest] = user;
 
           if (!foundUser || !foundUser.password) {
-            console.log("User not found or user password missing");
-            return null;
+            throw new Error(MESSAGES.LOGIN_NOTFOUND);
           }
 
           const passwordsMatch = await bcrypt.compare(
@@ -61,8 +63,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             };
         }
 
-        console.log("Invalid credentials");
-        return null;
+        throw new Error(MESSAGES.INVALID_CREDENTIALS);
       },
     }),
   ],

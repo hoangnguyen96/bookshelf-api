@@ -1,4 +1,5 @@
-import { ERROR_MESSAGES } from "@app/constants";
+import { getUserByEmail } from "@app/api";
+import { MESSAGES } from "@app/constants";
 
 export const isRequired = (value: string | null | undefined): boolean =>
   !!value;
@@ -28,16 +29,45 @@ export const isEnableSubmitButton = (
 };
 
 export const validateRequired = (value: string | null): string | true =>
-  isRequired(value?.trim()) || ERROR_MESSAGES.FIELD_REQUIRED;
+  isRequired(value?.trim()) || MESSAGES.FIELD_REQUIRED;
 
 export const validateRegExpFormat = (
   value: string,
   pattern: RegExp,
   ariaLabel: string
 ): string | true =>
-  isValidFormat(value.trim(), pattern) || ERROR_MESSAGES.FORMAT(ariaLabel);
+  isValidFormat(value.trim(), pattern) || MESSAGES.FORMAT(ariaLabel);
+
+export const checkEmailExists = async (email: string) => {
+  const data = await getUserByEmail(email);
+
+  if (data?.length > 0) {
+    return MESSAGES.EMAIL_EXISTS;
+  }
+
+  return true;
+};
 
 export const validateConfirmPassword = (
   confirmPassword: string,
   password: string
-) => confirmPassword === password || ERROR_MESSAGES.CONFIRM_PASSWORD;
+) => confirmPassword === password || MESSAGES.CONFIRM_PASSWORD;
+
+/**
+ * Validate password with the following criteria:
+ * - Minimum 8 characters
+ * - At least one uppercase letter
+ * - At least one lowercase letter
+ * - At least one number
+ * - At least one symbol
+ *
+ * @param password - The password string to validate
+ * @returns A string with the error message if invalid, or true if valid
+ */
+export const validatePassword = (password: string): true | string => {
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
+  return regex.test(password)
+    ? true
+    : "Password must have minimum 8 characters, at least one uppercase letter, one lowercase letter, one number, and one symbol";
+};

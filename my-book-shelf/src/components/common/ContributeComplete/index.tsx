@@ -13,7 +13,6 @@ const ContributeComplete = () => {
       maxW={678}
       borderRadius="10px"
       alignItems="center"
-      boxShadow="0 0 5px 1px #efdfde"
     >
       <Text color="dark.100">Thank you For your Submission </Text>
       <CheckIcon />
