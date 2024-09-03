@@ -4,6 +4,6 @@ import HeartIcon from "..";
 
 describe("HeartIcon", () => {
   it("Should render correctly snapshot", () => {
-    expect(render(<HeartIcon />)).toMatchSnapshot();
+    expect(render(<HeartIcon id="1" />)).toMatchSnapshot();
   });
 });

@@ -6,7 +6,7 @@ exports[`ContributeComplete Should render correctly snapshot 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="css-r56k4m"
+        class="css-fg2ebx"
       >
         <p
           class="chakra-text css-qbyqmg"
@@ -15,9 +15,9 @@ exports[`ContributeComplete Should render correctly snapshot 1`] = `
         </p>
         <svg
           fill="none"
-          height="140"
+          height="140px"
           viewBox="0 0 140 140"
-          width="140"
+          width="140px"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -35,7 +35,7 @@ exports[`ContributeComplete Should render correctly snapshot 1`] = `
   </body>,
   "container": <div>
     <div
-      class="css-r56k4m"
+      class="css-fg2ebx"
     >
       <p
         class="chakra-text css-qbyqmg"
@@ -44,9 +44,9 @@ exports[`ContributeComplete Should render correctly snapshot 1`] = `
       </p>
       <svg
         fill="none"
-        height="140"
+        height="140px"
         viewBox="0 0 140 140"
-        width="140"
+        width="140px"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path

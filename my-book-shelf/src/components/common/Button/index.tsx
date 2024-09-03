@@ -1,7 +1,9 @@
+"use client";
+
 import { Button, ButtonProps } from "@chakra-ui/react";
 
 type ButtonVariant = "normal" | "outline" | "full";
-type ButtonSize = "sm" | "md" | "lg" | "xl";
+type ButtonSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 interface ButtonBaseProps extends ButtonProps {
   variant?: ButtonVariant;

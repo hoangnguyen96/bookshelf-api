@@ -11,16 +11,23 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const SearchBar = ({ placeholder = "Search..." }: InputProps) => {
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchType, setSearchType] = useState("");
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
+  const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSearchType(event.target.value);
+  };
+
   const handleSearch = () => {
-    console.log("Searching for:", searchTerm);
+    router.push(`?type=${searchType}&query=${searchTerm}`);
   };
 
   return (
@@ -33,16 +40,18 @@ const SearchBar = ({ placeholder = "Search..." }: InputProps) => {
       <Select
         placeholder="Select"
         border="none"
+        value={searchType || ""}
         borderLeftRadius="40px"
         w="120px"
         h="50px"
         bgColor="backgroundTitle"
         _focusVisible={{ borderColor: "transparent" }}
+        onChange={handleTypeChange}
       >
-        <Box as="option" value="option1">
+        <Box as="option" value="title">
           Title
         </Box>
-        <Box as="option" value="option2">
+        <Box as="option" value="author">
           Author
         </Box>
       </Select>

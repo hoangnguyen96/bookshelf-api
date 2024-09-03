@@ -56,3 +56,12 @@ export const formatDate = (date: Date) => {
 
   return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()} ${formattedHours}:${formattedMinutes} ${period}`;
 };
+
+export const dividePaginationBooks = (list: BookType[]) => {
+  return list.reduce((acc: BookType[][], _, i, self) => {
+    if (!(i % 12)) {
+      return [...acc, self.slice(i, i + 12)];
+    }
+    return acc;
+  }, []);
+};

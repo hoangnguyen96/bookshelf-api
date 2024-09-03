@@ -11,16 +11,18 @@ import {
 } from "@chakra-ui/react";
 
 // Constants
-import { ERROR_MESSAGES, REGEX_PATTERN } from "@app/constants";
+import { MESSAGES, REGEX_PATTERN } from "@app/constants";
 
 // Models
 import { User } from "@app/models";
 
 // Utils
 import {
+  checkEmailExists,
   clearErrorOnChange,
   isEnableSubmitButton,
   validateConfirmPassword,
+  validatePassword,
   validateRegExpFormat,
 } from "@app/utils";
 
@@ -111,7 +113,7 @@ const FormRegister = ({ itemUpdate, onSubmit }: FormRegisterProps) => {
           control={control}
           defaultValue=""
           rules={{
-            required: ERROR_MESSAGES.FIELD_REQUIRED,
+            required: MESSAGES.FIELD_REQUIRED,
           }}
           render={({
             field: { value, onChange, ...rest },
@@ -146,13 +148,20 @@ const FormRegister = ({ itemUpdate, onSubmit }: FormRegisterProps) => {
           control={control}
           defaultValue=""
           rules={{
-            required: ERROR_MESSAGES.FIELD_REQUIRED,
-            validate: (value) =>
-              validateRegExpFormat(
+            required: MESSAGES.FIELD_REQUIRED,
+            validate: async (value) => {
+              const formatError = validateRegExpFormat(
                 value as string,
                 REGEX_PATTERN.EMAIL,
                 "Email"
-              ),
+              );
+
+              if (formatError !== true) {
+                return formatError;
+              }
+
+              return await checkEmailExists(value || "");
+            },
           }}
           render={({
             field: { value, onChange, ...rest },
@@ -187,7 +196,8 @@ const FormRegister = ({ itemUpdate, onSubmit }: FormRegisterProps) => {
           control={control}
           defaultValue=""
           rules={{
-            required: ERROR_MESSAGES.FIELD_REQUIRED,
+            required: MESSAGES.FIELD_REQUIRED,
+            validate: (value) => validatePassword(value || ""),
           }}
           render={({
             field: { value, onChange, ...rest },
@@ -223,7 +233,7 @@ const FormRegister = ({ itemUpdate, onSubmit }: FormRegisterProps) => {
           control={control}
           defaultValue=""
           rules={{
-            required: ERROR_MESSAGES.FIELD_REQUIRED,
+            required: MESSAGES.FIELD_REQUIRED,
             validate: (value) =>
               validateConfirmPassword(
                 value as string,

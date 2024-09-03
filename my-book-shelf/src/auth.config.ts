@@ -24,7 +24,12 @@ export const authConfig = {
       const isLoggedIn = !!auth?.user;
       const isOnHome = nextUrl.pathname.startsWith(ROUTES.HOME);
       const isOnSearch = nextUrl.pathname.startsWith(ROUTES.SEARCH);
-      const isOnBookShelf = nextUrl.pathname.startsWith(ROUTES.MY_BOOK_SHELF);
+      const isOnBookShelfAll = nextUrl.pathname.startsWith(
+        ROUTES.MY_BOOK_SHELF
+      );
+      const isOnBookShelfFavorites = nextUrl.pathname.startsWith(
+        ROUTES.MY_BOOK_SHELF_FAVORITES
+      );
       const isOnContribute = nextUrl.pathname.startsWith(ROUTES.CONTRIBUTE);
       const isOnContributeList = nextUrl.pathname.startsWith(
         ROUTES.CONTRIBUTE_LIST
@@ -34,7 +39,8 @@ export const authConfig = {
       if (
         isOnHome ||
         isOnSearch ||
-        isOnBookShelf ||
+        isOnBookShelfAll ||
+        isOnBookShelfFavorites ||
         isOnContribute ||
         isOnContributeList ||
         isOnPreview

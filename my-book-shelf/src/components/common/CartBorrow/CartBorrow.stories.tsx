@@ -25,6 +25,8 @@ const Template: StoryFn<typeof CartBorrow> = () => (
     rating={4.5}
     imgUrl={`${book1}`}
     createDate={"11 Mar 2023 09:00 AM"}
+    id={""}
+    onReturnBook={() => {}}
   />
 );
 

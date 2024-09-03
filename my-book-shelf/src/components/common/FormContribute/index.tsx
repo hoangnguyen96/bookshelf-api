@@ -1,9 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { BookType } from "@app/models";
-import { Button, Input } from "..";
+import Image from "next/image";
 import {
   Box,
   Flex,
@@ -13,26 +12,55 @@ import {
   Select,
   Textarea,
 } from "@chakra-ui/react";
-import { ERROR_MESSAGES } from "@app/constants";
+
+// Constants
+import { MESSAGES } from "@app/constants";
+
+// Models
+import { BookType } from "@app/models";
+
+// Api
+import { generateImageUpload } from "@app/api";
+
+// Utils
 import {
   clearErrorOnChange,
   formatDate,
   isEnableSubmitButton,
 } from "@app/utils";
-import Image from "next/image";
 import { UploadIcon } from "@app/assets/icons";
+import { Button, Input } from "..";
 
 interface FormContributeProps {
   itemUpdate?: Partial<BookType>;
-  onSubmit: (user: Partial<BookType>) => void;
+  onSubmit?: (book: Partial<BookType>) => void;
+  onUpdate?: (id: string, book: Partial<BookType>) => void;
 }
 
-const FormContribute = ({ itemUpdate, onSubmit }: FormContributeProps) => {
-  const { title, author, category, imageUrl, description } = itemUpdate || {};
+const FormContribute = ({
+  itemUpdate,
+  onSubmit,
+  onUpdate,
+}: FormContributeProps) => {
+  const {
+    id,
+    title,
+    author,
+    category,
+    imageUrl,
+    description,
+    createdDate,
+    edition,
+    publicationYear,
+    rating,
+    status,
+  } = itemUpdate || {};
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(
     selectedImage ? URL.createObjectURL(selectedImage) : imageUrl || null
   );
+  console.log("imagePreview", imagePreview);
+  console.log("=-=-=--=idvvvvvvvvvvvvvv", id);
 
   const REQUIRED_FIELDS = [
     "title",
@@ -55,9 +83,8 @@ const FormContribute = ({ itemUpdate, onSubmit }: FormContributeProps) => {
 
   const {
     control,
-    getValues,
     clearErrors,
-    handleSubmit: submitLogin,
+    handleSubmit: submitForm,
     formState: { errors, isValid, dirtyFields },
     reset,
   } = useForm<Partial<BookType>>({
@@ -75,29 +102,43 @@ const FormContribute = ({ itemUpdate, onSubmit }: FormContributeProps) => {
 
   const isDisableSubmit = !(shouldEnable || isValid);
 
-  const handleFormSubmit = async (dataAddBook: Partial<BookType>) => {
-    if (!selectedImage) {
+  const handleFormSubmit = async (dataBook: Partial<BookType>) => {
+    if (!selectedImage && !imageUrl) {
       console.error("No image selected");
       return;
     }
 
-    const formData = new FormData();
-    formData.append("image", selectedImage);
-
     try {
-      const response = await fetch(
-        `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`,
-        {
-          method: "POST",
-          body: formData,
+      if (itemUpdate) {
+        let finalImageUrl = imageUrl;
+        if (selectedImage) {
+          const data = await generateImageUpload(selectedImage as File);
+          if (data.success) {
+            finalImageUrl = data.data.url;
+          } else {
+            console.error("Upload failed:", data.error.message);
+            return;
+          }
         }
-      );
+        onUpdate?.(id as string, {
+          ...dataBook,
+          createdDate,
+          edition,
+          publicationYear,
+          rating,
+          status,
+          imageUrl: finalImageUrl,
+        });
 
-      const data = await response.json();
+        return;
+      }
+
+      const data = await generateImageUpload(selectedImage as File);
+      console.log("adasdasd===000", data);
 
       if (data.success) {
-        onSubmit({
-          ...dataAddBook,
+        onSubmit?.({
+          ...dataBook,
           status: false,
           publicationYear: new Date().getFullYear(),
           rating: 0,
@@ -108,11 +149,14 @@ const FormContribute = ({ itemUpdate, onSubmit }: FormContributeProps) => {
         reset();
         setSelectedImage(null);
         setImagePreview(null);
+        return;
       } else {
         console.error("Upload failed:", data.error.message);
+        return;
       }
     } catch (error) {
       console.error("Error add book!", error);
+      return;
     }
   };
 
@@ -123,6 +167,10 @@ const FormContribute = ({ itemUpdate, onSubmit }: FormContributeProps) => {
       setImagePreview(URL.createObjectURL(file));
     }
   };
+
+  useEffect(() => {
+    reset(formInitData);
+  }, [itemUpdate, reset, formInitData]);
 
   return (
     <Box as="form" pos="relative">
@@ -138,7 +186,7 @@ const FormContribute = ({ itemUpdate, onSubmit }: FormContributeProps) => {
             control={control}
             defaultValue=""
             rules={{
-              required: ERROR_MESSAGES.FIELD_REQUIRED,
+              required: MESSAGES.FIELD_REQUIRED,
             }}
             render={({
               field: { value, onChange, ...rest },
@@ -174,7 +222,7 @@ const FormContribute = ({ itemUpdate, onSubmit }: FormContributeProps) => {
             control={control}
             defaultValue=""
             rules={{
-              required: ERROR_MESSAGES.FIELD_REQUIRED,
+              required: MESSAGES.FIELD_REQUIRED,
             }}
             render={({
               field: { value, onChange, ...rest },
@@ -221,7 +269,7 @@ const FormContribute = ({ itemUpdate, onSubmit }: FormContributeProps) => {
           control={control}
           defaultValue=""
           rules={{
-            required: ERROR_MESSAGES.FIELD_REQUIRED,
+            required: MESSAGES.FIELD_REQUIRED,
           }}
           render={({
             field: { value, onChange, ...rest },
@@ -260,7 +308,7 @@ const FormContribute = ({ itemUpdate, onSubmit }: FormContributeProps) => {
           control={control}
           defaultValue=""
           rules={{
-            required: ERROR_MESSAGES.FIELD_REQUIRED,
+            required: MESSAGES.FIELD_REQUIRED,
           }}
           render={({
             field: { value, onChange, ...rest },
@@ -292,7 +340,6 @@ const FormContribute = ({ itemUpdate, onSubmit }: FormContributeProps) => {
               <Input
                 id="fileInput"
                 type="file"
-                value={value}
                 accept="image/*"
                 onChange={(e) => {
                   onChange(e);
@@ -350,10 +397,10 @@ const FormContribute = ({ itemUpdate, onSubmit }: FormContributeProps) => {
       <Button
         type="submit"
         size="xl"
-        text="Submit"
+        text={itemUpdate ? "Update" : "Submit"}
         my="40px"
         isDisabled={isDisableSubmit}
-        onClick={submitLogin(handleFormSubmit)}
+        onClick={submitForm(handleFormSubmit)}
       />
     </Box>
   );

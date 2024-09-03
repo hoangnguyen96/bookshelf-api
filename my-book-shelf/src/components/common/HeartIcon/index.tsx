@@ -1,28 +1,47 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo } from "react";
 import { IconButton, StyleProps } from "@chakra-ui/react";
 import { HeartIconFull, HeartIconOutline } from "@app/assets/icons";
+import { getUserById, updateUserById } from "@app/api";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { User } from "@app/models";
 
 interface IconHeartProps extends StyleProps {
+  id: string;
   isFavorite?: boolean;
 }
 
-const IconHeart = ({ isFavorite = false, ...rest }: IconHeartProps) => {
-  const [isSelected, setIsSelected] = useState(isFavorite);
+const IconHeart = ({ id, isFavorite = false, ...rest }: IconHeartProps) => {
+  const { data: session } = useSession();
+  const router = useRouter();
 
-  const handleClick = () => {
-    setIsSelected(!isSelected);
+  const handleClick = async () => {
+    const dataUserById = (await getUserById(session?.user?.id || "")) as User;
+
+    let listFavorite = dataUserById.favorites;
+    if (dataUserById.favorites.includes(id)) {
+      listFavorite = dataUserById.favorites.filter((item) => item !== id);
+    } else {
+      listFavorite = [...dataUserById.favorites, id];
+    }
+
+    updateUserById(dataUserById.id, {
+      ...dataUserById,
+      favorites: listFavorite,
+    });
+    return router.refresh();
   };
 
   const iconHeart = useCallback(
-    () => (isSelected ? <HeartIconFull /> : <HeartIconOutline />),
-    [isSelected]
+    () => (isFavorite ? <HeartIconFull /> : <HeartIconOutline />),
+    [isFavorite]
   );
 
   const colorHeart = useMemo(
-    () => (isSelected ? "red.500" : "gray.500"),
-    [isSelected]
+    () => (isFavorite ? "red.500" : "gray.500"),
+    [isFavorite]
   );
 
   return (
