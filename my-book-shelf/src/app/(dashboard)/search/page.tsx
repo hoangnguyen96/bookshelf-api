@@ -2,16 +2,22 @@
 
 import { useSession } from "next-auth/react";
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { getAllBook, getBookByParams, getUserById } from "@app/api";
+import {
+  getAllBook,
+  getBookByParams,
+  getUserById,
+  updateUserById,
+} from "@app/api";
 import { BookType, User } from "@app/models";
 import { Pagination, TableList } from "@app/components/common";
 import { TopContent } from "@app/components";
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { dividePaginationBooks } from "@app/utils";
 
 const SearchPage = async () => {
   const { data: session } = useSession();
+  const router = useRouter();
   const [pagination, setPagination] = useState<number>(0);
   const searchParams = useSearchParams();
   const type = searchParams.get("type");
@@ -31,6 +37,22 @@ const SearchPage = async () => {
       ? dataBookByParams[pagination] || []
       : dataBook[pagination] || [];
   const dataPagination = type && value ? dataBookByParams : dataBook;
+
+  const handleUpdateFavorites = async (id: string) => {
+    let listFavorite = dataUserById.favorites;
+    if (dataUserById.favorites.includes(id)) {
+      listFavorite = dataUserById.favorites.filter((item) => item !== id);
+    } else {
+      listFavorite = [...dataUserById.favorites, id];
+    }
+
+    await updateUserById(dataUserById.id, {
+      ...dataUserById,
+      favorites: listFavorite,
+    });
+
+    return router.refresh();
+  };
 
   return (
     <>
@@ -85,6 +107,7 @@ const SearchPage = async () => {
                 rating={rating}
                 edition={edition}
                 idFavorite={dataUserById.favorites.includes(id) || false}
+                onUpdateFavorites={handleUpdateFavorites}
               />
             );
           })}

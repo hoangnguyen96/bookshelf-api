@@ -3,15 +3,21 @@
 import { Grid } from "@chakra-ui/react";
 import { BookType, User } from "@app/models";
 import { Cart, Pagination } from "@app/components/common";
-import { getAllBook, getBookByParams, getUserById } from "@app/api";
+import {
+  getAllBook,
+  getBookByParams,
+  getUserById,
+  updateUserById,
+} from "@app/api";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { dividePaginationBooks } from "@app/utils";
 import { TopContent } from "@app/components";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const HomePage = async () => {
   const { data: session } = useSession();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const type = searchParams.get("type");
   const value = searchParams.get("query");
@@ -33,6 +39,22 @@ const HomePage = async () => {
       : dataBook[pagination] || [];
   const dataPagination = type && value ? dataBookByParams : dataBook;
 
+  const handleUpdateFavorites = async (id: string) => {
+    let listFavorite = dataUserById.favorites;
+    if (dataUserById.favorites.includes(id)) {
+      listFavorite = dataUserById.favorites.filter((item) => item !== id);
+    } else {
+      listFavorite = [...dataUserById.favorites, id];
+    }
+
+    await updateUserById(dataUserById.id, {
+      ...dataUserById,
+      favorites: listFavorite,
+    });
+
+    return router.refresh();
+  };
+
   return (
     <>
       <TopContent />
@@ -42,6 +64,7 @@ const HomePage = async () => {
 
           return (
             <Cart
+              key={id}
               id={id}
               title={title}
               author={author}
@@ -49,6 +72,7 @@ const HomePage = async () => {
               publicationYear={publicationYear}
               rating={rating}
               isFavorite={dataUserById.favorites.includes(id) || false}
+              onUpdateFavorites={handleUpdateFavorites}
             />
           );
         })}

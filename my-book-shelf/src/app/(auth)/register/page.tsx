@@ -2,7 +2,6 @@
 
 import { useCallback } from "react";
 import { Box, useToast } from "@chakra-ui/react";
-import { authenticate } from "@app/actions/auth";
 
 // Constants
 import { MESSAGES, ROUTES } from "@app/constants";

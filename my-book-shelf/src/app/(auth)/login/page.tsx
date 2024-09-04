@@ -1,12 +1,12 @@
 "use client";
 
+import { useEffect } from "react";
 import { Box, useToast } from "@chakra-ui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { authenticate } from "@app/actions/auth";
 import { MESSAGES, ROUTES } from "@app/constants";
 import { User } from "@app/models";
 import { FooterForm, FormLogin, HeadingForm } from "@app/components/common";
-import { useEffect } from "react";
 
 const LoginPage = () => {
   const toast = useToast();
