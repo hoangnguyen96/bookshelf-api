@@ -2,16 +2,19 @@
 
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Text, useToast } from "@chakra-ui/react";
 import { ROUTES } from "@app/constants";
 import { getAllBook, getBookById, getUserById, updateBookById } from "@app/api";
 import { BookType, User } from "@app/models";
 import { getThreeTopBook } from "@app/utils";
 import { Cart, FormContribute } from "@app/components/common";
 import { TopContent } from "@app/components";
+import { useRouter } from "next/navigation";
 
 const ContributePage = async ({ params }: { params: { id: string } }) => {
   const { data: session } = useSession();
+  const router = useRouter();
+  const toast = useToast();
   const dataBooks = await getAllBook();
   const dataUserById = (await getUserById(session?.user?.id || "")) as User;
   const dataBookById = await getBookById(params.id);
@@ -44,7 +47,16 @@ const ContributePage = async ({ params }: { params: { id: string } }) => {
       edition,
     };
 
-    return await updateBookById(id, payload);
+    await updateBookById(id, payload);
+    toast({
+      title: "Update book successful",
+      description: "",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+
+    return router.refresh();
   };
 
   return (

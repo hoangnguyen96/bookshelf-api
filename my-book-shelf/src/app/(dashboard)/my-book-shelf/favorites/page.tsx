@@ -1,15 +1,16 @@
 "use client";
 
-import { getAllBook, getUserById } from "@app/api";
+import { getAllBook, getUserById, updateUserById } from "@app/api";
 import { TableList } from "@app/components/common";
 import { TYPE_SEARCH } from "@app/constants";
 import { BookType, User } from "@app/models";
 import { Flex } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const MyBookShelfFavorites = async () => {
   const { data: session } = useSession();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const type = searchParams.get("type") || "";
   const value = searchParams.get("query") || "";
@@ -28,6 +29,23 @@ const MyBookShelfFavorites = async () => {
         ? item.author.toLowerCase().includes(value.toLowerCase())
         : item
   );
+
+  const handleUpdateFavorites = async (id: string) => {
+    let listFavorite = dataUserById.favorites;
+    if (dataUserById.favorites.includes(id)) {
+      listFavorite = dataUserById.favorites.filter((item) => item !== id);
+    } else {
+      listFavorite = [...dataUserById.favorites, id];
+    }
+
+    await updateUserById(dataUserById.id, {
+      ...dataUserById,
+      favorites: listFavorite,
+    });
+
+    return router.refresh();
+  };
+
   return (
     <Flex
       flexDir="column"
@@ -62,6 +80,7 @@ const MyBookShelfFavorites = async () => {
             edition={edition}
             category={category}
             idFavorite={dataUserById.favorites.includes(id)}
+            onUpdateFavorites={handleUpdateFavorites}
           />
         );
       })}
