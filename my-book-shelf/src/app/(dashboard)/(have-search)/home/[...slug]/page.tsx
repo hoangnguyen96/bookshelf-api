@@ -1,6 +1,6 @@
 "use client";
 
-import { Grid } from "@chakra-ui/react";
+import { Grid, Text } from "@chakra-ui/react";
 import { BookType, User } from "@app/models";
 import { Cart } from "@app/components/common";
 import {
@@ -48,6 +48,10 @@ const HomePage = async ({ params }: { params: { slug: string[] } }) => {
     return router.refresh();
   };
 
+  if (!listData || !dataUserById) {
+    return <Text>No data...</Text>;
+  }
+
   return (
     <Grid p="70px 44px" gridTemplateColumns="repeat(6, 1fr)" gap="40px 10px">
       {listData.map((item: BookType) => {
@@ -62,7 +66,7 @@ const HomePage = async ({ params }: { params: { slug: string[] } }) => {
             imageUrl={imageUrl}
             publicationYear={publicationYear}
             rating={rating}
-            isFavorite={dataUserById.favorites.includes(id) || false}
+            isFavorite={dataUserById?.favorites?.includes(id) || false}
             onUpdateFavorites={handleUpdateFavorites}
           />
         );

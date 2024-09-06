@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import {
   getAllBook,
   getBookByParams,
@@ -52,6 +52,10 @@ const SearchPage = async ({ params }: { params: { slug: string[] } }) => {
     return router.refresh();
   };
 
+  if (!dataUserById) {
+    return <Text>No data...</Text>;
+  }
+
   return (
     <>
       <Flex
@@ -82,11 +86,11 @@ const SearchPage = async ({ params }: { params: { slug: string[] } }) => {
               author={author}
               imageUrl={imageUrl}
               category={category}
-              status={dataUserById.shelfBooks.includes(id)}
+              status={dataUserById?.shelfBooks?.includes(id)}
               publicationYear={publicationYear}
               rating={rating}
               edition={edition}
-              idFavorite={dataUserById.favorites.includes(id) || false}
+              idFavorite={dataUserById?.favorites?.includes(id) || false}
               onUpdateFavorites={handleUpdateFavorites}
             />
           );

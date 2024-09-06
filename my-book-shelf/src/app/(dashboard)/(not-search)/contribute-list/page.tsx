@@ -15,6 +15,10 @@ const ContributeList = async () => {
   const dataUserById = (await getUserById(session?.user?.id || "")) as User;
   const data = await getAllBook();
 
+  if (!data || !dataUserById) {
+    return <Text>No data...</Text>;
+  }
+
   return (
     <>
       <Box p="20px 44px">
@@ -70,7 +74,7 @@ const ContributeList = async () => {
                 publicationYear={publicationYear}
                 rating={rating}
                 edition={edition}
-                idFavorite={dataUserById.favorites.includes(id) || false}
+                idFavorite={dataUserById?.favorites?.includes(id) || false}
               />
             );
           })}
