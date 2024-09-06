@@ -51,11 +51,11 @@ export const authConfig = {
       console.log("nextUrl authorized 1: ");
 
       if (isLoggedIn) {
-        return Response.redirect(new URL("/", nextUrl));
+        return Response.redirect(new URL("/login", nextUrl));
       }
 
       console.log("nextUrl authorized 2: ");
-      return true;
+      return;
     },
 
     async session({ session, token }) {
@@ -73,5 +73,6 @@ export const authConfig = {
     maxAge: 60 * 60 * 24, // 1d
   },
 
+  trustHost: true,
   providers: [],
 } satisfies NextAuthConfig;

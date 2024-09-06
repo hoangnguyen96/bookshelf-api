@@ -1,21 +1,22 @@
 "use client";
 
-import { useEffect } from "react";
+import { useState } from "react";
 import { Box, useToast } from "@chakra-ui/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { authenticate } from "@app/actions/auth";
 import { MESSAGES, ROUTES } from "@app/constants";
 import { User } from "@app/models";
 import { FooterForm, FormLogin, HeadingForm } from "@app/components/common";
 
 const LoginPage = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const toast = useToast();
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const type = searchParams.get("now");
 
   const handleLogin = async (formData: Partial<User>) => {
+    setIsLoading(true);
     const errorMessage = await authenticate(formData);
+    setIsLoading(false);
 
     if (errorMessage) {
       toast({
@@ -27,8 +28,8 @@ const LoginPage = () => {
       });
     } else {
       toast({
-        title: type ? "Login now...." : "Login successful",
-        description: type ? "" : MESSAGES.LOGIN_SUCCESS,
+        title: "Login successful",
+        description: MESSAGES.LOGIN_SUCCESS,
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -36,18 +37,6 @@ const LoginPage = () => {
       router.push(ROUTES.HOME);
     }
   };
-
-  const loginNow = async () => {
-    if (type) {
-      const email = localStorage.getItem("email") || "";
-      const password = localStorage.getItem("password") || "";
-      await handleLogin({ email, password });
-    }
-  };
-
-  useEffect(() => {
-    loginNow();
-  }, [type]);
 
   return (
     <Box
@@ -67,7 +56,7 @@ const LoginPage = () => {
         title="Welcome Back !"
         description="Sign in to continue to yourDigital Library"
       />
-      <FormLogin onSubmit={handleLogin} />
+      <FormLogin isLoading={isLoading} onSubmit={handleLogin} />
       <FooterForm
         text="New User?"
         textLink="Register Here"
