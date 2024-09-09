@@ -68,6 +68,7 @@ const ImageUploadForm = ({ image, user }: ImageUploadFormProps) => {
         </FormLabel>
         <Input
           id="fileInput"
+          data-testid="fileInput"
           ref={inputFileRef}
           type="file"
           accept="image/*"
