@@ -1,5 +1,5 @@
 import { auth } from "@app/auth";
-import { render, waitFor } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { getAllBook, getUserById } from "@app/api";
 import { DATA_BOOKS, DATA_USER } from "@app/app/__mocks__/data";
 import List from "../contribute/@list/page";

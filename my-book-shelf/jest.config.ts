@@ -46,6 +46,7 @@ const config: Config = {
   moduleNameMapper: {
     "^@app/components/(.*)$": "<rootDir>/components/$1",
     "^@app/api$": "<rootDir>/src/api",
+    "^@app/utils$": "<rootDir>/src/utils",
     "^@app/actions/auth$": "<rootDir>/src/actions/auth.ts",
     "@app/auth": "<rootDir>/__test__/mocks/auth.ts",
     "next-auth/providers/credentials":
