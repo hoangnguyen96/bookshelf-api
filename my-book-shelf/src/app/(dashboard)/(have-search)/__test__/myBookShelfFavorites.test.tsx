@@ -71,4 +71,14 @@ describe("My Book Shelf Favorites", () => {
 
     fireEvent.click(buttons[0]);
   });
+
+  it("Should render correctly snapshot with error", async () => {
+    (getAllBook as jest.Mock).mockRejectedValue(
+      new Error("Failed to fetch books")
+    );
+    await act(async () => {
+      const { container } = render(<MyBookShelfFavorites />);
+      expect(container).toMatchSnapshot();
+    });
+  });
 });

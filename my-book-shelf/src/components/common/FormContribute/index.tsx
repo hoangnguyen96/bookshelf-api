@@ -228,6 +228,7 @@ const FormContribute = ({
               fieldState: { error },
             }) => (
               <Select
+                data-testid="contribute-category"
                 placeholder="Category"
                 border="2px"
                 borderRadius="40px"
@@ -342,6 +343,7 @@ const FormContribute = ({
                 )}
               </FormLabel>
               <Input
+                data-testid="input-file-contribute"
                 id="fileInput"
                 type="file"
                 accept="image/*"
@@ -399,6 +401,7 @@ const FormContribute = ({
       </FormControl>
 
       <Button
+        data-testid="submit-contribute"
         type="submit"
         size="xl"
         text={itemUpdate ? "Update" : "Submit"}

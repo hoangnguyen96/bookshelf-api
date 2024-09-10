@@ -38,6 +38,7 @@ exports[`Button Should render correctly snapshot 1`] = `
             >
               <select
                 class="chakra-select css-g3rz38"
+                data-testid="contribute-category"
                 id="field-:r1:"
               >
                 <option
@@ -121,6 +122,7 @@ exports[`Button Should render correctly snapshot 1`] = `
             <input
               accept="image/*"
               class="chakra-input css-1vuqmsh"
+              data-testid="input-file-contribute"
               id="fileInput"
               type="file"
             />
@@ -141,6 +143,7 @@ exports[`Button Should render correctly snapshot 1`] = `
         </div>
         <button
           class="chakra-button css-1qhatj0"
+          data-testid="submit-contribute"
           disabled=""
           type="submit"
         >
@@ -183,6 +186,7 @@ exports[`Button Should render correctly snapshot 1`] = `
           >
             <select
               class="chakra-select css-g3rz38"
+              data-testid="contribute-category"
               id="field-:r1:"
             >
               <option
@@ -266,6 +270,7 @@ exports[`Button Should render correctly snapshot 1`] = `
           <input
             accept="image/*"
             class="chakra-input css-1vuqmsh"
+            data-testid="input-file-contribute"
             id="fileInput"
             type="file"
           />
@@ -286,6 +291,7 @@ exports[`Button Should render correctly snapshot 1`] = `
       </div>
       <button
         class="chakra-button css-1qhatj0"
+        data-testid="submit-contribute"
         disabled=""
         type="submit"
       >
