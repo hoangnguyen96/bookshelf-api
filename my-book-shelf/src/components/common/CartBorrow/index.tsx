@@ -46,6 +46,7 @@ const CartBorrow = ({
           alt="Don't make me think"
           width={123}
           height={170}
+          priority
         />
         <Text size="sm">{title}</Text>
         <Flex>
@@ -67,6 +68,7 @@ const CartBorrow = ({
           <Text size="xs">{createDate}</Text>
         </Box>
         <Button
+          data-testid="return-book"
           variant="outline"
           size="md"
           w={125}

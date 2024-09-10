@@ -62,7 +62,7 @@ const HomePage = ({ params }: { params?: { slug: string[] } }) => {
       favorites: listFavorite,
     });
 
-    return router.refresh();
+    return router?.refresh();
   };
 
   if (!listData || !dataUserById) {

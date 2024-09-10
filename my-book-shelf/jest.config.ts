@@ -27,6 +27,8 @@ const config: Config = {
     "!<rootDir>/src/**/global-error.tsx",
     "!<rootDir>/src/app/ChakraProvider/index.tsx",
     "!<rootDir>/src/app/SessionWrapper/index.tsx",
+    "!<rootDir>/src/app/robots.ts",
+    "!<rootDir>/src/app/sitemap.ts",
     "!<rootDir>/src/app/api/auth/**/*",
     "!<rootDir>/src/assets/**/*",
     "!<rootDir>/src/constants/**/*",

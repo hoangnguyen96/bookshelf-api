@@ -8,6 +8,7 @@ import { getAllBook, getUserById, updateUserById } from "@app/api";
 import { BookType, User } from "@app/models";
 import { LoadingIndicator, TableList } from "@app/components/common";
 import { useEffect, useState } from "react";
+import { filterBooksFavorite, filterBooksFavoriteByParams } from "@app/utils";
 
 const MyBookShelfFavorites = ({ params }: { params: { slug: string[] } }) => {
   const { data: session } = useSession();
@@ -23,16 +24,12 @@ const MyBookShelfFavorites = ({ params }: { params: { slug: string[] } }) => {
       const books = await getAllBook();
 
       const favorites = user?.favorites || [];
-      const booksByFavorites = books.filter((item) =>
-        favorites.includes(item.id)
-      );
+      const booksByFavorites = filterBooksFavorite(books, favorites);
 
-      const filteredBooks = booksByFavorites.filter((item) =>
-        type === TYPE_SEARCH.TITLE && value
-          ? item.title.toLowerCase().includes(value.toLowerCase())
-          : type === TYPE_SEARCH.AUTHOR && value
-            ? item.author.toLowerCase().includes(value.toLowerCase())
-            : item
+      const filteredBooks = filterBooksFavoriteByParams(
+        booksByFavorites,
+        type,
+        value
       );
 
       setDataUserById(user);
@@ -51,19 +48,23 @@ const MyBookShelfFavorites = ({ params }: { params: { slug: string[] } }) => {
   const handleUpdateFavorites = async (id: string) => {
     if (!dataUserById) return;
 
-    let listFavorite = dataUserById.favorites;
-    if (dataUserById.favorites.includes(id)) {
-      listFavorite = dataUserById.favorites.filter((item) => item !== id);
-    } else {
-      listFavorite = [...dataUserById.favorites, id];
+    try {
+      let listFavorite = dataUserById?.favorites || [];
+      if (dataUserById?.favorites.includes(id)) {
+        listFavorite = dataUserById?.favorites.filter((item) => item !== id);
+      } else {
+        listFavorite = [...dataUserById?.favorites, id];
+      }
+
+      await updateUserById(dataUserById.id, {
+        ...dataUserById,
+        favorites: listFavorite,
+      });
+
+      return router.refresh();
+    } catch (error) {
+      console.error("Failed to favorite book:", error);
     }
-
-    await updateUserById(dataUserById.id, {
-      ...dataUserById,
-      favorites: listFavorite,
-    });
-
-    return router.refresh();
   };
 
   if (!dataByFavorites || !dataUserById) {

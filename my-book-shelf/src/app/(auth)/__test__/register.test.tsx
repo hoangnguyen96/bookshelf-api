@@ -2,7 +2,6 @@ import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import RegisterPage from "../register/page";
 import { addUser, getUserByEmail } from "@app/api";
 import { useRouter } from "next/navigation";
-import { MESSAGES } from "@app/constants";
 
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
@@ -11,6 +10,10 @@ jest.mock("next/navigation", () => ({
 jest.mock("@app/api", () => ({
   addUser: jest.fn(),
   getUserByEmail: jest.fn(),
+}));
+
+jest.mock("@app/actions/auth", () => ({
+  authenticate: jest.fn(),
 }));
 
 describe("Register", () => {

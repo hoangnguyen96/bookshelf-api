@@ -37,11 +37,11 @@ const HomePage = () => {
   const handleUpdateFavorites = async (id: string) => {
     if (!dataUserById) return;
 
-    let listFavorite = dataUserById.favorites;
-    if (dataUserById.favorites.includes(id)) {
-      listFavorite = dataUserById.favorites.filter((item) => item !== id);
+    let listFavorite = dataUserById?.favorites || [];
+    if (listFavorite.includes(id)) {
+      listFavorite = listFavorite.filter((item) => item !== id);
     } else {
-      listFavorite = [...dataUserById.favorites, id];
+      listFavorite = [...listFavorite, id];
     }
 
     await updateUserById(dataUserById.id, {
@@ -49,7 +49,7 @@ const HomePage = () => {
       favorites: listFavorite,
     });
 
-    return router.refresh();
+    return router?.refresh();
   };
 
   if (!dataBook || !dataUserById) {

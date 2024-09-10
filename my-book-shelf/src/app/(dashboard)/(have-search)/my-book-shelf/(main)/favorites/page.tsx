@@ -7,6 +7,7 @@ import { getAllBook, getUserById, updateUserById } from "@app/api";
 import { BookType, User } from "@app/models";
 import { TableList } from "@app/components/common";
 import { useEffect, useState } from "react";
+import { filterBooksFavorite } from "@app/utils";
 
 const MyBookShelfFavorites = () => {
   const { data: session } = useSession();
@@ -20,9 +21,7 @@ const MyBookShelfFavorites = () => {
       const books = await getAllBook();
 
       const favorites = user?.favorites || [];
-      const booksByFavorites = books.filter((item) =>
-        favorites.includes(item.id)
-      );
+      const booksByFavorites = filterBooksFavorite(books, favorites);
 
       setDataUserById(user);
       setDataByFavorites(booksByFavorites);
@@ -40,19 +39,23 @@ const MyBookShelfFavorites = () => {
   const handleUpdateFavorites = async (id: string) => {
     if (!dataUserById) return;
 
-    let listFavorite = dataUserById.favorites;
-    if (dataUserById.favorites.includes(id)) {
-      listFavorite = dataUserById.favorites.filter((item) => item !== id);
-    } else {
-      listFavorite = [...dataUserById.favorites, id];
+    try {
+      let listFavorite = dataUserById?.favorites || [];
+      if (dataUserById?.favorites.includes(id)) {
+        listFavorite = dataUserById?.favorites.filter((item) => item !== id);
+      } else {
+        listFavorite = [...dataUserById.favorites, id];
+      }
+
+      await updateUserById(dataUserById.id, {
+        ...dataUserById,
+        favorites: listFavorite,
+      });
+
+      return router.refresh();
+    } catch (error) {
+      console.error("Failed to favorite book:", error);
     }
-
-    await updateUserById(dataUserById.id, {
-      ...dataUserById,
-      favorites: listFavorite,
-    });
-
-    return router.refresh();
   };
 
   return (

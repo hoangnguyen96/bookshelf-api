@@ -29,6 +29,7 @@ const Avatar = ({
         borderRadius: "50%",
         border: border,
       }}
+      priority
       {...rest}
     />
   );

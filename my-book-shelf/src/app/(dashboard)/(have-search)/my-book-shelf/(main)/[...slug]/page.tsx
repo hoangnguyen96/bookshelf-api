@@ -8,8 +8,8 @@ import {
   updateUserById,
 } from "@app/api";
 import { CartBorrow } from "@app/components/common";
-import { TYPE_SEARCH } from "@app/constants";
 import { BookType, User } from "@app/models";
+import { filterBooksOnShelf, filterBooksOnShelfByParams } from "@app/utils";
 import { Flex } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -28,16 +28,12 @@ const MyBookShelfByParams = ({ params }: { params: { slug: string[] } }) => {
       const user = (await getUserById(session?.user?.id || "")) as User;
       const allBooks = await getAllBook();
       const shelfBooks = user?.shelfBooks || [];
-      const booksOnShelf = allBooks.filter((item) =>
-        shelfBooks.includes(item.id)
-      );
+      const booksOnShelf = filterBooksOnShelf(allBooks, shelfBooks);
 
-      const filteredBooks = booksOnShelf.filter((item) =>
-        type === TYPE_SEARCH.TITLE && value
-          ? item.title.toLowerCase().includes(value.toLowerCase())
-          : type === TYPE_SEARCH.AUTHOR && value
-            ? item.author.toLowerCase().includes(value.toLowerCase())
-            : item
+      const filteredBooks = filterBooksOnShelfByParams(
+        booksOnShelf,
+        type,
+        value
       );
 
       setDataUserById(user);
@@ -54,21 +50,25 @@ const MyBookShelfByParams = ({ params }: { params: { slug: string[] } }) => {
   const handleReturnBook = async (id: string) => {
     if (!dataUserById) return;
 
-    const dataBookById = await getBookById(parseInt(id));
-    const updateShelfBook = dataUserById.shelfBooks.filter(
-      (item: string) => item !== id
-    );
+    try {
+      const dataBookById = await getBookById(id);
+      const updateShelfBook = dataUserById.shelfBooks.filter(
+        (item: string) => item !== id
+      );
 
-    await updateUserById(dataUserById.id, {
-      ...dataUserById,
-      shelfBooks: updateShelfBook,
-    });
+      await updateUserById(dataUserById.id, {
+        ...dataUserById,
+        shelfBooks: updateShelfBook,
+      });
 
-    await updateBookById(id, {
-      ...dataBookById,
-      status: false,
-    });
-    return router.refresh();
+      await updateBookById(id, {
+        ...dataBookById,
+        status: false,
+      });
+      return router.refresh();
+    } catch (error) {
+      console.error("Failed to return book:", error);
+    }
   };
 
   return (

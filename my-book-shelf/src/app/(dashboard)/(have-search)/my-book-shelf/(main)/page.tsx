@@ -7,8 +7,9 @@ import {
   updateBookById,
   updateUserById,
 } from "@app/api";
-import { CartBorrow } from "@app/components/common";
+import { CartBorrow, LoadingIndicator } from "@app/components/common";
 import { BookType, User } from "@app/models";
+import { filterBooksOnShelf } from "@app/utils";
 import { Flex } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -25,9 +26,7 @@ const MyBookShelfAll = () => {
       const user = (await getUserById(session?.user?.id || "")) as User;
       const allBooks = await getAllBook();
       const shelfBooks = user?.shelfBooks || [];
-      const booksOnShelf = allBooks.filter((item) =>
-        shelfBooks.includes(item.id)
-      );
+      const booksOnShelf = filterBooksOnShelf(allBooks, shelfBooks);
 
       setDataUserById(user);
       setDataByShelf(booksOnShelf);
@@ -43,22 +42,30 @@ const MyBookShelfAll = () => {
   const handleReturnBook = async (id: string) => {
     if (!dataUserById) return;
 
-    const dataBookById = await getBookById(parseInt(id));
-    const updateShelfBook = dataUserById.shelfBooks.filter(
-      (item: string) => item !== id
-    );
+    try {
+      const dataBookById = await getBookById(id);
+      const updateShelfBook = dataUserById?.shelfBooks.filter(
+        (item: string) => item !== id
+      );
 
-    await updateUserById(dataUserById.id, {
-      ...dataUserById,
-      shelfBooks: updateShelfBook,
-    });
+      await updateUserById(dataUserById.id, {
+        ...dataUserById,
+        shelfBooks: updateShelfBook,
+      });
 
-    await updateBookById(id, {
-      ...dataBookById,
-      status: false,
-    });
-    return router.refresh();
+      await updateBookById(id, {
+        ...dataBookById,
+        status: false,
+      });
+      return router.refresh();
+    } catch (error) {
+      console.error("Failed to return book:", error);
+    }
   };
+
+  if (!dataByShelf) {
+    return <LoadingIndicator />;
+  }
 
   return (
     <Flex gap="40px" flexWrap="wrap" overflow="hidden scroll" maxH="65vh">

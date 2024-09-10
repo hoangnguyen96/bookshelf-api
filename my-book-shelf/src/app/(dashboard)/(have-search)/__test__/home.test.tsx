@@ -1,4 +1,4 @@
-import { act, render } from "@testing-library/react";
+import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import { useSession } from "next-auth/react";
 import HomePage from "../home/page";
 import { getAllBook, getUserById } from "@app/api";
@@ -56,5 +56,13 @@ describe("HomePage", () => {
       const { container } = render(<HomePage />);
       expect(container).toMatchSnapshot();
     });
+  });
+
+  it("Should handle update favorite", async () => {
+    const { findAllByTestId } = render(<HomePage />);
+
+    const buttons = await findAllByTestId("update-favorite-cart");
+
+    fireEvent.click(buttons[0]);
   });
 });
