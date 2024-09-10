@@ -7,7 +7,9 @@ describe("Status", () => {
     expect(render(<StatusBook />)).toMatchSnapshot();
   });
 
-  it("Should render correctly snapshot with status true", () => {
-    expect(render(<StatusBook status={true} />)).toMatchSnapshot();
+  it("Should render with status true", () => {
+    const { getByText } = render(<StatusBook status={true} />);
+
+    expect(getByText("In-Shelf")).toBeInTheDocument();
   });
 });
