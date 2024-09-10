@@ -16,7 +16,11 @@ import {
 } from "@app/components/common";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { dividePaginationBooks } from "@app/utils";
+import {
+  dividePaginationBooks,
+  getDataByParams,
+  getListDataByTypeAndValue,
+} from "@app/utils";
 
 const SearchPage = ({ params }: { params: { slug: string[] } }) => {
   const { data: session } = useSession();
@@ -39,11 +43,21 @@ const SearchPage = ({ params }: { params: { slug: string[] } }) => {
         const dataParams = await getBookByParams(`${type}=${value}`);
         dataBookByParams = dividePaginationBooks(dataParams);
       }
-      const listData: BookType[] =
-        type && value
-          ? dataBookByParams[pagination] || []
-          : dataBook[pagination] || [];
-      const dataPagination = type && value ? dataBookByParams : dataBook;
+
+      const listData: BookType[] = getListDataByTypeAndValue(
+        type,
+        value,
+        dataBookByParams,
+        dataBook,
+        pagination
+      );
+
+      const dataPagination = getDataByParams(
+        type,
+        value,
+        dataBookByParams,
+        dataBook
+      );
 
       setDataUserById(dataUserById);
       setDataPagination(dataPagination);

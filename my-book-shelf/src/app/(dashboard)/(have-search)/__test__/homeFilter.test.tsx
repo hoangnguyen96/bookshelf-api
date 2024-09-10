@@ -1,4 +1,4 @@
-import { act, render, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import { useSession } from "next-auth/react";
 import { getAllBook, getBookByParams, getUserById } from "@app/api";
 import { DATA_BOOKS, DATA_USER } from "@app/app/__mocks__/data";
@@ -55,5 +55,15 @@ describe("Home Search Params", () => {
       );
       expect(container).toMatchSnapshot();
     });
+  });
+
+  it("Should handle update favorite", async () => {
+    const { findAllByTestId } = render(
+      <HomePage params={{ slug: ["title", "on"] }} />
+    );
+
+    const buttons = await findAllByTestId("update-favorite-cart");
+
+    fireEvent.click(buttons[0]);
   });
 });

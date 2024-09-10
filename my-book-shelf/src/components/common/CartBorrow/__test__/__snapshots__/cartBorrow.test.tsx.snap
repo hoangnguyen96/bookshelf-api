@@ -72,6 +72,7 @@ exports[`CartBorrow Should render correctly snapshot 1`] = `
           </div>
           <button
             class="chakra-button css-16ltlly"
+            data-testid="return-book"
             type="button"
           >
             Return
@@ -148,6 +149,7 @@ exports[`CartBorrow Should render correctly snapshot 1`] = `
         </div>
         <button
           class="chakra-button css-16ltlly"
+          data-testid="return-book"
           type="button"
         >
           Return

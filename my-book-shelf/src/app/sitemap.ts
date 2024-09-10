@@ -1,42 +1,53 @@
 import { MetadataRoute } from "next";
-import { ROUTES } from "@app/constants";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: `${process.env.NEXT_PUBLIC_URL}${ROUTES.HOME}`,
+      url: "https://my-shelf-nine.vercel.app/",
       lastModified: new Date(),
     },
     {
-      url: `${process.env.NEXT_PUBLIC_URL}${ROUTES.SEARCH}`,
+      url: "https://my-shelf-nine.vercel.app/login",
       lastModified: new Date(),
     },
     {
-      url: `${process.env.NEXT_PUBLIC_URL}${ROUTES.MY_BOOK_SHELF}`,
+      url: "https://my-shelf-nine.vercel.app/register",
       lastModified: new Date(),
     },
     {
-      url: `${process.env.NEXT_PUBLIC_URL}${ROUTES.MY_BOOK_SHELF_FAVORITES}`,
+      url: "https://my-shelf-nine.vercel.app/home",
       lastModified: new Date(),
     },
     {
-      url: `${process.env.NEXT_PUBLIC_URL}${ROUTES.CONTRIBUTE}`,
+      url: "https://my-shelf-nine.vercel.app/search",
       lastModified: new Date(),
     },
     {
-      url: `${process.env.NEXT_PUBLIC_URL}${ROUTES.CONTRIBUTE_LIST}`,
+      url: "https://my-shelf-nine.vercel.app/my-book-shelf",
       lastModified: new Date(),
     },
     {
-      url: `${process.env.NEXT_PUBLIC_URL}${ROUTES.CONTRIBUTE_COMPLETE}`,
+      url: "https://my-shelf-nine.vercel.app/my-book-shelf/favorites",
       lastModified: new Date(),
     },
     {
-      url: `${process.env.NEXT_PUBLIC_URL}${ROUTES.PREVIEW}`,
+      url: "https://my-shelf-nine.vercel.app/contribute",
       lastModified: new Date(),
     },
     {
-      url: `${process.env.NEXT_PUBLIC_URL}${ROUTES.PROFILE}`,
+      url: "https://my-shelf-nine.vercel.app/contribute-list",
+      lastModified: new Date(),
+    },
+    {
+      url: "https://my-shelf-nine.vercel.app/contribute/complete",
+      lastModified: new Date(),
+    },
+    {
+      url: "https://my-shelf-nine.vercel.app/preview",
+      lastModified: new Date(),
+    },
+    {
+      url: "https://my-shelf-nine.vercel.app/profile",
       lastModified: new Date(),
     },
   ];

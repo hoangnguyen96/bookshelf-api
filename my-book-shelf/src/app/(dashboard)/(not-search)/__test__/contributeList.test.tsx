@@ -1,6 +1,8 @@
-import { render } from "@testing-library/react";
+import { act, render } from "@testing-library/react";
 import { useSession } from "next-auth/react";
 import ContributeList from "../contribute-list/page";
+import { DATA_BOOKS, DATA_USER } from "@app/app/__mocks__/data";
+import { getAllBook, getUserById } from "@app/api";
 
 jest.mock("next-auth/react", () => ({
   useSession: jest.fn(),
@@ -8,6 +10,11 @@ jest.mock("next-auth/react", () => ({
 
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
+}));
+
+jest.mock("@app/api", () => ({
+  getAllBook: jest.fn(),
+  getUserById: jest.fn(),
 }));
 
 describe("Contribute List Page", () => {
@@ -24,7 +31,16 @@ describe("Contribute List Page", () => {
     status: "authenticated",
   });
 
-  it("Should render correctly snapshot", () => {
-    expect(render(<ContributeList />)).toMatchSnapshot();
+  beforeEach(() => {
+    jest.clearAllMocks();
+    (getAllBook as jest.Mock).mockResolvedValue(DATA_BOOKS);
+    (getUserById as jest.Mock).mockResolvedValue(DATA_USER[0]);
+  });
+
+  it("Should render correctly snapshot", async () => {
+    await act(async () => {
+      const { container } = render(<ContributeList />);
+      expect(container).toMatchSnapshot();
+    });
   });
 });

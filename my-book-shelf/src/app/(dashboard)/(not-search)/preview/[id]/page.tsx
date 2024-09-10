@@ -34,7 +34,7 @@ const PreviewBook = ({ params: { id } }: PreviewBookProps) => {
   const [dataUserById, setDataUserById] = useState<User>();
 
   const fetchData = async () => {
-    const book = await getBookById(parseInt(id));
+    const book = await getBookById(id);
     setDataBook(book as BookType);
     const user = (await getUserById(session?.user?.id || "")) as User;
     setDataUserById(user);
@@ -92,6 +92,7 @@ const PreviewBook = ({ params: { id } }: PreviewBookProps) => {
               width={210}
               height={278}
               style={{ margin: "0 auto" }}
+              priority
             />
           </Box>
           <Flex flexDir="column" w="100%" maxW={503}>
@@ -184,6 +185,7 @@ const PreviewBook = ({ params: { id } }: PreviewBookProps) => {
               width={88}
               height={100}
               style={{ position: "absolute", right: "120px", top: "30px" }}
+              priority
             />
           </Box>
         </Flex>

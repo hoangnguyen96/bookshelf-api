@@ -15,8 +15,8 @@ exports[`Cart Should render correctly snapshot 1`] = `
             alt="Don't make me think"
             data-nimg="1"
             decoding="async"
+            fetchpriority="high"
             height="172"
-            loading="lazy"
             src="/_next/image?url=https%3A%2F%2Fi.ibb.co%2FQbQgVtG%2Fbook1.png&w=384&q=75"
             srcset="/_next/image?url=https%3A%2F%2Fi.ibb.co%2FQbQgVtG%2Fbook1.png&w=256&q=75 1x, /_next/image?url=https%3A%2F%2Fi.ibb.co%2FQbQgVtG%2Fbook1.png&w=384&q=75 2x"
             style="color: transparent;"
@@ -61,6 +61,7 @@ exports[`Cart Should render correctly snapshot 1`] = `
         <button
           aria-label="Heart icon"
           class="chakra-button css-ujxaga"
+          data-testid="update-favorite-cart"
           type="button"
         >
           <svg
@@ -88,8 +89,8 @@ exports[`Cart Should render correctly snapshot 1`] = `
           alt="Don't make me think"
           data-nimg="1"
           decoding="async"
+          fetchpriority="high"
           height="172"
-          loading="lazy"
           src="/_next/image?url=https%3A%2F%2Fi.ibb.co%2FQbQgVtG%2Fbook1.png&w=384&q=75"
           srcset="/_next/image?url=https%3A%2F%2Fi.ibb.co%2FQbQgVtG%2Fbook1.png&w=256&q=75 1x, /_next/image?url=https%3A%2F%2Fi.ibb.co%2FQbQgVtG%2Fbook1.png&w=384&q=75 2x"
           style="color: transparent;"
@@ -134,6 +135,7 @@ exports[`Cart Should render correctly snapshot 1`] = `
       <button
         aria-label="Heart icon"
         class="chakra-button css-ujxaga"
+        data-testid="update-favorite-cart"
         type="button"
       >
         <svg

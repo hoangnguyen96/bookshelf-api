@@ -91,6 +91,7 @@ exports[`TableList Should render correctly snapshot 1`] = `
           <button
             aria-label="Heart icon"
             class="chakra-button css-38t1hi"
+            data-testid="handle-favorite"
             type="button"
           >
             <svg
@@ -202,6 +203,7 @@ exports[`TableList Should render correctly snapshot 1`] = `
         <button
           aria-label="Heart icon"
           class="chakra-button css-38t1hi"
+          data-testid="handle-favorite"
           type="button"
         >
           <svg

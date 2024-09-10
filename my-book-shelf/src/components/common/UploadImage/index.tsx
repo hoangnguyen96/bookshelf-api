@@ -58,6 +58,7 @@ const ImageUploadForm = ({ image, user }: ImageUploadFormProps) => {
             alt="Upload"
             width={110}
             height={110}
+            priority
             style={{
               margin: "0 auto",
               borderRadius: "50%",

@@ -49,6 +49,7 @@ const Cart = ({
           alt="Don't make me think"
           width={130}
           height={172}
+          priority
         />
       </Link>
       <Text size="sm">{title}</Text>
@@ -67,6 +68,7 @@ const Cart = ({
           </Flex>
           <HeartIcon
             position="absolute"
+            data-testid="update-favorite-cart"
             right="10px"
             bottom="5px"
             id={id}

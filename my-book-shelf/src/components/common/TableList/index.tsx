@@ -72,6 +72,7 @@ const TableList = ({
             alt="Don't make me think"
             width={75}
             height={100}
+            priority
           />
           <Flex flexDir="column">
             <Text size="xl" mb="20px">
@@ -106,6 +107,7 @@ const TableList = ({
           {!isContribute && (
             <HeartIcon
               id={id}
+              data-testid="handle-favorite"
               isFavorite={idFavorite}
               onUpdateFavorites={onUpdateFavorites}
             />

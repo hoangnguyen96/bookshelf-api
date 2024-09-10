@@ -326,6 +326,7 @@ const FormContribute = ({
                     width={100}
                     height={100}
                     style={{ margin: "0 auto" }}
+                    priority
                   />
                 ) : (
                   <Flex

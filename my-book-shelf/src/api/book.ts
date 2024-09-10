@@ -24,10 +24,10 @@ export const getBookByParams = async (params: string) => {
   }
 };
 
-export const getBookById = async (id: number) => {
+export const getBookById = async (id: string) => {
   try {
     const data = await HttpClient.get<BookType[]>(
-      `${API_ROUTES.BOOKS}?id=${id}`
+      `${API_ROUTES.BOOKS}?id=${parseInt(id)}`
     );
 
     return data[0];
