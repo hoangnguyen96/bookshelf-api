@@ -25,16 +25,12 @@ jest.mock("@app/utils", () => ({
   dividePaginationBooks: jest.fn(),
 }));
 
+jest.mock("@app/actions/auth", () => ({
+  logout: jest.fn(),
+}));
+
 describe("Search Page", () => {
-  const mockBooksPagination = DATA_BOOKS.reduce(
-    (acc: BookType[][], _, i, self) => {
-      if (!(i % 12)) {
-        return [...acc, self.slice(i, i + 12)];
-      }
-      return acc;
-    },
-    []
-  );
+  const mockBooksPagination = [DATA_BOOKS];
 
   (useSession as jest.Mock).mockReturnValue({
     data: {
@@ -61,7 +57,7 @@ describe("Search Page", () => {
       data: DATA_BOOKS,
     });
     (getUserById as jest.Mock).mockReturnValue({
-      data: DATA_USER[0],
+      favorites: DATA_USER[0].favorites,
     });
   });
 

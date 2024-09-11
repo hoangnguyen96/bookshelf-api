@@ -17,12 +17,17 @@ jest.mock("@app/api", () => ({
   getAllBook: jest.fn(),
   getUserById: jest.fn(),
   getBookById: jest.fn(),
+  updateUserById: jest.fn(),
   updateBookById: jest.fn(),
 }));
 
 jest.mock("@app/utils", () => ({
   ...jest.requireActual("@app/utils"),
   filterBooksOnShelf: jest.fn(),
+}));
+
+jest.mock("@app/actions/auth", () => ({
+  logout: jest.fn(),
 }));
 
 describe("My Book Shelf All", () => {
@@ -63,6 +68,16 @@ describe("My Book Shelf All", () => {
     await act(async () => {
       const { container } = render(<MyBookShelfAll />);
       expect(container).toMatchSnapshot();
+    });
+  });
+
+  it("Should handle fetch data failed", async () => {
+    (getAllBook as jest.Mock).mockRejectedValue(
+      new Error("Failed to fetch books")
+    );
+    await act(async () => {
+      const { asFragment } = render(<MyBookShelfAll />);
+      expect(asFragment()).toMatchSnapshot();
     });
   });
 

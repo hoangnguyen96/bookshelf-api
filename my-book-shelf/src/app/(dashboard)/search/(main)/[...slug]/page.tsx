@@ -74,19 +74,23 @@ const SearchPage = ({ params }: { params: { slug: string[] } }) => {
   const handleUpdateFavorites = async (id: string) => {
     if (!dataUserById) return;
 
-    let listFavorite = dataUserById.favorites;
-    if (dataUserById.favorites.includes(id)) {
-      listFavorite = dataUserById.favorites.filter((item) => item !== id);
-    } else {
-      listFavorite = [...dataUserById.favorites, id];
+    try {
+      let listFavorite = dataUserById?.favorites || [];
+      if (dataUserById?.favorites?.includes(id)) {
+        listFavorite = dataUserById.favorites.filter((item) => item !== id);
+      } else {
+        listFavorite = [...dataUserById.favorites, id];
+      }
+
+      await updateUserById(dataUserById.id, {
+        ...dataUserById,
+        favorites: listFavorite,
+      });
+
+      return router.refresh();
+    } catch (error) {
+      console.error("Failed to update favorite book:", error);
     }
-
-    await updateUserById(dataUserById.id, {
-      ...dataUserById,
-      favorites: listFavorite,
-    });
-
-    return router.refresh();
   };
 
   if (!listData || !dataUserById) {

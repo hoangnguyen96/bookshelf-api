@@ -12,6 +12,10 @@ jest.mock("@app/api", () => ({
   getUserById: jest.fn(),
 }));
 
+jest.mock("@app/actions/auth", () => ({
+  logout: jest.fn(),
+}));
+
 describe("Profile Page", () => {
   (useSession as jest.Mock).mockReturnValue({
     data: {
@@ -25,8 +29,6 @@ describe("Profile Page", () => {
       expires: "2024-12-31T23:59:59.999Z",
     },
     status: "authenticated",
-    signIn: jest.fn(),
-    signOut: jest.fn(),
   });
 
   beforeEach(() => {

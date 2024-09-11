@@ -1,28 +1,36 @@
+import { auth } from "@app/auth";
 import { act, render } from "@testing-library/react";
-import { useSession } from "next-auth/react";
-import { getBookById, getUserById } from "@app/api";
+import { getAllBook, getUserById } from "@app/api";
+import * as utils from "@app/utils";
 import { DATA_BOOKS, DATA_USER } from "@app/__mocks__/data";
-import PreviewBook from "@app/app/(dashboard)/preview/[id]/page";
+import ListContribute from "..";
+import { useSession } from "next-auth/react";
 
 jest.mock("next-auth/react", () => ({
   useSession: jest.fn(),
 }));
 
-jest.mock("next/navigation", () => ({
-  useRouter: jest.fn(),
+jest.mock("@app/api", () => ({
+  getAllBook: jest.fn(),
+  getUserById: jest.fn(),
 }));
 
-jest.mock("@app/api", () => ({
-  getBookById: jest.fn(),
-  getUserById: jest.fn(),
-  updateUserById: jest.fn(),
+jest.mock("@app/utils", () => ({
+  ...jest.requireActual("@app/utils"),
+  getThreeTopBook: jest.fn(),
 }));
 
 jest.mock("@app/actions/auth", () => ({
   logout: jest.fn(),
 }));
 
-describe("Preview book Page", () => {
+describe("Contribute Three Top Book", () => {
+  const mockThreeTopBook = DATA_BOOKS.sort((a, b) => {
+    return (
+      new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
+    );
+  }).slice(0, 3);
+
   (useSession as jest.Mock).mockReturnValue({
     data: {
       user: {
@@ -39,17 +47,15 @@ describe("Preview book Page", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    (getBookById as jest.Mock).mockReturnValue({
-      data: DATA_BOOKS[0],
-    });
-    (getUserById as jest.Mock).mockReturnValue({
-      data: DATA_USER[0],
-    });
+    (getUserById as jest.Mock).mockResolvedValue(DATA_USER[0]);
+
+    (getAllBook as jest.Mock).mockResolvedValue(DATA_BOOKS);
+    jest.spyOn(utils, "getThreeTopBook").mockReturnValue(mockThreeTopBook);
   });
 
   it("Should render correctly snapshot", async () => {
     await act(async () => {
-      const { container } = render(<PreviewBook params={{ id: "1" }} />);
+      const { container } = render(<ListContribute />);
       expect(container).toMatchSnapshot();
     });
   });

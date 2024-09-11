@@ -2,7 +2,6 @@ import { render, fireEvent, act } from "@testing-library/react";
 import { useRouter } from "next/navigation";
 import { authenticate } from "@app/actions/auth";
 import LoginPage from "../../app/(auth)/login/page";
-import { signIn, SignInResponse } from "next-auth/react";
 
 jest.mock("@app/actions/auth", () => ({
   authenticate: jest.fn(),
@@ -19,7 +18,6 @@ jest.mock("next-auth/react", () => ({
 const mockedAuthenticate = authenticate as jest.MockedFunction<
   typeof authenticate
 >;
-const mockedSignIn = signIn as jest.MockedFunction<typeof signIn>;
 
 describe("LoginPage", () => {
   const mockPush = jest.fn();
@@ -33,16 +31,6 @@ describe("LoginPage", () => {
   });
 
   it("should handle submit login successful", async () => {
-    const mockSignInResponse: SignInResponse = {
-      ok: true,
-      status: 200,
-      error: "",
-      code: "",
-      url: null,
-    };
-
-    // mockedSignIn.mockResolvedValueOnce(mockSignInResponse);
-
     const { getByPlaceholderText, getByTestId } = render(<LoginPage />);
 
     fireEvent.change(getByPlaceholderText("Email..."), {
