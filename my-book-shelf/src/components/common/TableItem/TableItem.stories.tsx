@@ -1,10 +1,10 @@
 import { Meta, StoryFn } from "@storybook/react";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "@app/themes";
-import MenuProfile from ".";
+import TableItem from ".";
 
-const meta: Meta<typeof MenuProfile> = {
-  component: MenuProfile,
+const meta: Meta<typeof TableItem> = {
+  component: TableItem,
   decorators: [
     (Story: StoryFn) => (
       <ChakraProvider theme={theme}>
@@ -16,7 +16,7 @@ const meta: Meta<typeof MenuProfile> = {
 
 export default meta;
 
-const Template: StoryFn<typeof MenuProfile> = (args) => <MenuProfile />;
+const Template: StoryFn<typeof TableItem> = (args) => <TableItem {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = { isContribute: true };

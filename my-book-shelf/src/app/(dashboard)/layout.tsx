@@ -1,7 +1,9 @@
+"use client";
+
 import { Box, Flex } from "@chakra-ui/react";
-import { Logo } from "@app/components/common";
-import SessionWrapper from "../SessionWrapper";
-import NavbarBase from "../ui/navbar";
+import { Logo, Navbar } from "@app/components/common";
+import { TopContent } from "@app/components";
+import { SessionProvider } from "next-auth/react";
 
 const DashboardLayout = ({
   children,
@@ -9,7 +11,7 @@ const DashboardLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <SessionWrapper>
+    <SessionProvider>
       <Flex bgColor="white" borderRadius="10px" height="100%">
         <Flex
           flexDir="column"
@@ -18,7 +20,7 @@ const DashboardLayout = ({
           alignItems="center"
         >
           <Logo />
-          <NavbarBase />
+          <Navbar />
         </Flex>
         <Box
           w="100%"
@@ -27,10 +29,11 @@ const DashboardLayout = ({
           borderRightRadius="10px"
           pos="relative"
         >
+          <TopContent />
           {children}
         </Box>
       </Flex>
-    </SessionWrapper>
+    </SessionProvider>
   );
 };
 
