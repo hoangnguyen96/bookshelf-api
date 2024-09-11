@@ -15,7 +15,7 @@ interface CartType {
   publicationYear: number;
   rating: number;
   isContribute?: boolean;
-  onUpdateFavorites?: (id: string) => void;
+  onUpdateFavorites?: () => void;
 }
 
 const Cart = ({

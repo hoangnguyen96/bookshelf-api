@@ -7,7 +7,7 @@ import { HeartIconFull, HeartIconOutline } from "@app/assets/icons";
 interface IconHeartProps extends StyleProps {
   id: string;
   isFavorite?: boolean;
-  onUpdateFavorites?: (id: string) => void;
+  onUpdateFavorites?: () => void;
 }
 
 const IconHeart = ({
@@ -16,25 +16,21 @@ const IconHeart = ({
   onUpdateFavorites,
   ...rest
 }: IconHeartProps) => {
-  const handleClick = () => {
-    onUpdateFavorites?.(id);
-  };
-
   const iconHeart = useCallback(
     () => (isFavorite ? <HeartIconFull /> : <HeartIconOutline />),
-    [isFavorite]
+    [isFavorite, onUpdateFavorites]
   );
 
   const colorHeart = useMemo(
     () => (isFavorite ? "red.500" : "gray.500"),
-    [isFavorite]
+    [isFavorite, onUpdateFavorites]
   );
 
   return (
     <IconButton
       aria-label="Heart icon"
       icon={iconHeart()}
-      onClick={handleClick}
+      onClick={onUpdateFavorites}
       variant="unstyled"
       fontSize="xl"
       color={colorHeart}

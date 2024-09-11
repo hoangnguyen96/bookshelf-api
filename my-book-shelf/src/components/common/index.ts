@@ -15,7 +15,7 @@ export { default as FormContribute } from "./FormContribute";
 export { default as FormProfile } from "./FormProfile";
 export { default as HeadingForm } from "./HeadingForm";
 export { default as FooterForm } from "./FooterForm";
-export { default as TableList } from "./TableList";
+export { default as TableItem } from "./TableItem";
 export { default as StatusBook } from "./StatusBook";
 export { default as Pagination } from "./Pagination";
 export { default as ErrorBoundary } from "./ErrorBoundary";
