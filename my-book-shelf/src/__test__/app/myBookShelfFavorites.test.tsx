@@ -25,6 +25,10 @@ jest.mock("@app/utils", () => ({
   filterBooksFavorite: jest.fn(),
 }));
 
+jest.mock("@app/actions/auth", () => ({
+  logout: jest.fn(),
+}));
+
 describe("My Book Shelf Favorites", () => {
   const mockBooks = DATA_BOOKS.filter((item) =>
     DATA_USER[0].favorites.includes(item.id)

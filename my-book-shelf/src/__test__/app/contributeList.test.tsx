@@ -17,6 +17,10 @@ jest.mock("@app/api", () => ({
   getUserById: jest.fn(),
 }));
 
+jest.mock("@app/actions/auth", () => ({
+  logout: jest.fn(),
+}));
+
 describe("Contribute List Page", () => {
   (useSession as jest.Mock).mockReturnValue({
     data: {

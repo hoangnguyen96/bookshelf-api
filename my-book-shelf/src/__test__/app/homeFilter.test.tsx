@@ -25,6 +25,10 @@ jest.mock("@app/utils", () => ({
   getTwelveItemData: jest.fn(),
 }));
 
+jest.mock("@app/actions/auth", () => ({
+  logout: jest.fn(),
+}));
+
 describe("Home Search Params", () => {
   const mockBooks = DATA_BOOKS.slice(0, 12);
   (useSession as jest.Mock).mockReturnValue({

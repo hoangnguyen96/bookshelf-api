@@ -2,6 +2,7 @@ import "@testing-library/jest-dom";
 import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import { User } from "@app/models";
 import FormLogin from "..";
+import { MESSAGES } from "@app/constants";
 
 describe("FormLogin", () => {
   const mockOnSubmit = jest.fn((data: Partial<User>) => Promise.resolve());
@@ -53,19 +54,39 @@ describe("FormLogin", () => {
   });
 
   it("Should display error message when login fails", async () => {
+    mockOnSubmit.mockRejectedValueOnce(new Error(MESSAGES.LOGIN_FAILED));
+
     const { getByTestId, getByPlaceholderText, getByText } = render(
       <FormLogin onSubmit={mockOnSubmit} />
     );
 
-    fireEvent.change(getByPlaceholderText(/email.../i), {
-      target: { value: "test@gmail.com" },
-    });
-    fireEvent.change(getByPlaceholderText(/password.../i), {
-      target: { value: "ValidPass123)" },
-    });
+    await act(async () => {
+      fireEvent.change(getByPlaceholderText(/email.../i), {
+        target: { value: "test@gmail.com" },
+      });
+      fireEvent.change(getByPlaceholderText(/password.../i), {
+        target: { value: "ValidPass123" },
+      });
 
-    act(() => {
       fireEvent.click(getByTestId("submit-login"));
     });
+
+    await waitFor(() => {
+      expect(new Error(MESSAGES.LOGIN_FAILED)).toBeTruthy();
+    });
+  });
+
+  it("Should toggle Remember Me checkbox correctly", async () => {
+    const { getByRole } = render(<FormLogin onSubmit={mockOnSubmit} />);
+
+    const checkbox = getByRole("checkbox");
+
+    expect(checkbox).not.toBeChecked();
+
+    fireEvent.click(checkbox);
+    await waitFor(() => expect(checkbox).toBeChecked());
+
+    fireEvent.click(checkbox);
+    await waitFor(() => expect(checkbox).not.toBeChecked());
   });
 });

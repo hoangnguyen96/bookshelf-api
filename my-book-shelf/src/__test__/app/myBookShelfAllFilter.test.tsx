@@ -26,6 +26,10 @@ jest.mock("@app/utils", () => ({
   filterBooksOnShelfByParams: jest.fn(),
 }));
 
+jest.mock("@app/actions/auth", () => ({
+  logout: jest.fn(),
+}));
+
 describe("My Book Shelf All Search", () => {
   const mockBooks = DATA_BOOKS.filter((item) =>
     DATA_USER[0].shelfBooks.includes(item.id)
@@ -70,6 +74,18 @@ describe("My Book Shelf All Search", () => {
   });
 
   it("Should render correctly snapshot", async () => {
+    await act(async () => {
+      const { asFragment } = render(
+        <MyBookShelfByParams params={{ slug: ["title", "on"] }} />
+      );
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
+  it("Should handle fetch data failed", async () => {
+    (getAllBook as jest.Mock).mockRejectedValue(
+      new Error("Failed to fetch books")
+    );
     await act(async () => {
       const { asFragment } = render(
         <MyBookShelfByParams params={{ slug: ["title", "on"] }} />

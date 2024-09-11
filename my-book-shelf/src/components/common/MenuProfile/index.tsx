@@ -20,8 +20,6 @@ const MenuProfile = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
-  console.log("session", session);
-
   const handleLogout = async () => {
     await logout();
     router.push(ROUTES.LOGIN);
@@ -68,7 +66,7 @@ const MenuProfile = () => {
         </MenuItem>
         <MenuItem onClick={handleRedirectFavorites}>
           <Text lineHeight="30px" w="100%">
-            Favorite
+            Favorites
           </Text>
         </MenuItem>
         <MenuItem onClick={handleLogout}>

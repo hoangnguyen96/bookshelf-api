@@ -24,6 +24,10 @@ jest.mock("@app/utils", () => ({
   getTwelveItemData: jest.fn(),
 }));
 
+jest.mock("@app/actions/auth", () => ({
+  logout: jest.fn(),
+}));
+
 describe("HomePage", () => {
   const mockBooks = DATA_BOOKS.slice(0, 12);
 
@@ -48,7 +52,7 @@ describe("HomePage", () => {
       data: DATA_BOOKS,
     });
     (getUserById as jest.Mock).mockReturnValue({
-      data: DATA_USER[0],
+      favorites: DATA_USER[0].favorites,
     });
   });
 

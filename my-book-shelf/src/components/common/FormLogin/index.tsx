@@ -155,7 +155,11 @@ const FormLogin = ({ isLoading = false, onSubmit }: LoginForm) => {
         </FormErrorMessage>
       </FormControl>
 
-      <Checkbox isChecked={rememberMe} onChange={handleRememberMeClick} />
+      <Checkbox
+        data-testid="check-remember"
+        isChecked={rememberMe}
+        onChange={handleRememberMeClick}
+      />
       <Button
         data-testid="submit-login"
         variant="full"

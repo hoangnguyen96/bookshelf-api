@@ -50,10 +50,10 @@ const config: Config = {
     "^@app/api$": "<rootDir>/src/api",
     "^@app/utils$": "<rootDir>/src/utils",
     "^@app/actions/auth$": "<rootDir>/src/actions/auth.ts",
-    "@app/auth": "<rootDir>/__test__/mocks/auth.ts",
+    "@app/auth": "<rootDir>/authConfig/mocks/auth.ts",
     "next-auth/providers/credentials":
-      "<rootDir>/__test__/mocks/next-auth-providers-credentials.ts",
-    "next-auth": "<rootDir>/__test__/mocks/next-auth.ts",
+      "<rootDir>/authConfig/mocks/next-auth-providers-credentials.ts",
+    "next-auth": "<rootDir>/authConfig/mocks/next-auth.ts",
   },
   transformIgnorePatterns: ["/node_modules/(?!next-auth|@auth/core)/"],
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],

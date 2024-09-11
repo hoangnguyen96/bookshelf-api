@@ -1,4 +1,4 @@
-import { act, render } from "@testing-library/react";
+import { act, fireEvent, render } from "@testing-library/react";
 import { useSession } from "next-auth/react";
 import * as utils from "@app/utils";
 import { DATA_BOOKS, DATA_USER } from "@app/__mocks__/data";
@@ -25,6 +25,10 @@ jest.mock("@app/api", () => ({
 jest.mock("@app/utils", () => ({
   ...jest.requireActual("@app/utils"),
   dividePaginationBooks: jest.fn(),
+}));
+
+jest.mock("@app/actions/auth", () => ({
+  logout: jest.fn(),
 }));
 
 describe("Search Page Params", () => {
@@ -82,7 +86,7 @@ describe("Search Page Params", () => {
       data: mockBooksPaginationByParams[0],
     });
     (getUserById as jest.Mock).mockReturnValue({
-      data: DATA_USER[0],
+      favorites: DATA_USER[0].favorites,
     });
   });
 
@@ -105,5 +109,15 @@ describe("Search Page Params", () => {
       );
       expect(asFragment()).toMatchSnapshot();
     });
+  });
+
+  it("Should handle update favorite book", async () => {
+    const { findAllByTestId } = render(
+      <SearchPage params={{ slug: ["title", "on"] }} />
+    );
+
+    const buttons = await findAllByTestId("handle-favorite");
+
+    fireEvent.click(buttons[0]);
   });
 });

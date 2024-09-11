@@ -88,6 +88,7 @@ exports[`FormLogin Should render correctly snapshot 1`] = `
         </div>
         <label
           class="chakra-checkbox css-1elxtiq"
+          data-testid="check-remember"
         >
           <input
             class="chakra-checkbox__input"
@@ -200,6 +201,7 @@ exports[`FormLogin Should render correctly snapshot 1`] = `
       </div>
       <label
         class="chakra-checkbox css-1elxtiq"
+        data-testid="check-remember"
       >
         <input
           class="chakra-checkbox__input"

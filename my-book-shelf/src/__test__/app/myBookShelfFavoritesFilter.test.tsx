@@ -26,6 +26,10 @@ jest.mock("@app/utils", () => ({
   filterBooksFavoriteByParams: jest.fn(),
 }));
 
+jest.mock("@app/actions/auth", () => ({
+  logout: jest.fn(),
+}));
+
 describe("My Book Shelf Favorites Search", () => {
   const mockBooks = DATA_BOOKS.filter((item) =>
     DATA_USER[0].favorites.includes(item.id)
@@ -62,7 +66,7 @@ describe("My Book Shelf Favorites Search", () => {
       data: DATA_BOOKS,
     });
     (getUserById as jest.Mock).mockReturnValue({
-      data: DATA_USER[0],
+      favorites: DATA_USER[0].favorites,
     });
     (getBookById as jest.Mock).mockReturnValue({
       data: mockBooks[0],
