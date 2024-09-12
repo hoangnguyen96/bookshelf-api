@@ -3,11 +3,12 @@
 import { useSession } from "next-auth/react";
 import { Flex } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import { getAllBook, getUserById, updateUserById } from "@app/api";
+import { getAllBook, getUserById, updateUserById } from "@app/api-request";
 import { BookType, User } from "@app/models";
-import { LoadingIndicator, TableItem } from "@app/components/common";
+import { LoadingIndicator } from "@app/components/common";
 import { useEffect, useState } from "react";
 import { filterBooksFavorite } from "@app/utils";
+import { TableItem } from "@app/components";
 
 const MyBookShelfFavorites = () => {
   const { data: session } = useSession();

@@ -1,7 +1,7 @@
 "use client";
 
-import { addBook } from "@app/api";
-import { FormContribute } from "@app/components/common";
+import { addBook } from "@app/api-request";
+import { FormContribute } from "@app/components";
 import { ROUTES } from "@app/constants";
 import { BookType } from "@app/models";
 import { Text } from "@chakra-ui/react";

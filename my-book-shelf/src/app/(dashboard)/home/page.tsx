@@ -3,7 +3,7 @@
 import { Grid, Text } from "@chakra-ui/react";
 import { BookType, User } from "@app/models";
 import { Cart, LoadingIndicator } from "@app/components/common";
-import { getAllBook, getUserById, updateUserById } from "@app/api";
+import { getAllBook, getUserById, updateUserById } from "@app/api-request";
 import { useSession } from "next-auth/react";
 import { getTwelveItemData } from "@app/utils";
 import { useRouter } from "next/navigation";
@@ -50,7 +50,7 @@ const HomePage = () => {
         favorites: listFavorite,
       });
 
-      return router?.refresh();
+      return router.refresh();
     } catch (error) {
       console.error("Failed to fetch data:", error);
     }
@@ -74,7 +74,7 @@ const HomePage = () => {
             imageUrl={imageUrl}
             publicationYear={publicationYear}
             rating={rating}
-            isFavorite={dataUserById?.favorites?.includes(id) || false}
+            isFavorite={dataUserById?.favorites?.includes(id)}
             onUpdateFavorites={() => handleUpdateFavorites(id)}
           />
         );

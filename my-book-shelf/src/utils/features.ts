@@ -1,5 +1,5 @@
 import { TYPE_SEARCH } from "@app/constants";
-import { BookType, User } from "@app/models";
+import { BookType } from "@app/models";
 import {
   FieldErrors,
   FieldValues,

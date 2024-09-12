@@ -47,17 +47,14 @@ export const authConfig = {
         isOnPreview ||
         isOnProfile;
 
-      console.log("nextUrl authorized 1: ", isLoggedIn);
-
       if (isLoggedIn && isOnDashBoard) {
         return true;
       }
 
       if (!isLoggedIn) {
-        return Response.redirect(new URL("/login", nextUrl));
+        return Response.redirect(new URL(ROUTES.LOGIN, nextUrl));
       }
 
-      console.log("nextUrl authorized 2: ");
       return true;
     },
 

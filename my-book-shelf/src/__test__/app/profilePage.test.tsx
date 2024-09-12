@@ -1,6 +1,6 @@
 import { act, render } from "@testing-library/react";
 import { useSession } from "next-auth/react";
-import { getUserById } from "@app/api";
+import { getUserById } from "@app/api-request";
 import { DATA_USER } from "@app/__mocks__/data";
 import ProfilePage from "@app/app/(dashboard)/profile/page";
 
@@ -8,7 +8,11 @@ jest.mock("next-auth/react", () => ({
   useSession: jest.fn(),
 }));
 
-jest.mock("@app/api", () => ({
+jest.mock("next/navigation", () => ({
+  useRouter: jest.fn(),
+}));
+
+jest.mock("@app/api-request", () => ({
   getUserById: jest.fn(),
 }));
 

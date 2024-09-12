@@ -4,6 +4,7 @@ import { ROUTES } from "@app/constants";
 import { Flex } from "@chakra-ui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { memo } from "react";
 
 const HeadingFavorites = () => {
   const pathname = usePathname();
@@ -28,4 +29,4 @@ const HeadingFavorites = () => {
   );
 };
 
-export default HeadingFavorites;
+export default memo(HeadingFavorites);

@@ -1,6 +1,6 @@
 import { act, fireEvent, render } from "@testing-library/react";
 import { useRouter } from "next/navigation";
-import { addBook, generateImageUpload } from "@app/api";
+import { addBook, generateImageUpload } from "@app/api-request";
 import ContributePage from "@app/app/(dashboard)/contribute/(main)/page";
 
 jest.mock("next/navigation", () => ({
@@ -12,7 +12,7 @@ jest.mock("next/image", () => ({
   default: (props: any) => <img {...props} />,
 }));
 
-jest.mock("@app/api", () => ({
+jest.mock("@app/api-request", () => ({
   addBook: jest.fn(),
   generateImageUpload: jest.fn().mockResolvedValue({
     success: true,

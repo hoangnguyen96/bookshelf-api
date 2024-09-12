@@ -1,13 +1,13 @@
 import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import RegisterPage from "../../app/(auth)/register/page";
-import { addUser, getUserByEmail } from "@app/api";
+import { addUser, getUserByEmail } from "@app/api-request";
 import { useRouter } from "next/navigation";
 
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));
 
-jest.mock("@app/api", () => ({
+jest.mock("@app/api-request", () => ({
   addUser: jest.fn(),
   getUserByEmail: jest.fn(),
 }));
