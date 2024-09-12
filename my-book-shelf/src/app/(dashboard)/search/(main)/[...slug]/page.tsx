@@ -7,13 +7,9 @@ import {
   getBookByParams,
   getUserById,
   updateUserById,
-} from "@app/api";
+} from "@app/api-request";
 import { BookType, User } from "@app/models";
-import {
-  LoadingIndicator,
-  Pagination,
-  TableItem,
-} from "@app/components/common";
+import { LoadingIndicator, Pagination } from "@app/components/common";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -21,6 +17,7 @@ import {
   getDataByParams,
   getListDataByTypeAndValue,
 } from "@app/utils";
+import { TableItem } from "@app/components";
 
 const SearchPage = ({ params }: { params: { slug: string[] } }) => {
   const { data: session } = useSession();

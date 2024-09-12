@@ -6,8 +6,9 @@ import {
   getUserById,
   updateBookById,
   updateUserById,
-} from "@app/api";
-import { CartBorrow, LoadingIndicator } from "@app/components/common";
+} from "@app/api-request";
+import { CartBorrow } from "@app/components";
+import { LoadingIndicator } from "@app/components/common";
 import { BookType, User } from "@app/models";
 import { filterBooksOnShelf } from "@app/utils";
 import { Flex } from "@chakra-ui/react";

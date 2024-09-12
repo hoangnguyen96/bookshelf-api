@@ -9,7 +9,7 @@ import {
   getBookByParams,
   getUserById,
   updateUserById,
-} from "@app/api";
+} from "@app/api-request";
 import { useSession } from "next-auth/react";
 import { getTwelveItemData } from "@app/utils";
 import { useRouter } from "next/navigation";
@@ -50,19 +50,23 @@ const HomePage = ({ params }: { params?: { slug: string[] } }) => {
   const handleUpdateFavorites = async (id: string) => {
     if (!dataUserById) return;
 
-    let listFavorite = dataUserById.favorites;
-    if (dataUserById.favorites.includes(id)) {
-      listFavorite = dataUserById.favorites.filter((item) => item !== id);
-    } else {
-      listFavorite = [...dataUserById.favorites, id];
+    try {
+      let listFavorite = dataUserById.favorites;
+      if (dataUserById.favorites.includes(id)) {
+        listFavorite = dataUserById.favorites.filter((item) => item !== id);
+      } else {
+        listFavorite = [...dataUserById.favorites, id];
+      }
+
+      await updateUserById(dataUserById.id, {
+        ...dataUserById,
+        favorites: listFavorite,
+      });
+
+      return router.refresh();
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
     }
-
-    await updateUserById(dataUserById.id, {
-      ...dataUserById,
-      favorites: listFavorite,
-    });
-
-    return router?.refresh();
   };
 
   if (!listData || !dataUserById) {
@@ -83,7 +87,7 @@ const HomePage = ({ params }: { params?: { slug: string[] } }) => {
             imageUrl={imageUrl}
             publicationYear={publicationYear}
             rating={rating}
-            isFavorite={dataUserById?.favorites?.includes(id) || false}
+            isFavorite={dataUserById?.favorites?.includes(id)}
             onUpdateFavorites={() => handleUpdateFavorites(id)}
           />
         );

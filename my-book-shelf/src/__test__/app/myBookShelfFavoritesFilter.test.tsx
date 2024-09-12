@@ -1,11 +1,11 @@
 import { act, fireEvent, render } from "@testing-library/react";
 import { useSession } from "next-auth/react";
-import { getAllBook, getBookById, getUserById } from "@app/api";
+import { getAllBook, getBookById, getUserById } from "@app/api-request";
 import { DATA_BOOKS, DATA_USER } from "@app/__mocks__/data";
 import * as utils from "@app/utils";
 import MyBookShelfFavorites from "@app/app/(dashboard)/my-book-shelf/(main)/favorites/[...slug]/page";
 
-jest.mock("@app/api", () => ({
+jest.mock("@app/api-request", () => ({
   getAllBook: jest.fn(),
   getUserById: jest.fn(),
   getBookById: jest.fn(),

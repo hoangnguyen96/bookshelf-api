@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import {
   Input,
@@ -15,7 +15,7 @@ import { SearchIcon } from "@chakra-ui/icons";
 import { ROUTES } from "@app/constants";
 import { getFirstPath, getTwoPath } from "@app/utils";
 
-const SearchBar = ({ placeholder = "Search..." }: InputProps) => {
+const SearchBar = ({ placeholder = "Search...", ...rest }: InputProps) => {
   const [prevPath, setPrevPath] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchType, setSearchType] = useState("");
@@ -93,6 +93,7 @@ const SearchBar = ({ placeholder = "Search..." }: InputProps) => {
           borderRightRadius="40px"
           borderLeftRadius="inherit"
           _placeholder={{ color: "gray.500" }}
+          {...rest}
         />
         <IconButton
           aria-label="Search"
@@ -116,4 +117,5 @@ const SearchBar = ({ placeholder = "Search..." }: InputProps) => {
     </Flex>
   );
 };
-export default SearchBar;
+
+export default memo(SearchBar);

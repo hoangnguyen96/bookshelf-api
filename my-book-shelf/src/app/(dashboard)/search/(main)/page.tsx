@@ -2,16 +2,13 @@
 
 import { useSession } from "next-auth/react";
 import { Flex } from "@chakra-ui/react";
-import { getAllBook, getUserById, updateUserById } from "@app/api";
+import { getAllBook, getUserById, updateUserById } from "@app/api-request";
 import { BookType, User } from "@app/models";
-import {
-  LoadingIndicator,
-  Pagination,
-  TableItem,
-} from "@app/components/common";
+import { LoadingIndicator, Pagination } from "@app/components/common";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { dividePaginationBooks } from "@app/utils";
+import { TableItem } from "@app/components";
 
 const SearchPage = () => {
   const { data: session } = useSession();

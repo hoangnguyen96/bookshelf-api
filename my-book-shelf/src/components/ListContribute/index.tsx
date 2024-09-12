@@ -1,11 +1,11 @@
 "use client";
 
-import { getAllBook, getUserById } from "@app/api";
+import { getAllBook, getUserById } from "@app/api-request";
 import { Cart, LoadingIndicator } from "@app/components/common";
 import { BookType, User } from "@app/models";
 import { getThreeTopBook } from "@app/utils";
 import { Flex } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
 const ListContribute = () => {
@@ -58,4 +58,4 @@ const ListContribute = () => {
   );
 };
 
-export default ListContribute;
+export default memo(ListContribute);

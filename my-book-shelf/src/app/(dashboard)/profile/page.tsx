@@ -1,18 +1,19 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { Box, Flex, Text } from "@chakra-ui/react";
-import { getUserById, updateUserById } from "@app/api";
+import { Box, Flex, Text, useToast } from "@chakra-ui/react";
+import { getUserById, updateUserById } from "@app/api-request";
 import { User } from "@app/models";
-import {
-  FormProfile,
-  LoadingIndicator,
-  UploadImage,
-} from "@app/components/common";
+import { LoadingIndicator, UploadImage } from "@app/components/common";
 import { useEffect, useState } from "react";
+import { MESSAGES } from "@app/constants";
+import { useRouter } from "next/navigation";
+import { FormProfile } from "@app/components";
 
 const ProfilePage = () => {
   const { data: session } = useSession();
+  const router = useRouter();
+  const toast = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [dataUserById, setDataUserById] = useState<User>();
 
@@ -32,20 +33,38 @@ const ProfilePage = () => {
   }, [session]);
 
   const handleUpdateUser = async (id: string, user: Partial<User>) => {
-    setIsLoading(true);
-    const { username, email, phone, bio } = user;
+    try {
+      setIsLoading(true);
+      const { username, email, phone, bio } = user;
 
-    const payload: Partial<User> = {
-      ...user,
-      username,
-      email,
-      phone,
-      bio,
-    };
+      const payload: Partial<User> = {
+        ...user,
+        username,
+        email,
+        phone,
+        bio,
+      };
 
-    await updateUserById(id, payload);
-    setIsLoading(false);
-    return;
+      await updateUserById(id, payload);
+      toast({
+        title: "Update Successful.",
+        description: MESSAGES.UPDATE_SUCCESS,
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+      setIsLoading(false);
+      return router.refresh();
+    } catch (error) {
+      toast({
+        title: "Update Failed!",
+        description: MESSAGES.UPDATE_ERROR,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+      console.error("Failed to update user!", error);
+    }
   };
 
   if (!dataUserById) {

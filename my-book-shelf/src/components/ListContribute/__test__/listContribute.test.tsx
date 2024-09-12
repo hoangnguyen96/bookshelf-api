@@ -1,6 +1,6 @@
 import { auth } from "@app/auth";
 import { act, render } from "@testing-library/react";
-import { getAllBook, getUserById } from "@app/api";
+import { getAllBook, getUserById } from "@app/api-request";
 import * as utils from "@app/utils";
 import { DATA_BOOKS, DATA_USER } from "@app/__mocks__/data";
 import ListContribute from "..";
@@ -10,7 +10,7 @@ jest.mock("next-auth/react", () => ({
   useSession: jest.fn(),
 }));
 
-jest.mock("@app/api", () => ({
+jest.mock("@app/api-request", () => ({
   getAllBook: jest.fn(),
   getUserById: jest.fn(),
 }));

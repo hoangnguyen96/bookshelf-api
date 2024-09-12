@@ -1,6 +1,6 @@
 "use client";
 
-import { ContributeComplete } from "@app/components/common";
+import { ContributeComplete } from "@app/components";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Text } from "@chakra-ui/react";
 import Link from "next/link";

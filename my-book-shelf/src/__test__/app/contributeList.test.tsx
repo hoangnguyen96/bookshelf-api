@@ -1,7 +1,7 @@
 import { act, render } from "@testing-library/react";
 import { useSession } from "next-auth/react";
 import { DATA_BOOKS, DATA_USER } from "@app/__mocks__/data";
-import { getAllBook, getUserById } from "@app/api";
+import { getAllBook, getUserById } from "@app/api-request";
 import ContributeList from "@app/app/(dashboard)/contribute-list/page";
 
 jest.mock("next-auth/react", () => ({
@@ -12,7 +12,7 @@ jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));
 
-jest.mock("@app/api", () => ({
+jest.mock("@app/api-request", () => ({
   getAllBook: jest.fn(),
   getUserById: jest.fn(),
 }));

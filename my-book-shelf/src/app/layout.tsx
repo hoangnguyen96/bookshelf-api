@@ -1,4 +1,4 @@
-import ChakraUIProviders from "@app/components/ChakraProvider";
+import ChakraUIProviders from "@app/layouts/ChakraProvider";
 import "../styles/globals.css";
 
 import type { Metadata } from "next";

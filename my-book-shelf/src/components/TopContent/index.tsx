@@ -3,7 +3,9 @@
 import { Flex } from "@chakra-ui/react";
 import { usePathname } from "next/navigation";
 import { ROUTES } from "@app/constants";
-import { MenuProfile, SearchBar } from "../common";
+import { SearchBar } from "../common";
+import MenuProfile from "../MenuProfile";
+import { memo } from "react";
 
 const TopContent = () => {
   const pathName = usePathname();
@@ -28,4 +30,4 @@ const TopContent = () => {
   );
 };
 
-export default TopContent;
+export default memo(TopContent);

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { Box, Flex, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Flex, Text, useDisclosure, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,12 +11,12 @@ import {
   getUserById,
   updateBookById,
   updateUserById,
-} from "@app/api";
+} from "@app/api-request";
 import { formatDate } from "@app/utils";
 import { CheckIcon, StarFullIcon } from "@app/assets/icons";
 import { previewAuthor } from "@app/assets/images";
-import { Button, LoadingIndicator, StatusBook } from "@app/components/common";
-import { ModalSuccessProcess } from "@app/components";
+import { Button, LoadingIndicator } from "@app/components/common";
+import { ModalSuccessProcess, StatusBook } from "@app/components";
 import { BookType, User } from "@app/models";
 import { useEffect, useState } from "react";
 
@@ -29,6 +29,7 @@ interface PreviewBookProps {
 const PreviewBook = ({ params: { id } }: PreviewBookProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
+  const toast = useToast();
   const { data: session } = useSession();
   const [dataBook, setDataBook] = useState<BookType>();
   const [dataUserById, setDataUserById] = useState<User>();
@@ -45,8 +46,15 @@ const PreviewBook = ({ params: { id } }: PreviewBookProps) => {
   }, [id, session?.user?.id]);
 
   const handleAddBorrowBook = async (id: string) => {
-    if (dataUserById?.shelfBooks?.includes(id))
-      return console.log("You borrowed book successful!!");
+    if (dataUserById?.shelfBooks?.includes(id)) {
+      return toast({
+        title: "Borrowed book.",
+        description: "You borrowed book successful!",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
 
     dataUserById?.shelfBooks.push(id);
     await updateBookById(dataBook?.id || "", {

@@ -14,6 +14,7 @@ import {
   SearchIcon,
 } from "@app/assets/icons";
 import { useSession } from "next-auth/react";
+import { memo } from "react";
 
 const Navbar = () => {
   const { data: session } = useSession();
@@ -61,4 +62,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default memo(Navbar);
