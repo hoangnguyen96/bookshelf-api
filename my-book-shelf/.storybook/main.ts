@@ -13,7 +13,7 @@ const config: StorybookConfig = {
     name: "@storybook/nextjs",
     options: {},
   },
-  staticDirs: ["..\\public"],
+  staticDirs: ["../public"],
   refs: {
     "@chakra-ui/react": {
       disable: true,
