@@ -1,7 +1,7 @@
 import { act, render } from "@testing-library/react";
 import { useSession } from "next-auth/react";
 import { getBookById, getUserById } from "@app/api-request";
-import { DATA_BOOKS, DATA_USER } from "@app/__mocks__/data";
+import { DATA_BOOKS, DATA_USER } from "@app/mocks/data";
 import PreviewBook from "../page";
 
 jest.mock("next-auth/react", () => ({

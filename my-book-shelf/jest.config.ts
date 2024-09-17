@@ -39,6 +39,7 @@ const config: Config = {
     "!<rootDir>/src/themes/**/*",
     "!<rootDir>/src/types/**/*",
     "!<rootDir>/src/utils/**/*",
+    "!<rootDir>/src/mocks/**/*",
     "!<rootDir>/src/auth.config.ts",
     "!<rootDir>/src/auth.ts",
     "!<rootDir>/src/middleware.ts",

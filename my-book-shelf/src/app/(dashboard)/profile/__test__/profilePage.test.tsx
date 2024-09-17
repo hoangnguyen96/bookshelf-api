@@ -1,7 +1,7 @@
 import { act, fireEvent, render } from "@testing-library/react";
 import { useSession } from "next-auth/react";
 import { getUserById } from "@app/api-request";
-import { DATA_USER } from "@app/__mocks__/data";
+import { DATA_USER } from "@app/mocks/data";
 import ProfilePage from "../page";
 
 jest.mock("next-auth/react", () => ({

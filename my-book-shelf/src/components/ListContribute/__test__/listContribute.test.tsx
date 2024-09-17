@@ -2,7 +2,7 @@ import { auth } from "@app/auth";
 import { act, render } from "@testing-library/react";
 import { getAllBook, getUserById } from "@app/api-request";
 import * as utils from "@app/utils";
-import { DATA_BOOKS, DATA_USER } from "@app/__mocks__/data";
+import { DATA_BOOKS, DATA_USER } from "@app/mocks/data";
 import ListContribute from "..";
 import { useSession } from "next-auth/react";
 

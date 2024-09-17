@@ -1,6 +1,6 @@
 import { act, render } from "@testing-library/react";
 import { useSession } from "next-auth/react";
-import { DATA_BOOKS, DATA_USER } from "@app/__mocks__/data";
+import { DATA_BOOKS, DATA_USER } from "@app/mocks/data";
 import { getAllBook, getUserById } from "@app/api-request";
 import ContributeList from "../page";
 

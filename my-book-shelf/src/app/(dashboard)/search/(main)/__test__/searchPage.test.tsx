@@ -1,7 +1,7 @@
 import { act, fireEvent, render } from "@testing-library/react";
 import { useSession } from "next-auth/react";
 import * as utils from "@app/utils";
-import { DATA_BOOKS, DATA_USER } from "@app/__mocks__/data";
+import { DATA_BOOKS, DATA_USER } from "@app/mocks/data";
 import { getAllBook, getUserById } from "@app/api-request";
 import SearchPage from "../page";
 
