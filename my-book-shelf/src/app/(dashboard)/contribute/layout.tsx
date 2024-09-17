@@ -14,7 +14,6 @@ const ContributeLayout = ({
 }>) => {
   const { data: session } = useSession();
 
-  console.log("session---000", session);
   if (!session?.user?.isAdmin) {
     return notFound();
   }
@@ -36,7 +35,6 @@ const ContributeLayout = ({
         p="28px 45px 45px 60px"
       >
         {children}
-        {session?.user?.email}
       </Flex>
       <Flex maxW={582} flexDir="column" w="100%">
         <Text fontSize="50px" lineHeight="64px" fontWeight={700}>
