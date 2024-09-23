@@ -2,7 +2,7 @@ import { MESSAGES } from "@app/constants";
 
 const API_END_POINT = process.env.NEXT_PUBLIC_API_URL || "";
 
-class HttpService {
+class ApiService {
   private _apiName: string;
 
   constructor(api: string) {
@@ -60,4 +60,4 @@ class HttpService {
   }
 }
 
-export const HttpClient = new HttpService(API_END_POINT);
+export const api = new ApiService(API_END_POINT);

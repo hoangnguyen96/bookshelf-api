@@ -20,7 +20,7 @@ import { MESSAGES } from "@app/constants";
 import { BookType } from "@app/models";
 
 // Api
-import { generateImageUpload } from "@app/api-request";
+import { generateImageUpload } from "@app/features/dashboard/actions";
 
 // Utils
 import {

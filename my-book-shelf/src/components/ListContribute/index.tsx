@@ -1,6 +1,6 @@
 "use client";
 
-import { getAllBook, getUserById } from "@app/api-request";
+import { getAllBook, getUserById } from "@app/features/dashboard/actions";
 import { Cart, LoadingIndicator } from "@app/components/common";
 import { BookType, User } from "@app/models";
 import { getThreeTopBook } from "@app/utils";
@@ -16,7 +16,9 @@ const ListContribute = () => {
 
   const fetchData = async () => {
     try {
-      const dataUserById = (await getUserById(session?.user?.id as string)) as User;
+      const dataUserById = (await getUserById(
+        session?.user?.id as string
+      )) as User;
       const dataBooks = await getAllBook();
       const dataTop = getThreeTopBook(dataBooks);
 

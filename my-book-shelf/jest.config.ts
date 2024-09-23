@@ -47,7 +47,7 @@ const config: Config = {
   ],
   moduleNameMapper: {
     "^@app/components/(.*)$": "<rootDir>/components/$1",
-    "^@app/api-request$": "<rootDir>/src/api-request",
+    "^@app/features/dashboard/actions$": "<rootDir>/features/dashboard/actions",
     "^@app/utils$": "<rootDir>/src/utils",
     "^@app/actions/auth$": "<rootDir>/src/actions/auth.ts",
     "@app/auth": "<rootDir>/authConfig/mocks/auth.ts",

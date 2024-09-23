@@ -4,8 +4,11 @@ import { memo, useRef, useState } from "react";
 import { Box, Input, FormControl, FormLabel } from "@chakra-ui/react";
 import Image from "next/image";
 import { Button } from "..";
-import { generateImageUpload, updateUserById } from "@app/api-request";
 import { User } from "@app/models";
+import {
+  generateImageUpload,
+  updateUserById,
+} from "@app/features/dashboard/actions";
 
 interface ImageUploadFormProps {
   image: string;

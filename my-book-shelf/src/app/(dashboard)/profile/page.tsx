@@ -2,13 +2,13 @@
 
 import { useSession } from "next-auth/react";
 import { Box, Flex, Text, useToast } from "@chakra-ui/react";
-import { getUserById, updateUserById } from "@app/api-request";
 import { User } from "@app/models";
 import { LoadingIndicator, UploadImage } from "@app/components/common";
 import { useEffect, useState } from "react";
 import { MESSAGES } from "@app/constants";
 import { useRouter } from "next/navigation";
 import { FormProfile } from "@app/components";
+import { getUserById, updateUserById } from "@app/features/dashboard/actions";
 
 const ProfilePage = () => {
   const { data: session } = useSession();

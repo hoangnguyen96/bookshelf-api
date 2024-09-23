@@ -5,11 +5,11 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { getAllBook, getUserById } from "@app/api-request";
 import { BookType, User } from "@app/models";
 import { LoadingIndicator } from "@app/components/common";
 import { useEffect, useState } from "react";
 import { TableItem } from "@app/components";
+import { getAllBook, getUserById } from "@app/features/dashboard/actions";
 
 const ContributeList = () => {
   const [dataUserById, setDataUserById] = useState<User>();

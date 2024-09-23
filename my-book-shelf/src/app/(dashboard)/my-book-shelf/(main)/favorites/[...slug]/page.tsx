@@ -3,12 +3,16 @@
 import { useSession } from "next-auth/react";
 import { Flex } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import { getAllBook, getUserById, updateUserById } from "@app/api-request";
 import { BookType, User } from "@app/models";
 import { LoadingIndicator } from "@app/components/common";
 import { useEffect, useState } from "react";
 import { filterBooksFavorite, filterBooksFavoriteByParams } from "@app/utils";
 import { TableItem } from "@app/components";
+import {
+  getAllBook,
+  getUserById,
+  updateUserById,
+} from "@app/features/dashboard/actions";
 
 const MyBookShelfFavorites = ({ params }: { params: { slug: string[] } }) => {
   const { data: session } = useSession();

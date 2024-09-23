@@ -7,7 +7,7 @@ import {
   getBookById,
   getUserById,
   updateBookById,
-} from "@app/api-request";
+} from "@app/features/dashboard/actions";
 import MyBookShelfByParams from "../page";
 
 jest.mock("next-auth/react", () => ({
@@ -18,7 +18,7 @@ jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));
 
-jest.mock("@app/api-request", () => ({
+jest.mock("@app/features/dashboard/actions", () => ({
   getAllBook: jest.fn(),
   getUserById: jest.fn(),
   getBookById: jest.fn(),

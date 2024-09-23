@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import FormContribute from "..";
-import { generateImageUpload } from "@app/api-request";
+import { generateImageUpload } from "@app/features/dashboard/actions";
 
 // Mock Image component
 jest.mock("next/image", () => ({
@@ -9,7 +9,7 @@ jest.mock("next/image", () => ({
   default: (props: any) => <img {...props} />,
 }));
 
-jest.mock("@app/api-request", () => ({
+jest.mock("@app/features/dashboard/actions", () => ({
   generateImageUpload: jest.fn().mockResolvedValue({
     success: true,
     url: "https://example.com/image.jpg",
