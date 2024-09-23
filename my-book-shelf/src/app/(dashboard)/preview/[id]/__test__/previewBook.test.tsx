@@ -1,6 +1,6 @@
 import { act, render } from "@testing-library/react";
 import { useSession } from "next-auth/react";
-import { getBookById, getUserById } from "@app/api-request";
+import { getBookById, getUserById } from "@app/features/dashboard/actions";
 import { DATA_BOOKS, DATA_USER } from "@app/mocks/data";
 import PreviewBook from "../page";
 
@@ -12,7 +12,7 @@ jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));
 
-jest.mock("@app/api-request", () => ({
+jest.mock("@app/features/dashboard/actions", () => ({
   getBookById: jest.fn(),
   getUserById: jest.fn(),
   updateUserById: jest.fn(),

@@ -2,12 +2,6 @@
 
 import { useSession } from "next-auth/react";
 import { Flex } from "@chakra-ui/react";
-import {
-  getAllBook,
-  getBookByParams,
-  getUserById,
-  updateUserById,
-} from "@app/api-request";
 import { BookType, User } from "@app/models";
 import { LoadingIndicator, Pagination } from "@app/components/common";
 import { useEffect, useState } from "react";
@@ -18,6 +12,12 @@ import {
   getListDataByTypeAndValue,
 } from "@app/utils";
 import { TableItem } from "@app/components";
+import {
+  getAllBook,
+  getBookByParams,
+  getUserById,
+  updateUserById,
+} from "@app/features/dashboard/actions";
 
 const SearchPage = ({ params }: { params: { slug: string[] } }) => {
   const { data: session } = useSession();

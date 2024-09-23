@@ -6,12 +6,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import {
-  getBookById,
-  getUserById,
-  updateBookById,
-  updateUserById,
-} from "@app/api-request";
 import { formatDate } from "@app/utils";
 import { CheckIcon, StarFullIcon } from "@app/assets/icons";
 import { previewAuthor } from "@app/assets/images";
@@ -19,6 +13,12 @@ import { Button, LoadingIndicator } from "@app/components/common";
 import { ModalSuccessProcess, StatusBook } from "@app/components";
 import { BookType, User } from "@app/models";
 import { useEffect, useState } from "react";
+import {
+  getBookById,
+  getUserById,
+  updateBookById,
+  updateUserById,
+} from "@app/features/dashboard/actions";
 
 interface PreviewBookProps {
   params: {

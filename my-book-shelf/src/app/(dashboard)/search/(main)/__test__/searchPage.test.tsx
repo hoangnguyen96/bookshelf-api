@@ -2,7 +2,7 @@ import { act, fireEvent, render } from "@testing-library/react";
 import { useSession } from "next-auth/react";
 import * as utils from "@app/utils";
 import { DATA_BOOKS, DATA_USER } from "@app/mocks/data";
-import { getAllBook, getUserById } from "@app/api-request";
+import { getAllBook, getUserById } from "@app/features/dashboard/actions";
 import SearchPage from "../page";
 
 jest.mock("next-auth/react", () => ({
@@ -13,7 +13,7 @@ jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));
 
-jest.mock("@app/api-request", () => ({
+jest.mock("@app/features/dashboard/actions", () => ({
   getAllBook: jest.fn(),
   getUserById: jest.fn(),
   updateUserById: jest.fn(),

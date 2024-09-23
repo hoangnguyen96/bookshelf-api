@@ -4,12 +4,13 @@ import { useCallback, useState } from "react";
 import { Box, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { authenticate } from "@app/actions/auth";
+import bcrypt from "bcryptjs";
 
 // Constants
 import { MESSAGES, ROUTES } from "@app/constants";
 
 // Api
-import { addUser } from "@app/api-request";
+import { addUser } from "@app/features/dashboard/actions";
 
 // Models
 import { User } from "@app/models";
@@ -19,7 +20,6 @@ import { generateSevenDigitUUID } from "@app/utils";
 
 // Components
 import { FooterForm, FormRegister, HeadingForm } from "@app/components";
-import bcrypt from "bcryptjs";
 
 const RegisterPage = () => {
   const toast = useToast();
@@ -65,7 +65,6 @@ const RegisterPage = () => {
         duration: 9000,
         isClosable: true,
       });
-      // throw new Error(MESSAGES.ADD_USER_FAILED);
     }
   }, []);
 

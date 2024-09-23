@@ -1,5 +1,5 @@
 import { act, fireEvent, render, waitFor } from "@testing-library/react";
-import { addUser, getUserByEmail } from "@app/api-request";
+import { addUser, getUserByEmail } from "@app/features/dashboard/actions";
 import { useRouter } from "next/navigation";
 import RegisterPage from "../page";
 import { MESSAGES } from "@app/constants";
@@ -9,7 +9,7 @@ jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));
 
-jest.mock("@app/api-request", () => ({
+jest.mock("@app/features/dashboard/actions", () => ({
   addUser: jest.fn(),
   getUserByEmail: jest.fn(),
 }));

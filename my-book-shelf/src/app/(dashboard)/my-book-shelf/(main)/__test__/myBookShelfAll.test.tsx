@@ -5,8 +5,7 @@ import {
   getBookById,
   getUserById,
   updateBookById,
-  updateUserById,
-} from "@app/api-request";
+} from "@app/features/dashboard/actions";
 import { DATA_BOOKS, DATA_USER } from "@app/mocks/data";
 import * as utils from "@app/utils";
 import MyBookShelfAll from "../page";
@@ -19,7 +18,7 @@ jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));
 
-jest.mock("@app/api-request", () => ({
+jest.mock("@app/features/dashboard/actions", () => ({
   getAllBook: jest.fn(),
   getUserById: jest.fn(),
   getBookById: jest.fn(),

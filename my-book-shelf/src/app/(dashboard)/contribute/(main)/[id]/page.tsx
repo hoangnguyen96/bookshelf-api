@@ -1,9 +1,9 @@
 "use client";
 
-import { getBookById, updateBookById } from "@app/api-request";
 import { FormContribute } from "@app/components";
 import { LoadingIndicator } from "@app/components/common";
 import { ROUTES } from "@app/constants";
+import { getBookById, updateBookById } from "@app/features/dashboard/actions";
 import { BookType } from "@app/models";
 import { Box, Text, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";

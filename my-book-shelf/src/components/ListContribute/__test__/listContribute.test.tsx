@@ -1,6 +1,6 @@
 import { auth } from "@app/auth";
 import { act, render } from "@testing-library/react";
-import { getAllBook, getUserById } from "@app/api-request";
+import { getAllBook, getUserById } from "@app/features/dashboard/actions";
 import * as utils from "@app/utils";
 import { DATA_BOOKS, DATA_USER } from "@app/mocks/data";
 import ListContribute from "..";
@@ -10,7 +10,7 @@ jest.mock("next-auth/react", () => ({
   useSession: jest.fn(),
 }));
 
-jest.mock("@app/api-request", () => ({
+jest.mock("@app/features/dashboard/actions", () => ({
   getAllBook: jest.fn(),
   getUserById: jest.fn(),
 }));
@@ -33,7 +33,7 @@ describe("Contribute Three Top Book", () => {
 
   (useSession as jest.Mock).mockReturnValue({
     data: {
-      user: DATA_USER[0]
+      user: DATA_USER[0],
     },
     status: "authenticated",
   });

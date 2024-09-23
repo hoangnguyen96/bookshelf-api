@@ -1,11 +1,14 @@
 import { act, fireEvent, render } from "@testing-library/react";
 import { useSession } from "next-auth/react";
-import { getAllBook, getBookByParams, getUserById } from "@app/api-request";
+import {
+  getAllBook,
+  getBookByParams,
+  getUserById,
+} from "@app/features/dashboard/actions";
 import { DATA_BOOKS, DATA_USER } from "@app/mocks/data";
-import * as utils from "@app/utils";
 import HomePage from "../page";
 
-jest.mock("@app/api-request", () => ({
+jest.mock("@app/features/dashboard/actions", () => ({
   getAllBook: jest.fn(),
   getBookByParams: jest.fn(),
   getUserById: jest.fn(),
@@ -49,7 +52,6 @@ describe("Home Search Params", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    jest.spyOn(utils, "getTwelveItemData").mockReturnValue(mockBooks);
     (getAllBook as jest.Mock).mockResolvedValue(DATA_BOOKS);
     (getBookByParams as jest.Mock).mockResolvedValue(mockBooks);
     (getUserById as jest.Mock).mockResolvedValue(DATA_USER[0]);
