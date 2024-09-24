@@ -1,19 +1,19 @@
 "use client";
 
-import { TableItem } from "@app/components";
-import { Pagination } from "@app/components/common";
-import { BookType, User } from "@app/models";
+import { memo, useEffect, useState } from "react";
 import { Flex } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { updateUserById } from "../actions";
 import { useRouter } from "next/navigation";
+import { BookType, User } from "@app/models";
+import { updateUserById } from "../actions";
+import { Pagination } from "@app/components/common";
+import { TableItem } from "@app/components";
 
 interface SearchListProps {
   user: User;
   list: BookType[][];
 }
 
-export const SearchList = ({ list, user }: SearchListProps) => {
+export const SearchList = memo(({ list, user }: SearchListProps) => {
   const [pagination, setPagination] = useState<number>(0);
   const [listPage, setListPage] = useState<BookType[]>([]);
   const router = useRouter();
@@ -97,4 +97,4 @@ export const SearchList = ({ list, user }: SearchListProps) => {
       />
     </>
   );
-};
+});

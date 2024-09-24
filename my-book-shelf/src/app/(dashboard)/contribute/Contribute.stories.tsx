@@ -9,6 +9,8 @@ import { ListContribute, MenuProfile } from "@app/components";
 import ContributePage from "./(main)/page";
 import Link from "next/link";
 import { ROUTES } from "@app/constants";
+import { User } from "@app/models";
+import List from "./@list/page";
 
 const meta: Meta<typeof ContributePage> = {
   component: ContributePage,
@@ -30,7 +32,17 @@ export default meta;
 const Template: StoryFn<typeof ContributePage> = () => (
   <Flex bgColor="white" borderRadius="10px" height="100%">
     <Flex flexDir="column" gap="100px" padding="38px 66px" alignItems="center">
-      <Logo />
+      <Logo
+        user={
+          {
+            isAdmin: true,
+            email: "admin@gmail.com",
+            id: "3733403",
+            name: "admin",
+            image: "https://i.ibb.co/RHMqQGr/man-1.png",
+          } as unknown as User
+        }
+      />
       <Navbar />
     </Flex>
     <Box
@@ -89,7 +101,7 @@ const Template: StoryFn<typeof ContributePage> = () => (
               </Text>
             </Link>
           </Flex>
-          <ListContribute />
+          <List />
         </Flex>
       </Flex>
     </Box>

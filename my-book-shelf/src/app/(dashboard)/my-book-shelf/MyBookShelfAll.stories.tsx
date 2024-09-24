@@ -6,10 +6,11 @@ import { mockRouter, mockSession } from "@app/mocks/storybook";
 import { SessionProvider } from "next-auth/react";
 import { Logo, Navbar } from "@app/components/common";
 import { HeadingFavorites, TopContent } from "@app/components";
-import MyBookShelfAll from "./(main)/page";
+import MyBookShelf from "./(main)/page";
+import { User } from "@app/models";
 
-const meta: Meta<typeof MyBookShelfAll> = {
-  component: MyBookShelfAll,
+const meta: Meta<typeof MyBookShelf> = {
+  component: MyBookShelf,
   decorators: [
     (Story: StoryFn) => (
       <ChakraProvider theme={theme}>
@@ -25,10 +26,20 @@ const meta: Meta<typeof MyBookShelfAll> = {
 
 export default meta;
 
-const Template: StoryFn<typeof MyBookShelfAll> = () => (
+const Template: StoryFn<typeof MyBookShelf> = () => (
   <Flex bgColor="white" borderRadius="10px" height="100%">
     <Flex flexDir="column" gap="100px" padding="38px 66px" alignItems="center">
-      <Logo />
+      <Logo
+        user={
+          {
+            isAdmin: true,
+            email: "admin@gmail.com",
+            id: "3733403",
+            name: "admin",
+            image: "https://i.ibb.co/RHMqQGr/man-1.png",
+          } as unknown as User
+        }
+      />
       <Navbar />
     </Flex>
     <Box
@@ -49,7 +60,7 @@ const Template: StoryFn<typeof MyBookShelfAll> = () => (
         <Flex flexDir="column" mt="37px" height="100%">
           <HeadingFavorites />
           <Box mt="34px" height="100%">
-            <MyBookShelfAll />
+            <MyBookShelf />
           </Box>
         </Flex>
       </Flex>

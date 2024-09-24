@@ -1,18 +1,17 @@
-"use client";
-
-import { ListContribute } from "@app/components";
-import { ROUTES } from "@app/constants";
+import { auth } from "@app/auth";
 import { Flex, Text } from "@chakra-ui/react";
-import { useSession } from "next-auth/react";
+import { ROUTES } from "@app/constants";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-const ContributeLayout = ({
+const ContributeLayout = async ({
   children,
+  list,
 }: Readonly<{
+  list: React.ReactNode;
   children: React.ReactNode;
 }>) => {
-  const { data: session } = useSession();
+  const session = await auth();
 
   if (!session?.user?.isAdmin) {
     return notFound();
@@ -65,7 +64,7 @@ const ContributeLayout = ({
             </Text>
           </Link>
         </Flex>
-        <ListContribute />
+        {list}
       </Flex>
     </Flex>
   );

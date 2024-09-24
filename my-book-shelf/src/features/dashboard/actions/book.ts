@@ -1,12 +1,24 @@
 import { BookType } from "@app/models";
 import { API_ROUTES } from "@app/constants";
 import { api } from "@app/services";
+import { dividePaginationBooks } from "@app/utils";
 
 export const getAllBook = async () => {
   try {
     const data = await api.get<BookType[]>(API_ROUTES.BOOKS);
 
     return data;
+  } catch (error) {
+    return [];
+  }
+};
+
+export const getPaginatedBook = async () => {
+  try {
+    const data = await api.get<BookType[]>(API_ROUTES.BOOKS);
+    const result = dividePaginationBooks(data);
+
+    return result;
   } catch (error) {
     return [];
   }
