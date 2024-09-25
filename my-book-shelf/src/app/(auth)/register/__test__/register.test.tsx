@@ -3,7 +3,7 @@ import { addUser, getUserByEmail } from "@app/features/dashboard/actions";
 import { useRouter } from "next/navigation";
 import RegisterPage from "../page";
 import { MESSAGES } from "@app/constants";
-import { authenticate } from "@app/actions/auth";
+import { authenticate } from "@app/features/auth/actions";
 
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),

@@ -3,12 +3,11 @@ import { Flex, Text } from "@chakra-ui/react";
 import { ROUTES } from "@app/constants";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ListTopContribute } from "@app/features/dashboard/components";
 
 const ContributeLayout = async ({
   children,
-  list,
 }: Readonly<{
-  list: React.ReactNode;
   children: React.ReactNode;
 }>) => {
   const session = await auth();
@@ -64,7 +63,7 @@ const ContributeLayout = async ({
             </Text>
           </Link>
         </Flex>
-        {list}
+        <ListTopContribute />
       </Flex>
     </Flex>
   );

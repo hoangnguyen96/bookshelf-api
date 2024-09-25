@@ -12,12 +12,14 @@ class ApiService {
   private async request<T>(
     method: string,
     url: string,
-    body?: any
+    body?: any,
+    next?: NextFetchRequestConfig
   ): Promise<T> {
     const response = await fetch(`${this._apiName}${url}`, {
       method: method,
       headers: { "content-type": "application/json" },
       body: body ? JSON.stringify(body) : null,
+      next,
     });
 
     if (!response.ok) {
@@ -27,33 +29,41 @@ class ApiService {
     return response.json();
   }
 
-  async get<T>(url: string): Promise<T> {
+  async get<T>(url: string, next?: NextFetchRequestConfig): Promise<T> {
     try {
-      return await this.request<T>("GET", url);
+      return await this.request<T>("GET", url, null, next);
     } catch (error) {
       throw new Error(MESSAGES.GET_ERROR);
     }
   }
 
-  async post<T>(url: string, body: any): Promise<T> {
+  async post<T>(
+    url: string,
+    body: any,
+    next?: NextFetchRequestConfig
+  ): Promise<T> {
     try {
-      return await this.request<T>("POST", url, body);
+      return await this.request<T>("POST", url, body, next);
     } catch (error) {
       throw new Error(MESSAGES.POST_ERROR);
     }
   }
 
-  async put<T>(url: string, body: any): Promise<T> {
+  async put<T>(
+    url: string,
+    body: any,
+    next?: NextFetchRequestConfig
+  ): Promise<T> {
     try {
-      return await this.request<T>("PUT", url, body);
+      return await this.request<T>("PUT", url, body, next);
     } catch (error) {
       throw new Error(MESSAGES.UPDATE_ERROR);
     }
   }
 
-  async delete<T>(url: string): Promise<T> {
+  async delete<T>(url: string, next?: NextFetchRequestConfig): Promise<T> {
     try {
-      return await this.request<T>("DELETE", url);
+      return await this.request<T>("DELETE", url, null, next);
     } catch (error) {
       throw new Error(MESSAGES.DELETE_ERROR);
     }

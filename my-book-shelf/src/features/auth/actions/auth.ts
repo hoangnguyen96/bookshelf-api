@@ -1,9 +1,9 @@
 "use server";
 
 import { AuthError } from "next-auth";
-import { signIn, signOut } from "../auth";
 import { MESSAGES } from "@app/constants";
 import { User } from "@app/models";
+import { signIn, signOut } from "@app/auth";
 
 export const authenticate = async (formData: Partial<User>) => {
   try {
