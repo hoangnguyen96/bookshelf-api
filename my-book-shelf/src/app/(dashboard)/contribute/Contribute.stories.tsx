@@ -10,7 +10,7 @@ import ContributePage from "./(main)/page";
 import Link from "next/link";
 import { ROUTES } from "@app/constants";
 import { User } from "@app/models";
-import List from "./@list/page";
+import { DATA_BOOKS, DATA_USER } from "@app/mocks/data";
 
 const meta: Meta<typeof ContributePage> = {
   component: ContributePage,
@@ -101,7 +101,7 @@ const Template: StoryFn<typeof ContributePage> = () => (
               </Text>
             </Link>
           </Flex>
-          <List />
+          <ListContribute list={DATA_BOOKS} user={DATA_USER[0]} />
         </Flex>
       </Flex>
     </Box>

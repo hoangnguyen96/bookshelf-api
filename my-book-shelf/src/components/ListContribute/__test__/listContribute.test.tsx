@@ -1,4 +1,3 @@
-import { auth } from "@app/auth";
 import { act, render } from "@testing-library/react";
 import { getAllBook, getUserById } from "@app/features/dashboard/actions";
 import * as utils from "@app/utils";
@@ -48,7 +47,9 @@ describe("Contribute Three Top Book", () => {
 
   it("Should render correctly snapshot", async () => {
     await act(async () => {
-      const { container } = render(<ListContribute />);
+      const { container } = render(
+        <ListContribute list={DATA_BOOKS} user={DATA_USER[0]} />
+      );
       expect(container).toMatchSnapshot();
     });
   });
@@ -58,7 +59,9 @@ describe("Contribute Three Top Book", () => {
       new Error("Failed to fetch books")
     );
     await act(async () => {
-      const { container } = render(<ListContribute />);
+      const { container } = render(
+        <ListContribute list={DATA_BOOKS} user={DATA_USER[0]} />
+      );
       expect(container).toMatchSnapshot();
     });
   });

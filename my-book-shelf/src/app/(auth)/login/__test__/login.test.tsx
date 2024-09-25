@@ -1,7 +1,7 @@
 import { render, fireEvent, act } from "@testing-library/react";
 import { useRouter } from "next/navigation";
-import { authenticate } from "@app/actions/auth";
 import LoginPage from "../page";
+import { authenticate } from "@app/features/auth/actions";
 
 jest.mock("@app/actions/auth", () => ({
   authenticate: jest.fn(),
