@@ -17,7 +17,7 @@ export const MyBookShelf = memo(({ list, user }: MyBookShelfProps) => {
 
   const handleReturnBook = async (id: string) => {
     try {
-      const dataBookById = await getBookById(id);
+      const dataBookById = (await getBookById(id)) as BookType;
       const updateShelfBook = user?.shelfBooks.filter(
         (item: string) => item !== id
       );

@@ -1,9 +1,11 @@
+import { Suspense } from "react";
 import { auth } from "@app/auth";
 import { Flex, Text } from "@chakra-ui/react";
 import { ROUTES } from "@app/constants";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ListTopContribute } from "@app/features/dashboard/components";
+import { SkeletonListTopContribute } from "@app/components";
 
 const ContributeLayout = async ({
   children,
@@ -63,7 +65,9 @@ const ContributeLayout = async ({
             </Text>
           </Link>
         </Flex>
-        <ListTopContribute />
+        <Suspense fallback={<SkeletonListTopContribute />}>
+          <ListTopContribute />
+        </Suspense>
       </Flex>
     </Flex>
   );

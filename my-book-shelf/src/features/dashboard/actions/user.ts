@@ -1,11 +1,18 @@
-import { API_ROUTES } from "@app/constants";
+import { API_ROUTES, MESSAGES } from "@app/constants";
 import { User } from "@app/models";
 import { api } from "@app/services";
 
 export const getAllUser = async () => {
-  const data = await api.get<User[]>(API_ROUTES.USER);
+  try {
+    const data = await api.get<User[]>(API_ROUTES.USER);
 
-  return data || [];
+    return data || [];
+  } catch (error) {
+    if (error instanceof Error) {
+      return error.message;
+    }
+    return MESSAGES.RESPONSE_ERROR;
+  }
 };
 
 export const getUserById = async (id: string) => {
@@ -14,7 +21,10 @@ export const getUserById = async (id: string) => {
 
     return data[0];
   } catch (error) {
-    return [];
+    if (error instanceof Error) {
+      return error.message;
+    }
+    return MESSAGES.RESPONSE_ERROR;
   }
 };
 
@@ -24,7 +34,10 @@ export const getUserByEmail = async (email: string) => {
 
     return user;
   } catch (error) {
-    return [];
+    if (error instanceof Error) {
+      return error.message;
+    }
+    return MESSAGES.RESPONSE_ERROR;
   }
 };
 

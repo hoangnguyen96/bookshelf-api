@@ -24,7 +24,9 @@ export const ListCartByParams = memo(
       try {
         let dataBookByParams: BookType[] = [];
         if (type && value) {
-          dataBookByParams = await getTwelveItemBook(`${type}=${value}&`);
+          dataBookByParams = (await getTwelveItemBook(
+            `${type}=${value}&`
+          )) as BookType[];
         }
 
         const listData: BookType[] =

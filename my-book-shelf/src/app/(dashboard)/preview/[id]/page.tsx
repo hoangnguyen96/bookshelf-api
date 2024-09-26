@@ -3,8 +3,8 @@ import { auth } from "@app/auth";
 import { BookType, User } from "@app/models";
 import { getBookById, getUserById } from "@app/features/dashboard/actions";
 import { PreviewBookDetails } from "@app/features/dashboard/components";
-import { LoadingIndicator } from "@app/components/common";
 import { notFound } from "next/navigation";
+import { SkeletonPreviewBook } from "@app/components";
 
 interface PreviewBookProps {
   params: {
@@ -20,7 +20,7 @@ const PreviewBook = async ({ params: { id } }: PreviewBookProps) => {
   if (!book) return notFound();
 
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<SkeletonPreviewBook />}>
       <PreviewBookDetails book={book} user={user} />;
     </Suspense>
   );
