@@ -1,14 +1,35 @@
+import { Suspense } from "react";
 import { auth } from "@app/auth";
 import { User } from "@app/models";
 import { SearchList } from "@app/features/dashboard/components";
-import { getPaginatedBook, getUserById } from "@app/features/dashboard/actions";
+import {
+  getAllBook,
+  getPaginatedBook,
+  getUserById,
+} from "@app/features/dashboard/actions";
+import { DEFAULT_LIMIT } from "@app/constants";
+import { LoadingIndicator } from "@app/components/common";
 
-const SearchPage = async () => {
+interface SearchPageProps {
+  searchParams: {
+    page: number;
+  };
+}
+
+const SearchPage = async ({ searchParams }: SearchPageProps) => {
   const session = await auth();
+  const page = searchParams.page || 1;
   const userById = (await getUserById(session?.user?.id as string)) as User;
-  const paginatedBooks = await getPaginatedBook();
+  const listAllBook = await getAllBook();
+  const listBooks = await getPaginatedBook(page, "");
 
-  return <SearchList list={paginatedBooks} user={userById} />;
+  const totalPages = Math.ceil(listAllBook.length / DEFAULT_LIMIT);
+
+  return (
+    <Suspense fallback={null}>
+      <SearchList totalPages={totalPages} list={listBooks} user={userById} />
+    </Suspense>
+  );
 };
 
 export default SearchPage;

@@ -1,7 +1,7 @@
 import { BookType } from "@app/models";
-import { API_ROUTES } from "@app/constants";
+import { API_ROUTES, DEFAULT_LIMIT } from "@app/constants";
 import { api } from "@app/services";
-import { dividePaginationBooks, getThreeTopBook } from "@app/utils";
+import { getThreeTopBook } from "@app/utils";
 
 export const getAllBook = async () => {
   try {
@@ -16,7 +16,7 @@ export const getAllBook = async () => {
 export const getTopThreeBook = async () => {
   try {
     const data = await api.get<BookType[]>(API_ROUTES.BOOKS, {
-      revalidate: 3600,
+      next: { revalidate: 3600 },
     });
     const result = getThreeTopBook(data);
 
@@ -26,12 +26,16 @@ export const getTopThreeBook = async () => {
   }
 };
 
-export const getPaginatedBook = async () => {
+export const getPaginatedBook = async (page: number, params?: string) => {
   try {
-    const data = await api.get<BookType[]>(API_ROUTES.BOOKS);
-    const result = dividePaginationBooks(data);
+    const data = await api.get<BookType[]>(
+      `${API_ROUTES.BOOKS}?${params}page=${page}&limit=${DEFAULT_LIMIT}`,
+      {
+        cache: "no-store",
+      }
+    );
 
-    return result;
+    return data;
   } catch (error) {
     return [];
   }
@@ -41,7 +45,7 @@ export const getTwelveItemBook = async (params?: string) => {
   try {
     const data = await api.get<BookType[]>(
       `${API_ROUTES.BOOKS}?${params || ""}page=1&limit=12`,
-      { revalidate: 3600 }
+      { next: { revalidate: 3600 } }
     );
 
     return data;

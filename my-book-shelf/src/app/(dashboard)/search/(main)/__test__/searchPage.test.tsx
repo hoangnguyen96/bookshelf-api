@@ -62,7 +62,13 @@ describe("Search Page", () => {
 
   it("Should render correctly snapshot", async () => {
     await act(async () => {
-      const { container } = render(<SearchPage />);
+      const { container } = render(
+        <SearchPage
+          searchParams={{
+            page: 1,
+          }}
+        />
+      );
       expect(container).toMatchSnapshot();
     });
   });
@@ -72,7 +78,13 @@ describe("Search Page", () => {
       shelfBooks: DATA_USER[1].shelfBooks,
     });
     await act(async () => {
-      const { asFragment } = render(<SearchPage />);
+      const { asFragment } = render(
+        <SearchPage
+          searchParams={{
+            page: 1,
+          }}
+        />
+      );
       expect(asFragment()).toMatchSnapshot();
     });
   });
@@ -82,13 +94,25 @@ describe("Search Page", () => {
       new Error("Failed to fetch books")
     );
     await act(async () => {
-      const { asFragment } = render(<SearchPage />);
+      const { asFragment } = render(
+        <SearchPage
+          searchParams={{
+            page: 1,
+          }}
+        />
+      );
       expect(asFragment()).toMatchSnapshot();
     });
   });
 
   it("Should handle update favorite book", async () => {
-    const { findAllByTestId } = render(<SearchPage />);
+    const { findAllByTestId } = render(
+      <SearchPage
+        searchParams={{
+          page: 1,
+        }}
+      />
+    );
 
     const buttons = await findAllByTestId("handle-favorite");
 
@@ -99,7 +123,13 @@ describe("Search Page", () => {
     (getUserById as jest.Mock).mockReturnValue({
       favorites: null,
     });
-    const { findAllByTestId } = render(<SearchPage />);
+    const { findAllByTestId } = render(
+      <SearchPage
+        searchParams={{
+          page: 1,
+        }}
+      />
+    );
 
     const buttons = await findAllByTestId("handle-favorite");
 
@@ -110,7 +140,13 @@ describe("Search Page", () => {
     (getUserById as jest.Mock).mockReturnValue({
       favorites: [],
     });
-    const { findAllByTestId } = render(<SearchPage />);
+    const { findAllByTestId } = render(
+      <SearchPage
+        searchParams={{
+          page: 1,
+        }}
+      />
+    );
 
     const buttons = await findAllByTestId("handle-favorite");
 
