@@ -4,6 +4,7 @@ import "../styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,9 +21,9 @@ const RootLayout = async ({
 }>) => {
   return (
     <html lang="en">
-      <head>
+      <Head>
         <link rel="icon" href="/favicon.webp" />
-      </head>
+      </Head>
 
       <body className={inter.className}>
         <ChakraUIProviders>

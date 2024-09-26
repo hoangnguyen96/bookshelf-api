@@ -1,14 +1,14 @@
-import { Suspense } from "react";
 import { auth } from "@app/auth";
-import { User } from "@app/models";
+import { BookType, User } from "@app/models";
 import {
   getAllBook,
   getPaginatedBook,
   getUserById,
 } from "@app/features/dashboard/actions";
-import { LoadingIndicator } from "@app/components/common";
-import { SearchListByParams } from "@app/features/dashboard/components";
 import { DEFAULT_LIMIT } from "@app/constants";
+import { Suspense } from "react";
+import { SkeletonSearchList } from "@app/components";
+import { SearchListByParams } from "@app/features/dashboard/components";
 
 interface SearchPageProps {
   params: { slug: string[] };
@@ -26,12 +26,15 @@ const SearchPage = async ({ params, searchParams }: SearchPageProps) => {
 
   const userById = (await getUserById(session?.user?.id as string)) as User;
   const listAllBook = await getAllBook();
-  const paginatedBooks = await getPaginatedBook(page, paramSearch);
+  const paginatedBooks = (await getPaginatedBook(
+    page,
+    paramSearch
+  )) as BookType[];
 
   const totalPages = Math.ceil(listAllBook.length / DEFAULT_LIMIT);
 
   return (
-    <Suspense fallback={<LoadingIndicator />}>
+    <Suspense fallback={<SkeletonSearchList />}>
       <SearchListByParams
         totalPages={totalPages}
         list={paginatedBooks}

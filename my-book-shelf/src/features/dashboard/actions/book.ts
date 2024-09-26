@@ -1,5 +1,5 @@
 import { BookType } from "@app/models";
-import { API_ROUTES, DEFAULT_LIMIT } from "@app/constants";
+import { API_ROUTES, DEFAULT_LIMIT, MESSAGES } from "@app/constants";
 import { api } from "@app/services";
 import { getThreeTopBook } from "@app/utils";
 
@@ -9,7 +9,10 @@ export const getAllBook = async () => {
 
     return data;
   } catch (error) {
-    return [];
+    if (error instanceof Error) {
+      return error.message;
+    }
+    return MESSAGES.RESPONSE_ERROR;
   }
 };
 
@@ -22,7 +25,10 @@ export const getTopThreeBook = async () => {
 
     return result;
   } catch (error) {
-    return [];
+    if (error instanceof Error) {
+      return error.message;
+    }
+    return MESSAGES.RESPONSE_ERROR;
   }
 };
 
@@ -37,7 +43,10 @@ export const getPaginatedBook = async (page: number, params?: string) => {
 
     return data;
   } catch (error) {
-    return [];
+    if (error instanceof Error) {
+      return error.message;
+    }
+    return MESSAGES.RESPONSE_ERROR;
   }
 };
 
@@ -50,7 +59,10 @@ export const getTwelveItemBook = async (params?: string) => {
 
     return data;
   } catch (error) {
-    return [];
+    if (error instanceof Error) {
+      return error.message;
+    }
+    return MESSAGES.RESPONSE_ERROR;
   }
 };
 
@@ -60,7 +72,10 @@ export const getBookByParams = async (params: string) => {
 
     return data;
   } catch (error) {
-    return [];
+    if (error instanceof Error) {
+      return error.message;
+    }
+    return MESSAGES.RESPONSE_ERROR;
   }
 };
 
@@ -70,7 +85,10 @@ export const getBookById = async (id: string) => {
 
     return data;
   } catch (error) {
-    return [];
+    if (error instanceof Error) {
+      return error.message;
+    }
+    return MESSAGES.RESPONSE_ERROR;
   }
 };
 
