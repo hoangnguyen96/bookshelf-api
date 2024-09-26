@@ -97,7 +97,12 @@ describe("Search Page Params", () => {
   it("Should render correctly snapshot", async () => {
     await act(async () => {
       const { asFragment } = render(
-        <SearchPage params={{ slug: ["title", "on"] }} />
+        <SearchPage
+          params={{ slug: ["title", "on"] }}
+          searchParams={{
+            page: 1,
+          }}
+        />
       );
       expect(asFragment()).toMatchSnapshot();
     });
@@ -109,7 +114,12 @@ describe("Search Page Params", () => {
     });
     await act(async () => {
       const { asFragment } = render(
-        <SearchPage params={{ slug: ["title", "on"] }} />
+        <SearchPage
+          params={{ slug: ["title", "on"] }}
+          searchParams={{
+            page: 1,
+          }}
+        />
       );
       expect(asFragment()).toMatchSnapshot();
     });
@@ -121,7 +131,12 @@ describe("Search Page Params", () => {
     );
     await act(async () => {
       const { asFragment } = render(
-        <SearchPage params={{ slug: ["title", "on"] }} />
+        <SearchPage
+          params={{ slug: ["title", "on"] }}
+          searchParams={{
+            page: 1,
+          }}
+        />
       );
       expect(asFragment()).toMatchSnapshot();
     });
@@ -129,7 +144,12 @@ describe("Search Page Params", () => {
 
   it("Should handle update favorite book", async () => {
     const { findAllByTestId } = render(
-      <SearchPage params={{ slug: ["title", "on"] }} />
+      <SearchPage
+        params={{ slug: ["title", "on"] }}
+        searchParams={{
+          page: 1,
+        }}
+      />
     );
 
     const buttons = await findAllByTestId("handle-favorite");
@@ -142,7 +162,12 @@ describe("Search Page Params", () => {
       favorites: null,
     });
     const { findAllByTestId } = render(
-      <SearchPage params={{ slug: ["title", "on"] }} />
+      <SearchPage
+        params={{ slug: ["title", "on"] }}
+        searchParams={{
+          page: 1,
+        }}
+      />
     );
 
     const buttons = await findAllByTestId("handle-favorite");

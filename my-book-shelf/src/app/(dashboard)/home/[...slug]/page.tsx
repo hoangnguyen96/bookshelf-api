@@ -6,7 +6,6 @@ import {
   getUserById,
 } from "@app/features/dashboard/actions";
 import { ListCartByParams } from "@app/features/dashboard/components";
-import { LoadingIndicator } from "@app/components/common";
 
 const HomePage = async ({ params }: { params?: { slug: string[] } }) => {
   const type = params?.slug[0];
@@ -16,7 +15,7 @@ const HomePage = async ({ params }: { params?: { slug: string[] } }) => {
   const books = await getTwelveItemBook();
 
   return (
-    <Suspense fallback={<LoadingIndicator />}>
+    <Suspense fallback={null}>
       <ListCartByParams
         type={type}
         value={value}

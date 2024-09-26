@@ -1,65 +1,22 @@
 "use client";
 
-import { TableItem } from "@app/components";
-import { BookType, User } from "@app/models";
-import { Flex } from "@chakra-ui/react";
+import { memo } from "react";
 import { useRouter } from "next/navigation";
-import { getBookByParams, updateUserById } from "../actions";
-import { memo, useEffect, useState } from "react";
-import {
-  dividePaginationBooks,
-  getDataByParams,
-  getListDataByTypeAndValue,
-} from "@app/utils";
+import { Flex } from "@chakra-ui/react";
+import { BookType, User } from "@app/models";
+import { updateUserById } from "../actions";
 import { Pagination } from "@app/components/common";
+import { TableItem } from "@app/components";
 
 interface SearchListByParamsProps {
-  type?: string;
-  value?: string;
   user: User;
-  list: BookType[][];
+  totalPages: number;
+  list: BookType[];
 }
 
 export const SearchListByParams = memo(
-  ({ type, value, list, user }: SearchListByParamsProps) => {
-    const [dataPagination, setDataPagination] = useState<BookType[][]>(list);
-    const [listData, setListData] = useState<BookType[]>([]);
-    const [pagination, setPagination] = useState<number>(0);
+  ({ list, user, totalPages }: SearchListByParamsProps) => {
     const router = useRouter();
-
-    const fetchData = async () => {
-      try {
-        let dataBookByParams: BookType[][] = [];
-        if (type && value) {
-          const dataParams = await getBookByParams(`${type}=${value}`);
-          dataBookByParams = dividePaginationBooks(dataParams);
-        }
-
-        const listData: BookType[] = getListDataByTypeAndValue(
-          type as string,
-          value as string,
-          dataBookByParams,
-          list,
-          pagination
-        );
-
-        const dataPagination = getDataByParams(
-          type as string,
-          value as string,
-          dataBookByParams,
-          list
-        );
-
-        setDataPagination(dataPagination);
-        setListData(listData);
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      }
-    };
-
-    useEffect(() => {
-      fetchData();
-    }, [pagination, type, value]);
 
     const handleUpdateFavorites = async (id: string) => {
       try {
@@ -91,7 +48,7 @@ export const SearchListByParams = memo(
           overflowY="scroll"
           maxH="62vh"
         >
-          {listData.map((itemBook: BookType) => {
+          {list.map((itemBook: BookType) => {
             const {
               id,
               title,
@@ -121,11 +78,7 @@ export const SearchListByParams = memo(
             );
           })}
         </Flex>
-        <Pagination
-          data={dataPagination}
-          pagination={pagination}
-          setPagination={setPagination}
-        />
+        <Pagination totalPages={totalPages} />
       </>
     );
   }

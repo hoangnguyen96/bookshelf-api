@@ -1,73 +1,88 @@
 "use client";
 
-import { Dispatch, memo, SetStateAction } from "react";
+import { memo, useEffect } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Flex, IconButton } from "@chakra-ui/react";
 import { Button } from "..";
-import { BookType } from "@app/models";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface PaginationProps {
-  pagination: number;
-  setPagination: Dispatch<SetStateAction<number>>;
-  data: BookType[][];
+  totalPages: number;
 }
 
-const Pagination = ({ pagination, setPagination, data }: PaginationProps) => (
-  <Flex
-    justifyContent="center"
-    alignItems="center"
-    gap="8px"
-    position="absolute"
-    left="0"
-    right="0"
-    bottom="5%"
-  >
-    <IconButton
-      width="30px"
-      height="30px"
-      size="sm"
-      variant="outline"
-      color="brand.90"
-      bgColor="transparent"
-      onClick={() => setPagination(pagination - 1)}
-      isDisabled={pagination === 0}
-      icon={<ChevronLeftIcon />}
-      minW="auto"
-      aria-label={""}
-      _focusVisible="none"
-      _hover={{ bgColor: "transparent" }}
-    />
+const Pagination = ({ totalPages }: PaginationProps) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentPage = Number(searchParams.get("page")) || 1;
+  const page = searchParams.get("page");
 
-    {data.map((_, index) => (
-      <Button
-        key={index}
+  useEffect(() => {
+    if (!page) {
+      router.push("?page=1");
+    }
+  }, [page, router]);
+
+  const handlePageChange = (page: number) => {
+    router.push(`?page=${page}`);
+  };
+
+  return (
+    <Flex
+      justifyContent="center"
+      alignItems="center"
+      gap="8px"
+      position="absolute"
+      left="0"
+      right="0"
+      bottom="5%"
+    >
+      <IconButton
         width="30px"
         height="30px"
-        text={`${index + 1}`}
-        variant="outline"
         size="sm"
+        variant="outline"
+        color="brand.90"
+        bgColor="transparent"
+        onClick={() => handlePageChange(currentPage - 1)}
+        isDisabled={currentPage === 1}
+        icon={<ChevronLeftIcon />}
         minW="auto"
-        isActive={pagination === index}
-        onClick={() => setPagination(index)}
+        aria-label={""}
+        _focusVisible="none"
+        _hover={{ bgColor: "transparent" }}
       />
-    ))}
 
-    <IconButton
-      size="sm"
-      width="30px"
-      height="30px"
-      variant="outline"
-      color="brand.90"
-      bgColor="transparent"
-      minW="auto"
-      onClick={() => setPagination(pagination + 1)}
-      isDisabled={pagination === data.length - 1}
-      icon={<ChevronRightIcon />}
-      aria-label={""}
-      _focusVisible="none"
-      _hover={{ bgColor: "transparent" }}
-    />
-  </Flex>
-);
+      {Array.from({ length: totalPages }, (_, index) => (
+        <Button
+          key={index}
+          width="30px"
+          height="30px"
+          text={`${index + 1}`}
+          variant="outline"
+          size="sm"
+          minW="auto"
+          isActive={currentPage === index + 1}
+          onClick={() => handlePageChange(index + 1)}
+        />
+      ))}
+
+      <IconButton
+        size="sm"
+        width="30px"
+        height="30px"
+        variant="outline"
+        color="brand.90"
+        bgColor="transparent"
+        minW="auto"
+        onClick={() => handlePageChange(currentPage + 1)}
+        isDisabled={currentPage === totalPages}
+        icon={<ChevronRightIcon />}
+        aria-label={""}
+        _focusVisible="none"
+        _hover={{ bgColor: "transparent" }}
+      />
+    </Flex>
+  );
+};
 
 export default memo(Pagination);

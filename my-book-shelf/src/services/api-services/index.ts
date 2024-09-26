@@ -13,13 +13,13 @@ class ApiService {
     method: string,
     url: string,
     body?: any,
-    next?: NextFetchRequestConfig
+    options?: RequestInit
   ): Promise<T> {
     const response = await fetch(`${this._apiName}${url}`, {
       method: method,
       headers: { "content-type": "application/json" },
       body: body ? JSON.stringify(body) : null,
-      next,
+      ...options,
     });
 
     if (!response.ok) {
@@ -29,41 +29,33 @@ class ApiService {
     return response.json();
   }
 
-  async get<T>(url: string, next?: NextFetchRequestConfig): Promise<T> {
+  async get<T>(url: string, options?: RequestInit): Promise<T> {
     try {
-      return await this.request<T>("GET", url, null, next);
+      return await this.request<T>("GET", url, null, options);
     } catch (error) {
       throw new Error(MESSAGES.GET_ERROR);
     }
   }
 
-  async post<T>(
-    url: string,
-    body: any,
-    next?: NextFetchRequestConfig
-  ): Promise<T> {
+  async post<T>(url: string, body: any, options?: RequestInit): Promise<T> {
     try {
-      return await this.request<T>("POST", url, body, next);
+      return await this.request<T>("POST", url, body, options);
     } catch (error) {
       throw new Error(MESSAGES.POST_ERROR);
     }
   }
 
-  async put<T>(
-    url: string,
-    body: any,
-    next?: NextFetchRequestConfig
-  ): Promise<T> {
+  async put<T>(url: string, body: any, options?: RequestInit): Promise<T> {
     try {
-      return await this.request<T>("PUT", url, body, next);
+      return await this.request<T>("PUT", url, body, options);
     } catch (error) {
       throw new Error(MESSAGES.UPDATE_ERROR);
     }
   }
 
-  async delete<T>(url: string, next?: NextFetchRequestConfig): Promise<T> {
+  async delete<T>(url: string, options?: RequestInit): Promise<T> {
     try {
-      return await this.request<T>("DELETE", url, null, next);
+      return await this.request<T>("DELETE", url, null, options);
     } catch (error) {
       throw new Error(MESSAGES.DELETE_ERROR);
     }
