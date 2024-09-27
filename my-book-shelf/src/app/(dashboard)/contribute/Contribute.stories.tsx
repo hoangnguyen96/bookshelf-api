@@ -6,11 +6,11 @@ import { mockRouter, mockSession } from "@app/mocks/storybook";
 import { SessionProvider } from "next-auth/react";
 import { Logo, Navbar } from "@app/components/common";
 import { ListContribute, MenuProfile } from "@app/components";
-import ContributePage from "./(main)/page";
 import Link from "next/link";
 import { ROUTES } from "@app/constants";
 import { User } from "@app/models";
 import { DATA_BOOKS, DATA_USER } from "@app/mocks/data";
+import ContributePage from "./page";
 
 const meta: Meta<typeof ContributePage> = {
   component: ContributePage,

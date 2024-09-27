@@ -52,16 +52,13 @@ export const ProfileUpdate = memo(({ imageUrl, user }: ProfileUpdateProps) => {
   };
 
   return (
-    <>
+    <Box p="5px 44px 20px">
       <Flex
         flexDir="column"
         bgColor="white"
         borderRadius="10px"
         width="100%"
         maxW={1136}
-        ml="44px"
-        mt="4px"
-        mb="20px"
         p="48px 24px 24px"
         boxShadow="0 0 5px 1px rgb(0 0 0 / 10%)"
       >
@@ -81,6 +78,6 @@ export const ProfileUpdate = memo(({ imageUrl, user }: ProfileUpdateProps) => {
         </Flex>
         <FormProfile user={user as User} onUpdate={handleUpdateUser} />
       </Flex>
-    </>
+    </Box>
   );
 });

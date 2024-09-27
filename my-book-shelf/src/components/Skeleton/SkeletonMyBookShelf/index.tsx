@@ -1,7 +1,4 @@
-"use client";
-
 import { Flex, Skeleton } from "@chakra-ui/react";
-import { memo } from "react";
 
 const SkeletonMyBookShelf = () => (
   <Flex gap="40px" flexWrap="wrap">
@@ -11,4 +8,4 @@ const SkeletonMyBookShelf = () => (
   </Flex>
 );
 
-export default memo(SkeletonMyBookShelf);
+export default SkeletonMyBookShelf;

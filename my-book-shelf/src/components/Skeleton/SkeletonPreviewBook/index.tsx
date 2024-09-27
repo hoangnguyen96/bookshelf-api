@@ -1,7 +1,4 @@
-"use client";
-
 import { Box, Flex, Skeleton } from "@chakra-ui/react";
-import { memo } from "react";
 
 const SkeletonMyBookShelf = () => (
   <Box p="20px 44px" h="80%">
@@ -13,4 +10,4 @@ const SkeletonMyBookShelf = () => (
   </Box>
 );
 
-export default memo(SkeletonMyBookShelf);
+export default SkeletonMyBookShelf;

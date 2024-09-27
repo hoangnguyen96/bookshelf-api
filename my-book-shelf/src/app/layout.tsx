@@ -1,10 +1,9 @@
-import ChakraUIProviders from "@app/layouts/ChakraProvider";
-import "../styles/globals.css";
-
+import Head from "next/head";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
-import Head from "next/head";
+import ChakraUIProviders from "@app/layouts/ChakraProvider";
+import "../styles/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

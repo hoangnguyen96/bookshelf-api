@@ -21,3 +21,5 @@ export { default as SkeletonSearchList } from "./Skeleton/SkeletonSearchList";
 export { default as SkeletonMyBookShelf } from "./Skeleton/SkeletonMyBookShelf";
 export { default as SkeletonPreviewBook } from "./Skeleton/SkeletonPreviewBook";
 export { default as SkeletonListTopContribute } from "./Skeleton/SkeletonListTopContribute";
+export { default as SkeletonFormContribute } from "./Skeleton/SkeletonFormContribute";
+export { default as SkeletonProfile } from "./Skeleton/SkeletonProfile";

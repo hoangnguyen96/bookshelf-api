@@ -5,12 +5,12 @@ import { RouterContext } from "next/dist/shared/lib/router-context.shared-runtim
 import { mockRouter, mockSession } from "@app/mocks/storybook";
 import { SessionProvider } from "next-auth/react";
 import { Logo, Navbar } from "@app/components/common";
-import { TopContent } from "@app/components";
+import { HeadingFavorites, TopContent } from "@app/components";
 import { User } from "@app/models";
-import SearchPage from "./page";
+import MyBookShelfFavoritesPage from "./page";
 
-const meta: Meta<typeof SearchPage> = {
-  component: SearchPage,
+const meta: Meta<typeof MyBookShelfFavoritesPage> = {
+  component: MyBookShelfFavoritesPage,
   decorators: [
     (Story: StoryFn) => (
       <ChakraProvider theme={theme}>
@@ -26,7 +26,7 @@ const meta: Meta<typeof SearchPage> = {
 
 export default meta;
 
-const Template: StoryFn<typeof SearchPage> = () => (
+const Template: StoryFn<typeof MyBookShelfFavoritesPage> = () => (
   <Flex bgColor="white" borderRadius="10px" height="100%">
     <Flex flexDir="column" gap="100px" padding="38px 66px" alignItems="center">
       <Logo
@@ -50,29 +50,20 @@ const Template: StoryFn<typeof SearchPage> = () => (
       pos="relative"
     >
       <TopContent />
-      <Box p="70px 44px" height="70vh">
-        <Flex gap="90px" alignItems="center">
-          <Text size="xl" fontWeight={500} w="100%" maxW={352}>
-            Title
+      <Flex p="18px 44px" flexDir="column" height="80%">
+        <Text size="xxl">
+          Your{" "}
+          <Text as="span" size="xxl" color="brand.70">
+            Shelf
           </Text>
-          <Flex gap="60px" w="100%" maxW={312}>
-            <Text size="xl" fontWeight={500}>
-              Ratings
-            </Text>
-            <Text size="xl" fontWeight={500}>
-              Category
-            </Text>
-          </Flex>
-          <Text size="xl" fontWeight={500}>
-            Status
-          </Text>
+        </Text>
+        <Flex flexDir="column" mt="37px" height="100%">
+          <HeadingFavorites />
+          <Box mt="34px" height="100%">
+            <MyBookShelfFavoritesPage />
+          </Box>
         </Flex>
-        <SearchPage
-          searchParams={{
-            page: 1,
-          }}
-        />
-      </Box>
+      </Flex>
     </Box>
   </Flex>
 );
