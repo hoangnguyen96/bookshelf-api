@@ -1,7 +1,4 @@
-"use client";
-
 import { Flex, Skeleton } from "@chakra-ui/react";
-import { memo } from "react";
 
 const SkeletonListTopContribute = () => (
   <Flex gap="39px" justifyContent="space-between">
@@ -11,4 +8,4 @@ const SkeletonListTopContribute = () => (
   </Flex>
 );
 
-export default memo(SkeletonListTopContribute);
+export default SkeletonListTopContribute;

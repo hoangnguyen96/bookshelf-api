@@ -1,6 +1,3 @@
-"use client";
-
-import { memo } from "react";
 import { Flex, Skeleton } from "@chakra-ui/react";
 
 const SkeletonSearchList = () => (
@@ -18,4 +15,4 @@ const SkeletonSearchList = () => (
   </Flex>
 );
 
-export default memo(SkeletonSearchList);
+export default SkeletonSearchList;

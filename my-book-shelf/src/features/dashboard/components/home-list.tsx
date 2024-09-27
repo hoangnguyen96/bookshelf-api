@@ -36,7 +36,12 @@ export const ListCart = memo(({ list, user }: ListCartProps) => {
   };
 
   return (
-    <Grid p="70px 44px" gridTemplateColumns="repeat(6, 1fr)" gap="40px 10px">
+    <Grid
+      p="70px 44px"
+      gridTemplateRows="auto auto"
+      gridTemplateColumns="repeat(6, 1fr)"
+      gap="40px 10px"
+    >
       {list.map((item: BookType) => {
         const { id, title, author, imageUrl, publicationYear, rating } = item;
 

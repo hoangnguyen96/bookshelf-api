@@ -1,4 +1,4 @@
-import { SkeletonMyBookShelf } from "@app/components";
+import { SkeletonSearchList } from "@app/components";
 import { MyBookShelfLayout } from "@app/layouts";
 import { Suspense } from "react";
 
@@ -8,7 +8,7 @@ const Layout = ({
   children: React.ReactNode;
 }>) => (
   <MyBookShelfLayout>
-    <Suspense fallback={<SkeletonMyBookShelf />}>{children}</Suspense>
+    <Suspense fallback={<SkeletonSearchList />}>{children}</Suspense>
   </MyBookShelfLayout>
 );
 
