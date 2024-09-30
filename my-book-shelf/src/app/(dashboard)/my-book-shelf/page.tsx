@@ -9,7 +9,7 @@ const MyBookShelfPage = async () => {
   const user = (await getUserById(session?.user?.id as string)) as User;
   const allBooks = (await getAllBook()) as BookType[];
   const shelfBooks = user?.shelfBooks || [];
-  const booksOnShelf = filterBooksOnShelf(allBooks, shelfBooks);
+  const booksOnShelf = filterBooksOnShelf(allBooks, shelfBooks) as BookType[];
 
   return <MyBookShelf list={booksOnShelf} user={user} />;
 };

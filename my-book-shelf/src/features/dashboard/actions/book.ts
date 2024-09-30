@@ -1,7 +1,7 @@
 import { BookType } from "@app/models";
-import { API_ROUTES, DEFAULT_LIMIT, MESSAGES } from "@app/constants";
+import { API_ROUTES, MESSAGES } from "@app/constants";
 import { api } from "@app/services";
-import { getThreeTopBook } from "@app/utils";
+import { dividePaginationBooks, getThreeTopBook } from "@app/utils";
 
 export const getAllBook = async () => {
   try {
@@ -32,16 +32,17 @@ export const getTopThreeBook = async () => {
   }
 };
 
-export const getPaginatedBook = async (page: number, params?: string) => {
+export const getPaginatedBook = async (params?: string) => {
   try {
     const data = await api.get<BookType[]>(
-      `${API_ROUTES.BOOKS}?${params}page=${page}&limit=${DEFAULT_LIMIT}`,
+      `${API_ROUTES.BOOKS}?${params || ""}`,
       {
         cache: "no-store",
       }
     );
+    const result = dividePaginationBooks(data);
 
-    return data;
+    return result;
   } catch (error) {
     if (error instanceof Error) {
       return error.message;

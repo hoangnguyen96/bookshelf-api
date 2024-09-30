@@ -1,27 +1,14 @@
 import { auth } from "@app/auth";
 import { BookType, User } from "@app/models";
 import { SearchList } from "@app/features/dashboard/components";
-import {
-  getAllBook,
-  getPaginatedBook,
-  getUserById,
-} from "@app/features/dashboard/actions";
-import { DEFAULT_LIMIT } from "@app/constants";
+import { getPaginatedBook, getUserById } from "@app/features/dashboard/actions";
 
-interface SearchPageProps {
-  searchParams: {
-    page: number;
-  };
-}
-
-const SearchPage = async ({ searchParams }: SearchPageProps) => {
+const SearchPage = async () => {
   const session = await auth();
-  const page = searchParams.page || 1;
   const userById = (await getUserById(session?.user?.id as string)) as User;
-  const listAllBook = await getAllBook();
-  const listBooks = (await getPaginatedBook(page, "")) as BookType[];
+  const listBooks = (await getPaginatedBook()) as BookType[][];
 
-  const totalPages = Math.ceil(listAllBook.length / DEFAULT_LIMIT);
+  const totalPages = listBooks.length;
 
   return (
     <SearchList totalPages={totalPages} list={listBooks} user={userById} />

@@ -1,17 +1,11 @@
-import { act, fireEvent, render } from "@testing-library/react";
-import { useSession } from "next-auth/react";
-import * as utils from "@app/utils";
+import { render, waitFor } from "@testing-library/react";
 import { DATA_BOOKS, DATA_USER } from "@app/mocks/data";
-import { BookType } from "@app/models";
-import {
-  getAllBook,
-  getBookByParams,
-  getUserById,
-} from "@app/features/dashboard/actions";
+import { getPaginatedBook, getUserById } from "@app/features/dashboard/actions";
 import SearchPage from "../page";
+import { auth } from "@app/auth";
 
-jest.mock("next-auth/react", () => ({
-  useSession: jest.fn(),
+jest.mock("@app/auth", () => ({
+  auth: jest.fn(),
 }));
 
 jest.mock("next/navigation", () => ({
@@ -19,159 +13,46 @@ jest.mock("next/navigation", () => ({
 }));
 
 jest.mock("@app/features/dashboard/actions", () => ({
-  getAllBook: jest.fn(),
+  getPaginatedBook: jest.fn(),
   getUserById: jest.fn(),
-  updateUserById: jest.fn(),
-  getBookByParams: jest.fn(),
-  getDataByParams: jest.fn(),
-}));
-
-jest.mock("@app/utils", () => ({
-  ...jest.requireActual("@app/utils"),
-  dividePaginationBooks: jest.fn(),
-}));
-
-jest.mock("@app/actions/auth", () => ({
-  logout: jest.fn(),
 }));
 
 describe("Search Page Params", () => {
-  const mockBooksPagination = DATA_BOOKS.reduce(
-    (acc: BookType[][], _, i, self) => {
-      if (!(i % 12)) {
-        return [...acc, self.slice(i, i + 12)];
-      }
-      return acc;
+  const mockBooksPagination = [DATA_BOOKS];
+  const mockSession = {
+    user: {
+      isAdmin: true,
+      email: "admin@gmail.com",
+      id: "3733403",
+      name: "admin",
+      image: "https://i.ibb.co/RHMqQGr/man-1.png",
     },
-    []
-  );
-
-  const mockBooksPaginationByParams = DATA_BOOKS.filter((item) =>
-    item.title.includes("on")
-  ).reduce((acc: BookType[][], _, i, self) => {
-    if (!(i % 12)) {
-      return [...acc, self.slice(i, i + 12)];
-    }
-    return acc;
-  }, []);
-
-  (useSession as jest.Mock).mockReturnValue({
-    data: {
-      user: {
-        isAdmin: true,
-        email: "admin@gmail.com",
-        id: "3733403",
-        name: "admin",
-        image: "https://i.ibb.co/RHMqQGr/man-1.png",
-      },
-      expires: "2024-12-31T23:59:59.999Z",
-    },
-    status: "authenticated",
-    signIn: jest.fn(),
-    signOut: jest.fn(),
-  });
+  };
 
   beforeEach(() => {
     jest.clearAllMocks();
-    jest
-      .spyOn(utils, "dividePaginationBooks")
-      .mockReturnValue(mockBooksPagination);
-    jest
-      .spyOn(utils, "getListDataByTypeAndValue")
-      .mockReturnValue(mockBooksPaginationByParams[0]);
-    jest
-      .spyOn(utils, "getDataByParams")
-      .mockReturnValue(mockBooksPaginationByParams);
-
-    (getAllBook as jest.Mock).mockReturnValue({
-      data: DATA_BOOKS,
-    });
-    (getBookByParams as jest.Mock).mockReturnValue({
-      data: mockBooksPaginationByParams[0],
-    });
+    (auth as jest.Mock).mockResolvedValue(mockSession);
     (getUserById as jest.Mock).mockReturnValue({
       favorites: DATA_USER[0].favorites,
     });
+    (getPaginatedBook as jest.Mock).mockResolvedValue(mockBooksPagination);
   });
 
   it("Should render correctly snapshot", async () => {
-    await act(async () => {
-      const { asFragment } = render(
-        <SearchPage
-          params={{ slug: ["title", "on"] }}
-          searchParams={{
-            page: 1,
-          }}
-        />
-      );
-      expect(asFragment()).toMatchSnapshot();
+    const params = { slug: ["title", "on"] };
+    const { container } = render(await SearchPage({ params }));
+
+    await waitFor(() => {
+      expect(container).toMatchSnapshot();
     });
   });
 
-  it("Should render correctly snapshot when have shelfBook", async () => {
-    (getUserById as jest.Mock).mockReturnValue({
-      shelfBooks: DATA_USER[1].shelfBooks,
+  it("Should handle filter empty of search books", async () => {
+    const params = { slug: ["title", ""] };
+    const { container } = render(await SearchPage({ params }));
+
+    await waitFor(() => {
+      expect(container).toMatchSnapshot();
     });
-    await act(async () => {
-      const { asFragment } = render(
-        <SearchPage
-          params={{ slug: ["title", "on"] }}
-          searchParams={{
-            page: 1,
-          }}
-        />
-      );
-      expect(asFragment()).toMatchSnapshot();
-    });
-  });
-
-  it("Should handle fetch data failed", async () => {
-    (getAllBook as jest.Mock).mockRejectedValue(
-      new Error("Failed to fetch books")
-    );
-    await act(async () => {
-      const { asFragment } = render(
-        <SearchPage
-          params={{ slug: ["title", "on"] }}
-          searchParams={{
-            page: 1,
-          }}
-        />
-      );
-      expect(asFragment()).toMatchSnapshot();
-    });
-  });
-
-  it("Should handle update favorite book", async () => {
-    const { findAllByTestId } = render(
-      <SearchPage
-        params={{ slug: ["title", "on"] }}
-        searchParams={{
-          page: 1,
-        }}
-      />
-    );
-
-    const buttons = await findAllByTestId("handle-favorite");
-
-    fireEvent.click(buttons[0]);
-  });
-
-  it("Should handle update favorite book when data user empty", async () => {
-    (getUserById as jest.Mock).mockReturnValue({
-      favorites: null,
-    });
-    const { findAllByTestId } = render(
-      <SearchPage
-        params={{ slug: ["title", "on"] }}
-        searchParams={{
-          page: 1,
-        }}
-      />
-    );
-
-    const buttons = await findAllByTestId("handle-favorite");
-
-    fireEvent.click(buttons[0]);
   });
 });
