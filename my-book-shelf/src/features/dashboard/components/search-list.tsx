@@ -1,6 +1,6 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useMemo, useState } from "react";
 import { Flex } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { BookType, User } from "@app/models";
@@ -11,12 +11,15 @@ import { TableItem } from "@app/components";
 interface SearchListProps {
   user: User;
   totalPages: number;
-  list: BookType[];
+  list: BookType[][];
 }
 
 export const SearchList = memo(
   ({ totalPages, list, user }: SearchListProps) => {
+    const [pagination, setPagination] = useState<number>(0);
     const router = useRouter();
+
+    const listPagination = useMemo(() => list[pagination], [pagination]);
 
     const handleUpdateFavorites = async (id: string) => {
       try {
@@ -48,7 +51,7 @@ export const SearchList = memo(
           overflowY="scroll"
           maxH="75%"
         >
-          {list.map((itemBook: BookType) => {
+          {listPagination.map((itemBook: BookType) => {
             const {
               id,
               title,
@@ -78,7 +81,11 @@ export const SearchList = memo(
             );
           })}
         </Flex>
-        <Pagination totalPages={totalPages} />
+        <Pagination
+          pagination={pagination}
+          totalPages={totalPages}
+          setPagination={setPagination}
+        />
       </>
     );
   }

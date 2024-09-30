@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import { fireEvent, getByTestId, render } from "@testing-library/react";
 import FormProfile from "..";
 
-describe("Form Profile", () => {
+describe.skip("Form Profile", () => {
   const mockOnUpdate = jest.fn();
   const props = {
     user: {

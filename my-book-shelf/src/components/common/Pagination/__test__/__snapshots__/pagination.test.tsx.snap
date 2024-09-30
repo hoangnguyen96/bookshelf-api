@@ -26,12 +26,6 @@ exports[`Pagination Should render correctly snapshot 1`] = `
           </svg>
         </button>
         <button
-          class="chakra-button css-klz9de"
-          type="button"
-        >
-          1
-        </button>
-        <button
           aria-label=""
           class="chakra-button css-7baeyj"
           type="button"
@@ -71,12 +65,6 @@ exports[`Pagination Should render correctly snapshot 1`] = `
             fill="currentColor"
           />
         </svg>
-      </button>
-      <button
-        class="chakra-button css-klz9de"
-        type="button"
-      >
-        1
       </button>
       <button
         aria-label=""

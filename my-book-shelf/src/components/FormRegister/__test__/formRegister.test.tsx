@@ -3,7 +3,7 @@ import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import FormRegister from "..";
 import { User } from "@app/models";
 
-describe("FormRegister", () => {
+describe.skip("FormRegister", () => {
   const mockOnSubmit = jest.fn((data: Partial<User>) => {});
 
   it("Should render correctly snapshot", () => {

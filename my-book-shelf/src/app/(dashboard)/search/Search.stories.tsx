@@ -67,11 +67,7 @@ const Template: StoryFn<typeof SearchPage> = () => (
             Status
           </Text>
         </Flex>
-        <SearchPage
-          searchParams={{
-            page: 1,
-          }}
-        />
+        <SearchPage />
       </Box>
     </Box>
   </Flex>

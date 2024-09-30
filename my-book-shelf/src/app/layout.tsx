@@ -1,4 +1,3 @@
-import Head from "next/head";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
@@ -20,9 +19,9 @@ const RootLayout = async ({
 }>) => {
   return (
     <html lang="en">
-      <Head>
+      <head>
         <link rel="icon" href="/favicon.webp" />
-      </Head>
+      </head>
 
       <body className={inter.className}>
         <ChakraUIProviders>
