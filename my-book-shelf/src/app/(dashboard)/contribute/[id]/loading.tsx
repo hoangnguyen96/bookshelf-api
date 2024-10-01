@@ -1,5 +1,5 @@
-import { SkeletonFormContribute } from "@app/components";
+import { LoadingIndicator } from "@app/components/common";
 
-const Loading = () => <SkeletonFormContribute />;
+const Loading = () => <LoadingIndicator />;
 
 export default Loading;

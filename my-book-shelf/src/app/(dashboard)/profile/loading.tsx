@@ -1,5 +1,5 @@
-import { SkeletonProfile } from "@app/components";
+import { LoadingIndicator } from "@app/components/common";
 
-const Loading = () => <SkeletonProfile />;
+const Loading = () => <LoadingIndicator />;
 
 export default Loading;

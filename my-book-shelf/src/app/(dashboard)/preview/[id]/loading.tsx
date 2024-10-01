@@ -1,5 +1,5 @@
-import { SkeletonPreviewBook } from "@app/components";
+import { LoadingIndicator } from "@app/components/common";
 
-const Loading = () => <SkeletonPreviewBook />;
+const Loading = () => <LoadingIndicator />;
 
 export default Loading;
