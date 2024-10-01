@@ -6,32 +6,32 @@ import { ROUTES } from "@app/constants";
 import { logout } from "@app/features/auth/actions";
 import MenuProfile from "..";
 
-// jest.mock("next-auth/react", () => ({
-//   useSession: jest.fn(),
-// }));
+jest.mock("next-auth/react", () => ({
+  useSession: jest.fn(),
+}));
 
-// jest.mock("next/navigation", () => ({
-//   useRouter: jest.fn(),
-// }));
+jest.mock("next/navigation", () => ({
+  useRouter: jest.fn(),
+}));
 
-// jest.mock("@app/actions/auth", () => ({
-//   logout: jest.fn(),
-// }));
+jest.mock("@app/actions/auth", () => ({
+  logout: jest.fn(),
+}));
 
-describe.skip("MenuProfile", () => {
-  // (useSession as jest.Mock).mockReturnValue({
-  //   data: {
-  //     user: {
-  //       isAdmin: true,
-  //       email: "admin@gmail.com",
-  //       id: "3733403",
-  //       name: "admin",
-  //       image: "https://i.ibb.co/RHMqQGr/man-1.png",
-  //     },
-  //     expires: "2024-12-31T23:59:59.999Z",
-  //   },
-  //   status: "authenticated",
-  // });
+describe("MenuProfile", () => {
+  (useSession as jest.Mock).mockReturnValue({
+    data: {
+      user: {
+        isAdmin: true,
+        email: "admin@gmail.com",
+        id: "3733403",
+        name: "admin",
+        image: "https://i.ibb.co/RHMqQGr/man-1.png",
+      },
+      expires: "2024-12-31T23:59:59.999Z",
+    },
+    status: "authenticated",
+  });
 
   afterEach(() => {
     jest.clearAllMocks();

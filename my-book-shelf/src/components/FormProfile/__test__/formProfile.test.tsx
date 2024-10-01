@@ -1,8 +1,8 @@
 import "@testing-library/jest-dom";
-import { fireEvent, getByTestId, render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import FormProfile from "..";
 
-describe.skip("Form Profile", () => {
+describe("Form Profile", () => {
   const mockOnUpdate = jest.fn();
   const props = {
     user: {
@@ -55,7 +55,16 @@ describe.skip("Form Profile", () => {
     // Click the submit button to submit the form
     const submitButton = getByRole("button", { name: /update profile/i });
     fireEvent.click(submitButton);
+    await new Promise((resolve) => setTimeout(resolve, 0));
 
+    // Check that onUpdate was called with the expected data
+    expect(mockOnUpdate).toHaveBeenCalledWith(props.user.id, {
+      username: "Jane Doe",
+      email: "jane.doe@example.com",
+      phone: "0987654321",
+      userId: "3733403",
+      bio: "Junior Developer",
+    });
     expect(submitButton).toBeDisabled();
   });
 });

@@ -354,6 +354,7 @@ exports[`Search Page Params Should handle filter empty of search books 1`] = `
     <button
       aria-label=""
       class="chakra-button css-7baeyj"
+      data-testid="prev-pagination"
       disabled=""
       type="button"
     >
@@ -372,6 +373,7 @@ exports[`Search Page Params Should handle filter empty of search books 1`] = `
     <button
       class="chakra-button css-klz9de"
       data-active=""
+      data-testid="click-pagination"
       type="button"
     >
       1
@@ -379,6 +381,7 @@ exports[`Search Page Params Should handle filter empty of search books 1`] = `
     <button
       aria-label=""
       class="chakra-button css-7baeyj"
+      data-testid="next-pagination"
       disabled=""
       type="button"
     >
@@ -752,6 +755,7 @@ exports[`Search Page Params Should render correctly snapshot 1`] = `
     <button
       aria-label=""
       class="chakra-button css-7baeyj"
+      data-testid="prev-pagination"
       disabled=""
       type="button"
     >
@@ -770,6 +774,7 @@ exports[`Search Page Params Should render correctly snapshot 1`] = `
     <button
       class="chakra-button css-klz9de"
       data-active=""
+      data-testid="click-pagination"
       type="button"
     >
       1
@@ -777,6 +782,7 @@ exports[`Search Page Params Should render correctly snapshot 1`] = `
     <button
       aria-label=""
       class="chakra-button css-7baeyj"
+      data-testid="next-pagination"
       disabled=""
       type="button"
     >

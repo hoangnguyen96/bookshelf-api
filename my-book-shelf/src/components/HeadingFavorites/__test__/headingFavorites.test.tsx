@@ -7,7 +7,7 @@ jest.mock("next/navigation", () => ({
   usePathname: jest.fn(),
 }));
 
-describe.skip("My Book Shelf Favorites", () => {
+describe("My Book Shelf Favorites", () => {
   it("Should render correctly snapshot", () => {
     expect(render(<HeadingFavorites />)).toMatchSnapshot();
   });

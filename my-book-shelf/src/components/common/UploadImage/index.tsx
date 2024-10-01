@@ -53,7 +53,7 @@ const ImageUploadForm = ({ image, user }: ImageUploadFormProps) => {
   };
 
   return (
-    <Box as="form" onSubmit={() => {}} encType="multipart/form-data">
+    <Box as="form" encType="multipart/form-data">
       <FormControl id="myFile" mb={4}>
         <FormLabel htmlFor="fileInput" margin="0 auto">
           <Image

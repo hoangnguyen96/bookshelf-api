@@ -9,11 +9,16 @@ import { CheckIcon } from "@app/assets/icons";
 export const ContributeComplete = () => {
   const router = useRouter();
 
+  const handleClickBack = () => {
+    return router.back();
+  };
+
   return (
     <>
       <Link
         href="#"
-        onClick={() => router.back()}
+        data-testid="click-back"
+        onClick={handleClickBack}
         style={{ position: "absolute", top: 0, left: "68px" }}
       >
         <ArrowBackIcon w={5} h={5} />

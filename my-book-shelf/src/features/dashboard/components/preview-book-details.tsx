@@ -1,7 +1,7 @@
 "use client";
 
 import { memo } from "react";
-import { Box, Flex, Text, useDisclosure, useToast } from "@chakra-ui/react";
+import { Box, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,28 +23,21 @@ export const PreviewBookDetails = memo(
   ({ user, book }: PreviewBookDetailsProps) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const router = useRouter();
-    const toast = useToast();
 
     const handleAddBorrowBook = async (id: string) => {
-      if (user?.shelfBooks?.includes(id)) {
-        return toast({
-          title: "Borrowed book.",
-          description: "You borrowed book successful!",
-          status: "error",
-          duration: 9000,
-          isClosable: true,
-        });
-      }
-
       user?.shelfBooks.push(id);
-      await updateBookById(book?.id || "", {
+      await updateBookById(book?.id, {
         ...book,
         createdDate: formatDate(new Date()),
       });
-      const idUpdate = user?.id || "";
+      const idUpdate = user?.id;
       await updateUserById(idUpdate, { ...user });
 
       return onOpen();
+    };
+
+    const handleClickBack = () => {
+      return router.back();
     };
 
     const handleCloseModal = () => {
@@ -66,7 +59,7 @@ export const PreviewBookDetails = memo(
     return (
       <>
         <Box p="20px 44px" h="80%">
-          <Link href="#" onClick={() => router.back()}>
+          <Link href="#" data-testid="click-back" onClick={handleClickBack}>
             <ArrowBackIcon w={5} h={5} />
             <Text as="span" ml="9px">
               Back to results

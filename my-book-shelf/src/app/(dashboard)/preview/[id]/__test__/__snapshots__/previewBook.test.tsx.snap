@@ -6,6 +6,7 @@ exports[`Preview book Page Should render correctly snapshot 1`] = `
     class="css-1ghqoze"
   >
     <a
+      data-testid="click-back"
       href="#"
     >
       <svg

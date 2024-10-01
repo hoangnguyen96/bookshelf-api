@@ -75,7 +75,7 @@ export const SearchList = memo(
                 publicationYear={publicationYear}
                 rating={rating}
                 edition={edition}
-                isFavorite={user?.favorites?.includes(id) || false}
+                isFavorite={user?.favorites?.includes(id)}
                 onUpdateFavorites={() => handleUpdateFavorites(id)}
               />
             );

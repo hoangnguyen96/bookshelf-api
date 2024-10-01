@@ -101,11 +101,6 @@ const FormContribute = ({
   const isDisableSubmit = !(shouldEnable || isValid);
 
   const handleFormSubmit = async (dataBook: Partial<BookType>) => {
-    if (!selectedImage && !imageUrl) {
-      console.error("No image selected");
-      return;
-    }
-
     try {
       if (itemUpdate) {
         let finalImageUrl = imageUrl;
