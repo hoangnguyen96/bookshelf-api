@@ -1,5 +1,5 @@
-import { SkeletonHomeList } from "@app/components";
+import { LoadingIndicator } from "@app/components/common";
 
-const Loading = () => <SkeletonHomeList />;
+const Loading = () => <LoadingIndicator />;
 
 export default Loading;

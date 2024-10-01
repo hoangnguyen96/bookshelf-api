@@ -1,5 +1,5 @@
-import { SkeletonMyBookShelf } from "@app/components";
+import { LoadingIndicator } from "@app/components/common";
 
-const Loading = () => <SkeletonMyBookShelf />;
+const Loading = () => <LoadingIndicator />;
 
 export default Loading;

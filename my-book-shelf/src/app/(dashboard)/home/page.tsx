@@ -1,3 +1,5 @@
+"use server";
+
 import { auth } from "@app/auth";
 import { BookType, User } from "@app/models";
 import {

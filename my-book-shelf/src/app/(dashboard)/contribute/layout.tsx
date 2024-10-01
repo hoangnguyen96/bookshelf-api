@@ -5,7 +5,10 @@ import { ROUTES } from "@app/constants";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ListTopContribute } from "@app/features/dashboard/components";
-import { SkeletonListTopContribute } from "@app/components";
+import {
+  SkeletonFormContribute,
+  SkeletonListTopContribute,
+} from "@app/components";
 
 const ContributeLayout = async ({
   children,
@@ -34,7 +37,7 @@ const ContributeLayout = async ({
         borderRadius="10px"
         p="28px 45px 45px 60px"
       >
-        {children}
+        <Suspense fallback={<SkeletonFormContribute />}>{children}</Suspense>
       </Flex>
       <Flex maxW={582} flexDir="column" w="100%">
         <Text fontSize="50px" lineHeight="64px" fontWeight={700}>

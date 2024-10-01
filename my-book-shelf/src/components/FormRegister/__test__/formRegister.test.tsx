@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import FormRegister from "..";
 import { checkEmailExists } from "@app/utils";
 
@@ -31,6 +31,69 @@ describe("FormRegister Component", () => {
     expect(getByLabelText("Password")).toBeInTheDocument();
     expect(getByLabelText("Confirm Password")).toBeInTheDocument();
     expect(getByText(/Register/i)).toBeInTheDocument();
+  });
+
+  it("Should display validation error when data is empty", async () => {
+    jest.mock("react-hook-form", () => ({
+      ...jest.requireActual("react-hook-form"),
+      Controller: () => <></>,
+      useForm: () => ({
+        control: () => ({}),
+        handleSubmit: () => jest.fn(),
+        formState: {
+          errors: {
+            username: {
+              type: "required",
+              message: "Email is required",
+            },
+            email: {
+              type: "required",
+              message: "Email is required",
+            },
+            password: {
+              type: "required",
+              message: "Password is required",
+            },
+            confirmPassword: {
+              type: "required",
+              message: "Password is required",
+            },
+          },
+          isValid: false,
+          dirtyFields: {},
+          isSubmitting: false,
+        },
+        clearErrors: jest.fn(),
+        reset: jest.fn(),
+      }),
+    }));
+    const { getByLabelText, getAllByText } = render(
+      <FormRegister itemUpdate={{}} onSubmit={mockSubmit} />
+    );
+
+    fireEvent.change(getByLabelText(/Name/i), {
+      target: { value: "" },
+    });
+    fireEvent.blur(getByLabelText(/Name/i));
+
+    fireEvent.change(getByLabelText(/Email/i), {
+      target: { value: "" },
+    });
+    fireEvent.blur(getByLabelText(/Email/i));
+
+    fireEvent.change(getByLabelText("Password"), {
+      target: { value: "" },
+    });
+    fireEvent.blur(getByLabelText("Password"));
+
+    fireEvent.change(getByLabelText("Confirm Password"), {
+      target: { value: "" },
+    });
+    fireEvent.blur(getByLabelText("Confirm Password"));
+
+    await waitFor(() => {
+      expect(getAllByText("This field is required.")[0]).toBeInTheDocument();
+    });
   });
 
   it("Should shows password mismatch error if confirmPassword does not match password", async () => {
