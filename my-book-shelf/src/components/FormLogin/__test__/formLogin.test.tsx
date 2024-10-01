@@ -4,8 +4,8 @@ import { User } from "@app/models";
 import FormLogin from "..";
 import { MESSAGES } from "@app/constants";
 
-describe.skip("FormLogin", () => {
-  const mockOnSubmit = jest.fn((data: Partial<User>) => Promise.resolve());
+describe("FormLogin", () => {
+  const mockOnSubmit = jest.fn();
 
   it("Should render correctly snapshot", () => {
     expect(render(<FormLogin onSubmit={mockOnSubmit} />)).toMatchSnapshot();

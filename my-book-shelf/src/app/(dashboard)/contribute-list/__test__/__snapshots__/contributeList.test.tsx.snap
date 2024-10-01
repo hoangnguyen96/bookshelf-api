@@ -6,6 +6,7 @@ exports[`Contribute List Page Should render correctly snapshot 1`] = `
     class="css-1nhn4fa"
   >
     <a
+      data-testid="click-back"
       href="#"
     >
       <svg

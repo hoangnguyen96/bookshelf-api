@@ -6,6 +6,7 @@ exports[`Contribute Complete Page Should render correctly snapshot 1`] = `
   "baseElement": <body>
     <div>
       <a
+        data-testid="click-back"
         href="#"
         style="position: absolute; top: 0px; left: 68px;"
       >
@@ -55,6 +56,7 @@ exports[`Contribute Complete Page Should render correctly snapshot 1`] = `
   </body>,
   "container": <div>
     <a
+      data-testid="click-back"
       href="#"
       style="position: absolute; top: 0px; left: 68px;"
     >

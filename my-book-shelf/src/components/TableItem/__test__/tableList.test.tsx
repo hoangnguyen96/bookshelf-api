@@ -3,18 +3,18 @@ import { fireEvent, render } from "@testing-library/react";
 import TableItem from "..";
 import { useRouter } from "next/navigation";
 
-// // Mock useRouter
-// jest.mock("next/navigation", () => ({
-//   useRouter: jest.fn(),
-// }));
+// Mock useRouter
+jest.mock("next/navigation", () => ({
+  useRouter: jest.fn(),
+}));
 
-// // Mock Image component
-// jest.mock("next/image", () => ({
-//   __esModule: true,
-//   default: (props: any) => <img {...props} />,
-// }));
+// Mock Image component
+jest.mock("next/image", () => ({
+  __esModule: true,
+  default: (props: any) => <img {...props} />,
+}));
 
-describe.skip("TableItem", () => {
+describe("TableItem", () => {
   const mockPush = jest.fn();
 
   beforeEach(() => {

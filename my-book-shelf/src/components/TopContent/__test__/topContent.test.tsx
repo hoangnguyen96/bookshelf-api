@@ -4,33 +4,33 @@ import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { ROUTES } from "@app/constants";
 
-// jest.mock("next-auth/react", () => ({
-//   useSession: jest.fn(),
-// }));
+jest.mock("next-auth/react", () => ({
+  useSession: jest.fn(),
+}));
 
-// jest.mock("next/navigation", () => ({
-//   useRouter: jest.fn(),
-//   usePathname: jest.fn(),
-// }));
+jest.mock("next/navigation", () => ({
+  useRouter: jest.fn(),
+  usePathname: jest.fn(),
+}));
 
-// jest.mock("@app/actions/auth", () => ({
-//   logout: jest.fn(),
-// }));
+jest.mock("@app/actions/auth", () => ({
+  logout: jest.fn(),
+}));
 
-describe.skip("TopContent component", () => {
-  // (useSession as jest.Mock).mockReturnValue({
-  //   data: {
-  //     user: {
-  //       isAdmin: true,
-  //       email: "admin@gmail.com",
-  //       id: "3733403",
-  //       name: "admin",
-  //       image: "https://i.ibb.co/RHMqQGr/man-1.png",
-  //     },
-  //     expires: "2024-12-31T23:59:59.999Z",
-  //   },
-  //   status: "authenticated",
-  // });
+describe("TopContent component", () => {
+  (useSession as jest.Mock).mockReturnValue({
+    data: {
+      user: {
+        isAdmin: true,
+        email: "admin@gmail.com",
+        id: "3733403",
+        name: "admin",
+        image: "https://i.ibb.co/RHMqQGr/man-1.png",
+      },
+      expires: "2024-12-31T23:59:59.999Z",
+    },
+    status: "authenticated",
+  });
 
   afterEach(() => {
     jest.clearAllMocks();

@@ -16,9 +16,13 @@ interface ContributeListProps {
 export const ContributeList = memo(({ user, list }: ContributeListProps) => {
   const router = useRouter();
 
+  const handleClickBack = () => {
+    return router.back();
+  };
+
   return (
     <Box p="20px 44px">
-      <Link href="#" onClick={() => router.back()}>
+      <Link href="#" data-testid="click-back" onClick={handleClickBack}>
         <ArrowBackIcon w={5} h={5} />
         <Text as="span" ml="9px">
           Back

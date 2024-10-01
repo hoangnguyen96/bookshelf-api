@@ -26,6 +26,7 @@ const Pagination = ({
     bottom="5%"
   >
     <IconButton
+      data-testid="prev-pagination"
       width="30px"
       height="30px"
       size="sm"
@@ -44,6 +45,7 @@ const Pagination = ({
     {Array.from({ length: totalPages }, (_, index) => (
       <Button
         key={index}
+        data-testid="click-pagination"
         width="30px"
         height="30px"
         text={`${index + 1}`}
@@ -56,6 +58,7 @@ const Pagination = ({
     ))}
 
     <IconButton
+      data-testid="next-pagination"
       size="sm"
       width="30px"
       height="30px"
