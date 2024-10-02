@@ -25,5 +25,6 @@ export const colors = {
   bgCheckbox: "#df7d3a",
   buttonUpload: "#909090",
   colorDescription: "#595959",
+  colorButton: "#af1809",
   backgroundReadOnly: "#fafbfc",
 };
