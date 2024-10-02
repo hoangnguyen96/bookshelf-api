@@ -64,8 +64,9 @@ const TableItem = ({
         borderRadius="10px"
         boxShadow="0 0 5px 0px rgb(0 0 0 / 10%)"
         py="12px"
-        px="24px"
-        gap="90px"
+        pl="24px"
+        pr="48px"
+        gap="10%"
         alignItems="center"
       >
         <Flex gap="47px" alignItems="center" maxW={329} w="100%">

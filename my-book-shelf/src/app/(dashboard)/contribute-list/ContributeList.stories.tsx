@@ -1,13 +1,12 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { Box, ChakraProvider, Flex } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import theme from "@app/themes";
 import { RouterContext } from "next/dist/shared/lib/router-context.shared-runtime";
 import { mockRouter, mockSession } from "@app/mocks/storybook";
 import { SessionProvider } from "next-auth/react";
-import { Logo, Navbar } from "@app/components/common";
-import { MenuProfile, TopContent } from "@app/components";
-import ContributeList from "./page";
-import { User } from "@app/models";
+import { DATA_BOOKS, DATA_USER } from "@app/mocks/data";
+import { ContributeList } from "@app/features/dashboard/components";
+import { MainLayout } from "@app/layouts";
 
 const meta: Meta<typeof ContributeList> = {
   component: ContributeList,
@@ -27,34 +26,9 @@ const meta: Meta<typeof ContributeList> = {
 export default meta;
 
 const Template: StoryFn<typeof ContributeList> = () => (
-  <Flex bgColor="white" borderRadius="10px" height="100%">
-    <Flex flexDir="column" gap="100px" padding="38px 66px" alignItems="center">
-      <Logo
-        user={
-          {
-            isAdmin: true,
-            email: "admin@gmail.com",
-            id: "3733403",
-            name: "admin",
-            image: "https://i.ibb.co/RHMqQGr/man-1.png",
-          } as unknown as User
-        }
-      />
-      <Navbar />
-    </Flex>
-    <Box
-      w="100%"
-      h="100%"
-      bgColor="backgroundContent"
-      borderRightRadius="10px"
-      pos="relative"
-    >
-      <Flex alignItems="center" justifyContent="flex-end" p="32px 48px">
-        <MenuProfile />
-      </Flex>
-      <ContributeList />
-    </Box>
-  </Flex>
+  <MainLayout isNotSearch={true}>
+    <ContributeList user={DATA_USER[0]} list={DATA_BOOKS} />
+  </MainLayout>
 );
 
 export const Default = Template.bind({});
