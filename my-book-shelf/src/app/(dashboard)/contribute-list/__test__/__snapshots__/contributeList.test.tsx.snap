@@ -34,7 +34,7 @@ exports[`Contribute List Page Should render correctly snapshot 1`] = `
         Title
       </p>
       <div
-        class="css-eetujx"
+        class="css-11e68w1"
       >
         <p
           class="chakra-text css-10rvbm3"
@@ -52,7 +52,7 @@ exports[`Contribute List Page Should render correctly snapshot 1`] = `
       class="css-1pavchb"
     >
       <div
-        class="css-i20yi3"
+        class="css-uxib3o"
       >
         <div
           class="css-1jxcnq9"
@@ -147,7 +147,7 @@ exports[`Contribute List Page Should render correctly snapshot 1`] = `
         </div>
       </div>
       <div
-        class="css-i20yi3"
+        class="css-uxib3o"
       >
         <div
           class="css-1jxcnq9"
@@ -242,7 +242,7 @@ exports[`Contribute List Page Should render correctly snapshot 1`] = `
         </div>
       </div>
       <div
-        class="css-i20yi3"
+        class="css-uxib3o"
       >
         <div
           class="css-1jxcnq9"
