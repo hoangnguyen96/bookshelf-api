@@ -1,7 +1,7 @@
 import { auth } from "@app/auth";
 import { BookType, User } from "@app/models";
 import {
-  getTwelveItemBook,
+  getBooksByLimit,
   getUserById,
 } from "@app/features/dashboard/actions";
 import { ListCart } from "@app/features/dashboard/components";
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const HomePage = async () => {
   const session = await auth();
   const dataUserById = (await getUserById(session?.user?.id as string)) as User;
-  const books = (await getTwelveItemBook()) as BookType[];
+  const books = (await getBooksByLimit()) as BookType[];
 
   return <ListCart user={dataUserById} list={books} />;
 };

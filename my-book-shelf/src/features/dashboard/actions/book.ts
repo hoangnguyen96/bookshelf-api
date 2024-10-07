@@ -1,29 +1,13 @@
 import { BookType } from "@app/models";
 import { API_ROUTES, MESSAGES } from "@app/constants";
 import { api } from "@app/services";
-import { dividePaginationBooks, getThreeTopBook } from "@app/utils";
+import { dividePaginationBooks, getTopBook } from "@app/utils";
 
 export const getAllBook = async () => {
   try {
     const data = await api.get<BookType[]>(API_ROUTES.BOOKS);
 
     return data;
-  } catch (error) {
-    if (error instanceof Error) {
-      return error.message;
-    }
-    return MESSAGES.RESPONSE_ERROR;
-  }
-};
-
-export const getTopThreeBook = async () => {
-  try {
-    const data = await api.get<BookType[]>(API_ROUTES.BOOKS, {
-      next: { revalidate: 60 },
-    });
-    const result = getThreeTopBook(data);
-
-    return result;
   } catch (error) {
     if (error instanceof Error) {
       return error.message;
@@ -51,14 +35,16 @@ export const getPaginatedBook = async (params?: string) => {
   }
 };
 
-export const getTwelveItemBook = async (params?: string) => {
+export const getBooksByLimit = async (params?: string, limit?: number) => {
   try {
     const data = await api.get<BookType[]>(
-      `${API_ROUTES.BOOKS}?${params || ""}page=1&limit=12`,
-      { next: { revalidate: 3600 } }
+      `${API_ROUTES.BOOKS}?${params || ""}page=1`,
+      { next: { revalidate: 60 } }
     );
 
-    return data;
+    const result = getTopBook(data, limit);
+
+    return result;
   } catch (error) {
     if (error instanceof Error) {
       return error.message;
