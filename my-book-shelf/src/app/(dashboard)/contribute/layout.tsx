@@ -10,7 +10,6 @@ import {
   SkeletonListTopContribute,
 } from "@app/components";
 import { getBooksByLimit, getUserById } from "@app/features/dashboard/actions";
-import { BookType, User } from "@app/models";
 
 const ContributeLayout = async ({
   children,
@@ -18,8 +17,8 @@ const ContributeLayout = async ({
   children: React.ReactNode;
 }>) => {
   const session = await auth();
-  const dataUserById = (await getUserById(session?.user?.id as string)) as User;
-  const dataBooks = (await getBooksByLimit("", 3)) as BookType[];
+  const { data: dataUserById } = await getUserById(session?.user?.id as string);
+  const { data: dataBooks } = await getBooksByLimit("", 3);
 
   if (!session?.user?.isAdmin) {
     return notFound();
