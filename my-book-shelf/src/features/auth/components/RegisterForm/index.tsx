@@ -36,26 +36,17 @@ export const RegisterForm = () => {
 
     try {
       await addUser(payload);
-      const errorMessage = await authenticate({ email, password });
+      await authenticate({ email, password });
 
-      if (errorMessage) {
-        toast({
-          title: "Register failed",
-          description: errorMessage,
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        });
-      } else {
-        router.push(ROUTES.HOME);
-        toast({
-          title: "Register Successful.",
-          description: MESSAGES.REGISTER_SUCCESS,
-          status: "success",
-          duration: 9000,
-          isClosable: true,
-        });
-      }
+      router.push(ROUTES.HOME);
+      toast({
+        title: "Register Successful.",
+        description: MESSAGES.REGISTER_SUCCESS,
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
     } catch (error) {
       if (error instanceof Error) {
         return toast({
