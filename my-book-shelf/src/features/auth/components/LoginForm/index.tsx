@@ -22,16 +22,18 @@ export const LoginForm = () => {
         duration: 5000,
         isClosable: true,
       });
-    } else {
-      router.push(ROUTES.HOME);
-      toast({
-        title: "Login successful",
-        description: MESSAGES.LOGIN_SUCCESS,
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
+      return;
     }
+
+    router.push(ROUTES.HOME);
+    toast({
+      title: "Login successful",
+      description: MESSAGES.LOGIN_SUCCESS,
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+    return;
   };
 
   return <FormLogin onSubmit={handleLogin} />;
