@@ -37,6 +37,7 @@ export const Button = defineStyleConfig({
       py: "10px",
     },
     lg: {
+      minW: "125px",
       h: "48px",
       fontSize: "lg",
       fontWeight: 700,
@@ -53,7 +54,6 @@ export const Button = defineStyleConfig({
 
   variants: {
     normal: {
-      minW: "200px",
       boxShadow: "0 0 5px 1px #efdfde",
       _hover: { bgColor: "brand.70" },
     },
