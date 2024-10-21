@@ -65,7 +65,12 @@ const MenuProfile = ({ session }: { session?: Session }) => {
           </Text>
         </Flex>
       </MenuButton>
-      <MenuList minW={205} borderRadius="10px" boxShadow="0 0 3px 0px #a9a9a9">
+      <MenuList
+        minW={205}
+        borderRadius="10px"
+        boxShadow="0 0 3px 0px #a9a9a9"
+        zIndex={15}
+      >
         <MenuItem onClick={handleRedirectProfile}>
           <Text lineHeight="30px" w="100%">
             Profile

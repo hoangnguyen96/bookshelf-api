@@ -8,11 +8,11 @@ import { BookType } from "@app/interface";
 import { updateBookById } from "../../actions";
 import { FormContribute } from "@app/components";
 
-interface ContributeUpdateProps {
+interface EditContributionProps {
   book: BookType;
 }
 
-export const ContributeUpdate = memo(({ book }: ContributeUpdateProps) => {
+export const EditContribution = memo(({ book }: EditContributionProps) => {
   const router = useRouter();
   const toast = useToast();
 

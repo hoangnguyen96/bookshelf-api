@@ -1,7 +1,7 @@
 import { render, waitFor } from "@testing-library/react";
-import ContributeUpdate from "../page";
 import { DATA_BOOKS } from "@app/mocks/data";
 import { getBookById } from "@app/features/dashboard/actions";
+import EditContributionPage from "../page";
 
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
@@ -21,7 +21,7 @@ describe("Contribute Update", () => {
 
   it("Should render correctly snapshot", async () => {
     const { container } = render(
-      await ContributeUpdate({ params: { id: "1" } })
+      await EditContributionPage({ params: { id: "1" } })
     );
 
     await waitFor(() => {
