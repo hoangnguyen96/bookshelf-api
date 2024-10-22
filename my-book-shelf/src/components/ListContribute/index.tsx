@@ -1,5 +1,3 @@
-"use client";
-
 import { memo } from "react";
 import { Flex } from "@chakra-ui/react";
 import { BookType, User } from "@app/interface";

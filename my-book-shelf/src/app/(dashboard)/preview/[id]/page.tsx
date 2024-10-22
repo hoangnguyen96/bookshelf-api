@@ -33,7 +33,7 @@ const PreviewBook = async ({ params: { id } }: PreviewBookProps) => {
   const { data: user } = await getUserById(session?.user?.id as string);
   const { data: book } = await getBookById(id);
 
-  if (!book) return notFound();
+  if (!book || Object.keys(book).length === 0) return notFound();
 
   return <PreviewBookDetails book={book} user={user} />;
 };
