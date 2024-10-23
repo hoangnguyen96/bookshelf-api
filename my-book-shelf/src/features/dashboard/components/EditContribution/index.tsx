@@ -57,7 +57,7 @@ export const EditContribution = memo(({ book }: EditContributionProps) => {
 
   return (
     <Box>
-      <Text size="xl" color="dark.100" mb="34px">
+      <Text size="xl" color="var(--chakra-colors-chakra-body-text)" mb="34px">
         Preview Book Details
       </Text>
       <FormContribute itemUpdate={book} onUpdate={handleUpdate} />
