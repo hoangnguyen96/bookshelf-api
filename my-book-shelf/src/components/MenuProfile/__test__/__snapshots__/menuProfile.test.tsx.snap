@@ -9,7 +9,7 @@ exports[`MenuProfile Should render correctly snapshot 1`] = `
         aria-controls="menu-list-:r1:"
         aria-expanded="false"
         aria-haspopup="menu"
-        class="chakra-button chakra-menu__menu-button css-kxleh0"
+        class="chakra-button chakra-menu__menu-button css-1uucqp1"
         id="menu-button-:r1:"
         type="button"
       >
@@ -20,7 +20,7 @@ exports[`MenuProfile Should render correctly snapshot 1`] = `
             class="css-yvf3fq"
           >
             <div
-              class="css-bgqooo"
+              class="css-q3p7gi"
             >
               <img
                 alt="Avatar user"
@@ -120,7 +120,7 @@ exports[`MenuProfile Should render correctly snapshot 1`] = `
       aria-controls="menu-list-:r1:"
       aria-expanded="false"
       aria-haspopup="menu"
-      class="chakra-button chakra-menu__menu-button css-kxleh0"
+      class="chakra-button chakra-menu__menu-button css-1uucqp1"
       id="menu-button-:r1:"
       type="button"
     >
@@ -131,7 +131,7 @@ exports[`MenuProfile Should render correctly snapshot 1`] = `
           class="css-yvf3fq"
         >
           <div
-            class="css-bgqooo"
+            class="css-q3p7gi"
           >
             <img
               alt="Avatar user"
@@ -288,7 +288,7 @@ exports[`MenuProfile Should render correctly snapshot when data empty 1`] = `
         aria-controls="menu-list-:r6:"
         aria-expanded="false"
         aria-haspopup="menu"
-        class="chakra-button chakra-menu__menu-button css-kxleh0"
+        class="chakra-button chakra-menu__menu-button css-1uucqp1"
         id="menu-button-:r6:"
         type="button"
       >
@@ -299,7 +299,7 @@ exports[`MenuProfile Should render correctly snapshot when data empty 1`] = `
             class="css-yvf3fq"
           >
             <div
-              class="css-bgqooo"
+              class="css-q3p7gi"
             >
               <img
                 alt="Avatar user"
@@ -397,7 +397,7 @@ exports[`MenuProfile Should render correctly snapshot when data empty 1`] = `
       aria-controls="menu-list-:r6:"
       aria-expanded="false"
       aria-haspopup="menu"
-      class="chakra-button chakra-menu__menu-button css-kxleh0"
+      class="chakra-button chakra-menu__menu-button css-1uucqp1"
       id="menu-button-:r6:"
       type="button"
     >
@@ -408,7 +408,7 @@ exports[`MenuProfile Should render correctly snapshot when data empty 1`] = `
           class="css-yvf3fq"
         >
           <div
-            class="css-bgqooo"
+            class="css-q3p7gi"
           >
             <img
               alt="Avatar user"

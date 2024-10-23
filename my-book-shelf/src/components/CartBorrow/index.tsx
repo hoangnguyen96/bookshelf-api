@@ -37,7 +37,7 @@ const CartBorrow = ({
       py="15px"
       pl="15px"
       pr="20px"
-      bgColor="white"
+      bgColor="var(--chakra-colors-chakra-body-bg)"
       borderRadius="10px"
     >
       <Flex flexDirection="column" gap="5px" w={123}>
