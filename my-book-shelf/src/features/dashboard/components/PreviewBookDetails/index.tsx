@@ -73,7 +73,7 @@ export const PreviewBookDetails = memo(
       imageUrl,
       publicationYear,
       edition,
-    } = book;
+    } = book || {};
 
     return (
       <>

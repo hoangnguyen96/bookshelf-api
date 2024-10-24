@@ -20,7 +20,7 @@ export const ProfileUpdate = memo(({ imageUrl, user }: ProfileUpdateProps) => {
 
   const handleUpdateUser = async (id: string, user: Partial<User>) => {
     try {
-      const { username, email, phone, bio } = user;
+      const { username, email, phone, bio } = user || {};
 
       const payload: Partial<User> = {
         ...user,

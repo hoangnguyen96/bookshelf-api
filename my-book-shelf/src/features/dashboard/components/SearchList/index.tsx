@@ -58,7 +58,7 @@ export const SearchList = memo(
               rating,
               edition,
               category,
-            } = itemBook;
+            } = itemBook || {};
 
             return (
               <TableItem
