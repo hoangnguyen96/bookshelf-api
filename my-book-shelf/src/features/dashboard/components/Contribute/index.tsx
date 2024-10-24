@@ -22,7 +22,7 @@ export const Contribute = () => {
       rating,
       createdDate,
       edition,
-    } = values;
+    } = values || {};
 
     const payload: Partial<BookType> = {
       title,

@@ -28,7 +28,7 @@ export const EditContribution = memo(({ book }: EditContributionProps) => {
       rating,
       createdDate,
       edition,
-    } = values;
+    } = values || {};
 
     const payload: Partial<BookType> = {
       title,

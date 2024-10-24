@@ -52,7 +52,7 @@ export const MyBookShelfFavorites = memo(
             rating,
             edition,
             category,
-          } = itemBook;
+          } = itemBook || {};
 
           return (
             <TableItem
