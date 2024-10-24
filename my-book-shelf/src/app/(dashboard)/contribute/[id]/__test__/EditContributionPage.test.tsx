@@ -5,6 +5,7 @@ import EditContributionPage from "../page";
 
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
+  notFound: jest.fn(),
 }));
 
 jest.mock("@app/features/dashboard/actions", () => ({

@@ -3,6 +3,7 @@ import { getBookById, getUserById } from "@app/features/dashboard/actions";
 import { PreviewBookDetails } from "@app/features/dashboard/components";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { User } from "@app/interface";
 
 export const generateMetadata = async ({
   params: { id },
@@ -30,10 +31,17 @@ interface PreviewBookProps {
 
 const PreviewBook = async ({ params: { id } }: PreviewBookProps) => {
   const session = await auth();
-  const { data: user } = await getUserById(session?.user?.id as string);
   const { data: book } = await getBookById(id);
+  let user = null;
 
-  if (!book || Object.keys(book).length === 0) return notFound();
+  try {
+    const { data: userData } = await getUserById(session?.user?.id as string);
+    user = userData;
+  } catch (error) {
+    user = {} as User;
+  }
+
+  if (Object.keys(book || {}).length === 0) return notFound();
 
   return <PreviewBookDetails book={book} user={user} />;
 };
