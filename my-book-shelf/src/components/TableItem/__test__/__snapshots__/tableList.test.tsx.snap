@@ -60,7 +60,7 @@ exports[`TableItem Should render correctly snapshot 1`] = `
           >
             0
             <span
-              class="chakra-text css-1xibt3d"
+              class="chakra-text css-0"
             >
               /5
             </span>
@@ -181,7 +181,7 @@ exports[`TableItem Should render correctly snapshot 1`] = `
         >
           0
           <span
-            class="chakra-text css-1xibt3d"
+            class="chakra-text css-0"
           >
             /5
           </span>
@@ -355,7 +355,7 @@ exports[`TableItem Should render correctly snapshot when imageUrl is empty 1`] =
           >
             0
             <span
-              class="chakra-text css-1xibt3d"
+              class="chakra-text css-0"
             >
               /5
             </span>
@@ -470,7 +470,7 @@ exports[`TableItem Should render correctly snapshot when imageUrl is empty 1`] =
         >
           0
           <span
-            class="chakra-text css-1xibt3d"
+            class="chakra-text css-0"
           >
             /5
           </span>
@@ -646,7 +646,7 @@ exports[`TableItem Should render correctly snapshot when is contribute 1`] = `
           >
             0
             <span
-              class="chakra-text css-1xibt3d"
+              class="chakra-text css-0"
             >
               /5
             </span>
@@ -743,7 +743,7 @@ exports[`TableItem Should render correctly snapshot when is contribute 1`] = `
         >
           0
           <span
-            class="chakra-text css-1xibt3d"
+            class="chakra-text css-0"
           >
             /5
           </span>

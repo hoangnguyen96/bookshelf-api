@@ -101,7 +101,10 @@ const FormProfile = ({ user, onUpdate }: FormProfileProps) => {
           isInvalid={!!errors.username}
           mb={errors.username?.message ? "2px" : "24px"}
         >
-          <FormLabel color="dark.90" htmlFor="username">
+          <FormLabel
+            color="var(--chakra-colors-chakra-body-text)"
+            htmlFor="username"
+          >
             Full name
           </FormLabel>
           <Controller
@@ -144,7 +147,10 @@ const FormProfile = ({ user, onUpdate }: FormProfileProps) => {
           isInvalid={!!errors.email}
           mb={errors.email?.message ? "2px" : "24px"}
         >
-          <FormLabel color="dark.90" htmlFor="email">
+          <FormLabel
+            color="var(--chakra-colors-chakra-body-text)"
+            htmlFor="email"
+          >
             College Email ID
           </FormLabel>
           <Controller
@@ -201,7 +207,10 @@ const FormProfile = ({ user, onUpdate }: FormProfileProps) => {
           isInvalid={!!errors.userId}
           mb={errors.userId?.message ? "2px" : "24px"}
         >
-          <FormLabel color="dark.90" htmlFor="userId">
+          <FormLabel
+            color="var(--chakra-colors-chakra-body-text)"
+            htmlFor="userId"
+          >
             Register Number
           </FormLabel>
           <Controller
@@ -237,7 +246,10 @@ const FormProfile = ({ user, onUpdate }: FormProfileProps) => {
           isInvalid={!!errors.phone}
           mb={errors.phone?.message ? "2px" : "24px"}
         >
-          <FormLabel color="dark.90" htmlFor="phone">
+          <FormLabel
+            color="var(--chakra-colors-chakra-body-text)"
+            htmlFor="phone"
+          >
             Phone number
           </FormLabel>
           <Controller
@@ -284,7 +296,10 @@ const FormProfile = ({ user, onUpdate }: FormProfileProps) => {
         isInvalid={!!errors.bio}
         mb={errors.bio?.message ? "0" : "12px"}
       >
-        <FormLabel color="dark.90" htmlFor="phone">
+        <FormLabel
+          color="var(--chakra-colors-chakra-body-text)"
+          htmlFor="phone"
+        >
           Bio
         </FormLabel>
         <Controller

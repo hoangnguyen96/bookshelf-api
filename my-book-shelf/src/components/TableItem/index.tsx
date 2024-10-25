@@ -119,7 +119,7 @@ const TableItem = ({
         >
           <Text size="xl" minW="71px">
             {rating}
-            <Text as="span" size="md" color="colorDescription">
+            <Text as="span" size="md">
               /5
             </Text>
           </Text>

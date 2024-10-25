@@ -115,7 +115,7 @@ exports[`Update Profile Should render correctly snapshot 1`] = `
             role="group"
           >
             <label
-              class="chakra-form__label css-kem3nv"
+              class="chakra-form__label css-1v2ykga"
               for="username"
               id="field-:r1:-label"
             >
@@ -142,7 +142,7 @@ exports[`Update Profile Should render correctly snapshot 1`] = `
             role="group"
           >
             <label
-              class="chakra-form__label css-kem3nv"
+              class="chakra-form__label css-1v2ykga"
               for="email"
               id="field-:r2:-label"
             >
@@ -173,7 +173,7 @@ exports[`Update Profile Should render correctly snapshot 1`] = `
             role="group"
           >
             <label
-              class="chakra-form__label css-kem3nv"
+              class="chakra-form__label css-1v2ykga"
               for="userId"
               id="field-:r3:-label"
             >
@@ -200,7 +200,7 @@ exports[`Update Profile Should render correctly snapshot 1`] = `
             role="group"
           >
             <label
-              class="chakra-form__label css-kem3nv"
+              class="chakra-form__label css-1v2ykga"
               for="phone"
               id="field-:r4:-label"
             >
@@ -228,7 +228,7 @@ exports[`Update Profile Should render correctly snapshot 1`] = `
           role="group"
         >
           <label
-            class="chakra-form__label css-kem3nv"
+            class="chakra-form__label css-1v2ykga"
             for="phone"
             id="field-:r5:-label"
           >
