@@ -63,7 +63,7 @@ exports[`My Book Shelf Favorites Should render correctly snapshot 1`] = `
         >
           4.5
           <span
-            class="chakra-text css-1xibt3d"
+            class="chakra-text css-0"
           >
             /5
           </span>
@@ -183,7 +183,7 @@ exports[`My Book Shelf Favorites Should render correctly snapshot 1`] = `
         >
           4.5
           <span
-            class="chakra-text css-1xibt3d"
+            class="chakra-text css-0"
           >
             /5
           </span>
@@ -303,7 +303,7 @@ exports[`My Book Shelf Favorites Should render correctly snapshot 1`] = `
         >
           4.5
           <span
-            class="chakra-text css-1xibt3d"
+            class="chakra-text css-0"
           >
             /5
           </span>
@@ -432,7 +432,7 @@ exports[`My Book Shelf Favorites Should render correctly snapshot when user has 
         >
           4.5
           <span
-            class="chakra-text css-1xibt3d"
+            class="chakra-text css-0"
           >
             /5
           </span>
@@ -553,7 +553,7 @@ exports[`My Book Shelf Favorites Should render correctly snapshot when user has 
         >
           4.5
           <span
-            class="chakra-text css-1xibt3d"
+            class="chakra-text css-0"
           >
             /5
           </span>
@@ -674,7 +674,7 @@ exports[`My Book Shelf Favorites Should render correctly snapshot when user has 
         >
           4.5
           <span
-            class="chakra-text css-1xibt3d"
+            class="chakra-text css-0"
           >
             /5
           </span>
